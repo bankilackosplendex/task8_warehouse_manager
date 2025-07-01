@@ -1,26 +1,38 @@
-import { Injectable } from '@nestjs/common';
-import { CreateWarehouseDto } from './dto/create-warehouse.dto';
-import { UpdateWarehouseDto } from './dto/update-warehouse.dto';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { DatabaseService } from '../database/database.service';
+import { Prisma } from 'generated/prisma';
 
 @Injectable()
 export class WarehousesService {
-    create(createWarehouseDto: CreateWarehouseDto) {
-    return 'This action adds a new warehouse';
+  constructor(private prisma: DatabaseService) {}
+
+  create(createWarehouseDto: Prisma.WarehouseCreateInput) {
+    return this.prisma.warehouse.create({
+      data: createWarehouseDto,
+    });
   }
 
   findAll() {
-    return `This action returns all warehouse`;
+    return this.prisma.warehouse.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} warehouse`;
+  async findOne(id: number) {
+    const warehouse = await this.prisma.warehouse.findUnique({ where: { id } });
+    if (!warehouse)
+      throw new NotFoundException(`Warehouse with id ${id} not found`);
+    return warehouse;
   }
 
-  update(id: number, updateWarehouseDto: UpdateWarehouseDto) {
-    return `This action updates a #${id} warehouse`;
+  async update(id: number, updateWarehouseDto: Prisma.WarehouseUpdateInput) {
+    await this.findOne(id);
+    return this.prisma.warehouse.update({
+      where: { id },
+      data: updateWarehouseDto,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} warehouse`;
+  async remove(id: number) {
+    await this.findOne(id);
+    return this.prisma.warehouse.delete({ where: { id } });
   }
 }

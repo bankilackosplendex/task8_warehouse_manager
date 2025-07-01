@@ -4,19 +4,19 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
 } from '@nestjs/common';
 import { WarehousesService } from './warehouses.service';
-import { CreateWarehouseDto } from './dto/create-warehouse.dto';
-import { UpdateWarehouseDto } from './dto/update-warehouse.dto';
+import { Prisma } from 'generated/prisma';
 
 @Controller('warehouses')
 export class WarehousesController {
   constructor(private readonly warehousesService: WarehousesService) {}
 
   @Post()
-  create(@Body() createCoffeeDto: CreateWarehouseDto) {
+  create(@Body() createCoffeeDto: Prisma.WarehouseCreateInput) {
     return this.warehousesService.create(createCoffeeDto);
   }
 
@@ -26,17 +26,17 @@ export class WarehousesController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.warehousesService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.warehousesService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCoffeeDto: UpdateWarehouseDto) {
+  update(@Param('id', ParseIntPipe) id: number, @Body() updateCoffeeDto: Prisma.WarehouseUpdateInput) {
     return this.warehousesService.update(+id, updateCoffeeDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id', ParseIntPipe) id: number) {
     return this.warehousesService.remove(+id);
   }
 }
