@@ -9,12 +9,14 @@ import {
   ParseIntPipe,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
-import { Prisma } from 'generated/prisma';
+import { Prisma, Role } from 'generated/prisma';
+import { Roles } from 'src/iam/authorization/decorators/roles.decorator';
 
 @Controller('products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
+  @Roles(Role.ADMIN)
   @Post()
   create(@Body() createProductDto: Prisma.ProductCreateInput) {
     return this.productsService.create(createProductDto);
@@ -30,6 +32,7 @@ export class ProductsController {
     return this.productsService.findOne(id);
   }
 
+  @Roles(Role.ADMIN)
   @Patch(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
@@ -38,6 +41,7 @@ export class ProductsController {
     return this.productsService.update(id, updateProductDto);
   }
 
+  @Roles(Role.ADMIN)
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.productsService.remove(id);

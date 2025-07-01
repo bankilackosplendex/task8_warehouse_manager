@@ -9,12 +9,14 @@ import {
   ParseIntPipe,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { Prisma } from 'generated/prisma';
+import { Prisma, Role } from 'generated/prisma';
+import { Roles } from 'src/iam/authorization/decorators/roles.decorator';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  @Roles(Role.ADMIN)
   @Post()
   create(@Body() createUserDto: Prisma.UserCreateInput) {
     return this.usersService.create(createUserDto);
@@ -30,6 +32,7 @@ export class UsersController {
     return this.usersService.findOne(id);
   }
 
+  @Roles(Role.ADMIN)
   @Patch(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
@@ -38,6 +41,7 @@ export class UsersController {
     return this.usersService.update(id, updateUserDto);
   }
 
+  @Roles(Role.ADMIN)
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.usersService.remove(id);
