@@ -1,12 +1,24 @@
 import { Link } from "react-router-dom";
+import "./CompanyList.scss";
 
 function CompanyList() {
+  const companies = [
+    { id: "1", name: "IKEA" },
+    { id: "2", name: "Praktiker" },
+    { id: "3", name: "OBI" },
+  ];
+
   return (
-    <div>
-      Companies List
-      <Link to="/companies/company1">Company1</Link>
-      <Link to="/companies/company2">Company 2</Link>
-      <Link to="/companies/company3">Company 3</Link>
+    <div className="company-list">
+      {companies.map((company) => (
+        <Link
+          to={`/companies/${company.name}`}
+          key={company.id}
+          className="company-list__item"
+        >
+          {company.name}
+        </Link>
+      ))}
     </div>
   );
 }

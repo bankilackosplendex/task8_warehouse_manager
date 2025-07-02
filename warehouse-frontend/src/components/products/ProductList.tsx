@@ -1,19 +1,24 @@
 import { Link } from "react-router-dom";
-import ProductDetails from "./ProductDetails.tsx";
+import "./ProductList.scss";
 
 function ProductList() {
+  const products = [
+    { id: "1", name: "Csavar M8" },
+    { id: "2", name: "Szög 20mm" },
+    { id: "3", name: "Alátét 10mm" },
+  ];
+  
   return (
-    <div>
-      Product List
-      <Link to="/products/product1">
-        <ProductDetails />
-      </Link>
-      <Link to="/products/product2">
-        <ProductDetails />
-      </Link>
-      <Link to="/products/product3">
-        <ProductDetails />
-      </Link>
+    <div className="product-list">
+      {products.map((product) => (
+        <Link
+          to={`/products/${product.name}`}
+          key={product.id}
+          className="product-list__item"
+        >
+          {product.name}
+        </Link>
+      ))}
     </div>
   );
 }

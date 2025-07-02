@@ -1,0 +1,9 @@
+@import "../../style/mixins.scss";
+
+.stockmovementsPage {
+  @include pageContainer;
+
+  &__title{
+    @include pageTitle;
+  }
+}

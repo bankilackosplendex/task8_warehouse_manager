@@ -1,0 +1,15 @@
+@import "../../style/variables";
+@import "../../style/mixins";
+
+.company-list {
+  @include listBase;
+
+  &__item {
+    @include itemBase;
+
+    &:hover {
+      background-color: $secondary-color;
+      color: white;
+    }
+  }
+}

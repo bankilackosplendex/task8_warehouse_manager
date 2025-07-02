@@ -1,12 +1,24 @@
 import { Link } from "react-router-dom";
+import "./StockMovementList.scss";
 
 function StockMovementsList() {
+  const stockmovements = [
+    { id: "1", name: "Stockmovement from Pécs to Budapest" },
+    { id: "2", name: "Shipping from Spain to Szeged warehouse" },
+    { id: "3", name: "Stockmovement from Szeged to Pécs" },
+  ];
+
   return (
-    <div>
-      StockMovements List
-      <Link to="/stockmovements/stockmovement1">Stockmovement 1</Link>
-      <Link to="/stockmovements/stockmovement2">Stockmovement 2</Link>
-      <Link to="/stockmovements/stockmovement3">Stockmovement 3</Link>
+    <div className="stockmovement-list">
+      {stockmovements.map((stockmovement) => (
+        <Link
+          to={`/warehouses/${stockmovement.name}`}
+          key={stockmovement.id}
+          className="warehouse-list__item"
+        >
+          {stockmovement.name}
+        </Link>
+      ))}
     </div>
   );
 }

@@ -13,6 +13,7 @@ import WarehouseDetails from "./components/warehouses/WarehouseDetails.tsx";
 import ProductDetails from "./components/products/ProductDetails.tsx";
 import CompanyDetails from "./components/companies/CompanyDetails.tsx";
 import StockMovementDetails from "./components/stockmovements/StockMovementDetails.tsx";
+import ReportDetails from "./components/reports/ReportDetails.tsx";
 
 function App() {
   return (
@@ -47,6 +48,10 @@ function App() {
         />
         {/* --- REPORTS PAGE --- */}
         <Route path="/reports" element={<ReportsPage />} />
+        <Route
+          path="/reports/:reportId"
+          element={<ReportDetails />}
+        />
         {/* --- STATISTICS PAGE --- */}
         <Route path="/statistics" element={<StatisticsPage />} />
         {/* --- LOGIN PAGE --- */}

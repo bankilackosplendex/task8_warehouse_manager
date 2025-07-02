@@ -1,0 +1,14 @@
+@import "../../style/variables";
+@import "../../style/mixins";
+
+.product-list {
+  @include listBase;
+
+  &__item {
+    @include itemBase;
+
+    &:hover {
+      @include itemHoverBase;
+    }
+  }
+}

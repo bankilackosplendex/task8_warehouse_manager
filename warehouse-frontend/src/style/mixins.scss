@@ -1,0 +1,48 @@
+@import "./variables.scss";
+
+@mixin buttonBase {
+  padding: 8px 16px;
+  background-color: $primary-color;
+  color: #fff;
+  border: none;
+  border-radius: $border-radius;
+  cursor: pointer;
+  font-family: $font-family;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
+}
+
+@mixin pageContainer {
+  padding: $spacing-lg;
+  background-color: $background-color;
+  min-height: 100vh;
+  font-family: $font-family;
+}
+
+@mixin pageTitle{
+
+}
+
+@mixin listBase {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  font-family: $font-family;
+}
+
+@mixin itemBase {
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: $spacing-md;
+  border-radius: $border-radius;
+  text-decoration: none;
+  color: $text-color;
+  font-family: $font-family;
+}
+
+@mixin itemHoverBase {
+  background-color: $secondary-color;
+  color: white;
+}

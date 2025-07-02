@@ -1,0 +1,18 @@
+@import "../../style/mixins.scss";
+@import "../../style/maps.scss";
+
+.homePage {
+  @include pageContainer;
+  width: 100%;
+  height: 100vh;
+
+  background-image: url("../../assets/images/istockphoto-1484852942-612x612.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  &__title{
+    font-size: map-get($font-sizes , "extra");
+    color: white;
+  }
+}

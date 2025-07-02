@@ -1,0 +1,9 @@
+@import "../../style/mixins.scss";
+
+.loginPage {
+  @include pageContainer;
+
+  &__title{
+    @include pageTitle;
+  }
+}

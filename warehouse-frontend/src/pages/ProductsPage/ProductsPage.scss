@@ -1,0 +1,9 @@
+@import "../../style/mixins.scss";
+
+.productsPage {
+  @include pageContainer;
+
+  &__title{
+    @include pageTitle;
+  }
+}

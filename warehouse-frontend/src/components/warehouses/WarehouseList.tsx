@@ -1,19 +1,24 @@
 import { Link } from "react-router-dom";
-import WarehouseDetails from "./WarehouseDetails.tsx";
+import "./WarehouseList.scss";
 
 function WarehouseList() {
+  const warehouses = [
+    { id: "1", name: "Budapest warehouse" },
+    { id: "2", name: "Pécs warehouse" },
+    { id: "3", name: "Szeged warehouse" },
+  ];
+
   return (
-    <div>
-      Warehouse List
-      <Link to="/warehouses/warehouse1">
-        <WarehouseDetails />
-      </Link>
-      <Link to="/warehouses/warehouse2">
-        <WarehouseDetails />
-      </Link>
-      <Link to="/warehouses/warehouse3">
-        <WarehouseDetails />
-      </Link>
+    <div className="warehouse-list">
+      {warehouses.map((warehouse) => (
+        <Link
+          to={`/warehouses/${warehouse.name}`}
+          key={warehouse.id}
+          className="warehouse-list__item"
+        >
+          {warehouse.name}
+        </Link>
+      ))}
     </div>
   );
 }

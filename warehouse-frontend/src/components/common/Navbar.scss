@@ -1,0 +1,32 @@
+@import "../../style/variables.scss";
+@import "../../style/mixins.scss";
+
+.navbar {
+  background-color: $primary-color;
+  color: white;
+  padding: $spacing-md;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: $font-family;
+
+  &__title {
+    margin: 0;
+  }
+
+  &__links {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-md;
+
+    a {
+      color: white;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
