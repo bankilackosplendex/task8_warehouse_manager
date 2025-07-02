@@ -1,0 +1,81 @@
+@import "../../style/variables.scss";
+@import "../../style/mixins.scss";
+
+.warehouseForm {
+  @include formBase;
+
+  &__title {
+    @include pageTitle;
+  }
+
+  &__nameLabel {
+    @include inputLabelBase;
+  }
+
+  &__nameField {
+    @include inputFieldBase;
+  }
+
+  &__locationLabel {
+    @include inputLabelBase;
+    margin-bottom: -1rem;
+  }
+
+  &__location {
+    @include flexboxRow;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2rem;
+    width: 100%;
+
+    &__country {
+      @include flexboxColumn;
+      gap: 1rem;
+      width: 45%;
+
+      &__countryLabel {
+        @include inputLabelBase;
+      }
+
+      &__countryField {
+        @include inputFieldBase;
+        width: 90%;
+      }
+    }
+
+    &__city {
+      @include flexboxColumn;
+      gap: 1rem;
+      width: 45%;
+
+      &__cityLabel {
+        @include inputLabelBase;
+      }
+
+      &__cityField {
+        @include inputFieldBase;
+        width: 90%;
+      }
+    }
+
+    &__address {
+      @include flexboxColumn;
+      gap: 1rem;
+      width: 100%;
+
+      &__addressLabel {
+        @include inputLabelBase;
+        margin-top: -1rem;
+      }
+
+      &__addressField {
+        @include inputFieldBase;
+        width: 95%;
+      }
+    }
+  }
+
+  &__button {
+    @include buttonBase;
+  }
+}

@@ -1,35 +1,69 @@
 @import "./variables.scss";
+@import "./maps.scss";
+
+// --- FLEXBOX ---
+
+@mixin flexboxRow {
+  display: flex;
+  flex-direction: row;
+}
+
+@mixin flexboxColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flexboxCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// --- BUTTON ---
 
 @mixin buttonBase {
-  padding: 8px 16px;
   background-color: $primary-color;
-  color: #fff;
   border: none;
   border-radius: $border-radius;
   cursor: pointer;
   font-family: $font-family;
+  font-size: map-get($font-sizes, "small");
+  height: 2.5rem;
+  color: $third-color;
+  margin-top: 5rem;
 
   &:hover {
     background-color: darken($primary-color, 10%);
   }
 }
 
+// --- PAGE ---
+
 @mixin pageContainer {
-  padding: $spacing-lg;
+  @include flexboxColumn;
+  align-items: center;
+  width: 100%;
   background-color: $background-color;
-  min-height: 100vh;
+  min-height: 90vh;
   font-family: $font-family;
 }
 
-@mixin pageTitle{
-
+@mixin pageTitle {
+  font-size: map-get($font-sizes, "medium");
+  text-align: center;
+  color: $primary-color;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
 }
+
+// --- LIST ---
 
 @mixin listBase {
   display: flex;
   flex-direction: column;
   gap: $spacing-sm;
   font-family: $font-family;
+  width: 80%;
 }
 
 @mixin itemBase {
@@ -37,12 +71,46 @@
   border: 1px solid #ccc;
   padding: $spacing-md;
   border-radius: $border-radius;
+  border: none;
+  box-shadow: 0rem 0rem 0.5rem rgb(0, 0, 0, 0.2);
   text-decoration: none;
   color: $text-color;
   font-family: $font-family;
+  font-size: map-get($font-sizes, "small");
+  width: calc(100% - 2 * ($spacing-md));
 }
 
 @mixin itemHoverBase {
-  background-color: $secondary-color;
-  color: white;
+  background-color: $primary-color;
+  color: $third-color;
+}
+
+// --- FORM ---
+
+@mixin formBase {
+  @include flexboxColumn;
+  gap: 1rem;
+  margin: 0rem auto;
+  font-family: $font-family;
+  width: 90%;
+  max-width: 30rem;
+}
+
+@mixin inputFieldBase {
+  height: 2.5rem;
+  font-size: map-get($font-sizes, "small");
+  border-radius: $border-radius;
+  border: 0.1rem solid $primary-color;
+  padding-left: 1rem;
+  font-family: $font-family;
+
+  &:hover {
+    background-color: darken($third-color, 10%);
+  }
+}
+@mixin inputLabelBase {
+  font-size: map-get($font-sizes, "small");
+  margin-top: 2rem;
+  padding-left: 1rem;
+  font-family: $font-family;
 }

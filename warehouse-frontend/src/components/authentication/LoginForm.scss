@@ -1,0 +1,20 @@
+@import "../../style/variables.scss";
+@import "../../style/mixins.scss";
+
+.loginForm {
+  @include formBase;
+
+  &__emailLabel,
+  &__passwordLabel {
+    @include inputLabelBase;
+  }
+
+  &__emailField,
+  &__passwordField {
+    @include inputFieldBase;
+  }
+
+  &__button {
+    @include buttonBase;
+  }
+}

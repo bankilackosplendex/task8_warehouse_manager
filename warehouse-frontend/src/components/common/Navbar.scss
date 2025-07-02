@@ -1,9 +1,10 @@
 @import "../../style/variables.scss";
 @import "../../style/mixins.scss";
+@import "../../style/maps.scss";
 
 .navbar {
   background-color: $primary-color;
-  color: white;
+  color: $third-color;
   padding: $spacing-md;
   display: flex;
   justify-content: space-between;
@@ -12,6 +13,8 @@
 
   &__title {
     margin: 0;
+    margin-left: 1rem;
+    font-size: map-get($font-sizes , "medium");
   }
 
   &__links {
@@ -21,11 +24,12 @@
     gap: $spacing-md;
 
     a {
-      color: white;
+      color: $third-color;
       text-decoration: none;
+      font-size: map-get($font-sizes , "small");
 
       &:hover {
-        text-decoration: underline;
+        color: darken($third-color, 60%);
       }
     }
   }

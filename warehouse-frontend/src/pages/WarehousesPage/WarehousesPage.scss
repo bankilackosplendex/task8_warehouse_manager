@@ -6,4 +6,9 @@
   &__title{
     @include pageTitle;
   }
+
+  &__addButton{
+    @include buttonBase;
+    width: 15rem;
+  }
 }

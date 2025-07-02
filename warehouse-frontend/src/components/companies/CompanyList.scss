@@ -8,8 +8,7 @@
     @include itemBase;
 
     &:hover {
-      background-color: $secondary-color;
-      color: white;
+      @include itemHoverBase;
     }
   }
 }

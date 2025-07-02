@@ -1,0 +1,37 @@
+@import "../../style/variables.scss";
+@import "../../style/mixins.scss";
+
+.productForm {
+  @include formBase;
+
+  &__title {
+    @include pageTitle;
+  }
+
+  &__nameLabel,
+  &__quantityTypeLabel,
+  &__articleNumberLabel {
+    @include inputLabelBase;
+  }
+
+  &__nameField,
+  &__quantityTypeField,
+  &__articleNumberField {
+    @include inputFieldBase;
+  }
+
+  &__quantityTypeField {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='currentColor' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 12px 8px;
+    cursor: pointer;
+  }
+
+  &__button {
+    @include buttonBase;
+  }
+}

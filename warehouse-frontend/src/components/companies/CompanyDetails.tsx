@@ -1,5 +1,5 @@
 function CompanyDetails() {
-  return <div>Conpany Details</div>;
+  return <div>Company Details</div>;
 }
 
 export default CompanyDetails;

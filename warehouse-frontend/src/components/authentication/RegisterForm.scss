@@ -1,18 +1,19 @@
 @import "../../style/variables.scss";
 @import "../../style/mixins.scss";
 
-.companyForm{
+.registerForm{
     @include formBase;
+    
 
-    &__title{
-        @include pageTitle;
-    }
-
-    &__nameLabel{
+    &__emailLabel,
+    &__nameLabel,
+    &__passwordLabel{
         @include inputLabelBase;
     }
 
-    &__nameField{
+    &__emailField,
+    &__nameField,
+    &__passwordField{
         @include inputFieldBase;
     }
 

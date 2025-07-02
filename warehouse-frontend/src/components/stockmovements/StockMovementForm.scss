@@ -1,0 +1,48 @@
+@import "../../style/variables.scss";
+@import "../../style/mixins.scss";
+
+.stockMovementsForm {
+  @include formBase;
+
+  &__title {
+    @include pageTitle;
+  }
+
+  &__dateLabel,
+  &__movementTypeLabel,
+  &__productLabel,
+  &__warehouseLabel,
+  &__companyLabel {
+    @include inputLabelBase;
+  }
+
+  &__dateField,
+  &__movementTypeField,
+  &__productField,
+  &__warehouseField,
+  &__companyField {
+    @include inputFieldBase;
+  }
+
+  &__dateField {
+    padding-right: 0.7rem;
+  }
+
+  &__movementTypeField,
+  &__productField,
+  &__warehouseField,
+  &__companyField {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='currentColor' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 12px 8px;
+    cursor: pointer;
+  }
+
+  &__button {
+    @include buttonBase;
+  }
+}
