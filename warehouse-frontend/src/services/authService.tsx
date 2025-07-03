@@ -16,3 +16,11 @@ export const register = async (userData: {
   const res = await api.post("/authentication/sign-up", userData);
   return res.data;
 };
+
+export function getAccessToken (): string | null {
+  return localStorage.getItem("accessToken");
+}
+
+export function getRefreshToken (): string | null {
+  return localStorage.getItem("refreshToken");
+}

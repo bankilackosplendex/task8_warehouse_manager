@@ -1,7 +1,9 @@
+import { Product } from "../types/ProductType.tsx";
 import api from "./api.tsx";
+import { getAccessToken } from "./authService.tsx";
 
 export const getProducts = async () => {
-  const token = getToken();
+  const token = getAccessToken();
   const res = await api.get("/products", {
   headers: {
     Authorization: `Bearer ${token}`,
@@ -11,29 +13,41 @@ export const getProducts = async () => {
 };
 
 export const getProductById = async (id: number) => {
-  const res = await api.get(`/products/${id}`);
+  const token = getAccessToken();
+  const res = await api.get(`/products/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
+  });
   return res.data;
 };
 
-export const createProduct = async (data: {
-  name: string;
-  sku: string;
-  unit: string;
-}) => {
-  const res = await api.post("/products", data);
+export const createProduct = async (data: Product) => {
+  const token = getAccessToken();
+  const res = await api.post("/products", data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
+  });
   return res.data;
 };
 
-export const updateProduct = async (id: number, data: any) => {
-  const res = await api.put(`/products/${id}`, data);
+export const updateProduct = async (id: number, data: Product) => {
+  const token = getAccessToken();
+  const res = await api.put(`/products/${id}`, data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
+  });
   return res.data;
 };
 
 export const deleteProduct = async (id: number) => {
-  const res = await api.delete(`/products/${id}`);
+  const token = getAccessToken();
+  const res = await api.delete(`/products/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
+  });
   return res.data;
 };
-
-function getToken() {
-  return localStorage.getItem("accessToken");
-}

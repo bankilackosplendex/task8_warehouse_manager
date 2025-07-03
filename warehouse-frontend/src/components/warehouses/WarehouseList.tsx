@@ -1,12 +1,26 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import "./WarehouseList.scss";
+import { getWarehouses } from "../../services/warehouseService.tsx";
+import { Warehouse } from "../../types/WarehouseType.tsx";
 
 function WarehouseList() {
-  const warehouses = [
-    { id: "1", name: "Budapest warehouse" },
-    { id: "2", name: "Pécs warehouse" },
-    { id: "3", name: "Szeged warehouse" },
-  ];
+  const [warehouses, setWarehouses] = useState<Warehouse[]>([]);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchWarehouses = async () => {
+      try {
+        const data = await getWarehouses();
+        setWarehouses(data);
+      } catch (err: any) {
+        const msg = err.response?.data?.message || "Couldn't load warehouses";
+        setError(msg);
+      }
+    };
+
+    fetchWarehouses();
+  }, []);
 
   return (
     <div className="warehouse-list">

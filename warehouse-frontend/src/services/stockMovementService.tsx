@@ -1,33 +1,53 @@
+import { StockMovement } from "../types/StockMovementType.tsx";
 import api from "./api.tsx";
+import { getAccessToken } from "./authService.tsx";
 
 export const getStockMovements = async () => {
-  const res = await api.get("/stockmovements");
+  const token = getAccessToken();
+  const res = await api.get("/stockmovements", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return res.data;
 };
 
 export const getStockMovementById = async (id: string) => {
-  const res = await api.get(`/stockmovements/${id}`);
+  const token = getAccessToken();
+  const res = await api.get(`/stockmovements/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return res.data;
 };
 
-export const createStockMovement = async (data: {
-  date: string;
-  productId: string;
-  warehouseId: string;
-  quantity: number;
-  movementType: "import" | "export" | string;
-  companyId: string;
-}) => {
-  const res = await api.post("/stockmovements", data);
+export const createStockMovement = async (data: StockMovement) => {
+  const token = getAccessToken();
+  const res = await api.post("/stockmovements", data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return res.data;
 };
 
-export const updateStockMovement = async (id: string, data: any) => {
-  const res = await api.put(`/stockmovements/${id}`, data);
+export const updateStockMovement = async (id: string, data: StockMovement) => {
+  const token = getAccessToken();
+  const res = await api.put(`/stockmovements/${id}`, data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return res.data;
 };
 
 export const deleteStockMovement = async (id: string) => {
-  const res = await api.delete(`/stockmovements/${id}`);
+  const token = getAccessToken();
+  const res = await api.delete(`/stockmovements/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return res.data;
 };

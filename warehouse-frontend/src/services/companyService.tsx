@@ -1,28 +1,53 @@
+import { Company } from "../types/CompanyType.tsx";
 import api from "./api.tsx";
+import { getAccessToken } from "./authService.tsx";
 
 export const getCompanies = async () => {
-  const res = await api.get("/companies");
+  const token = getAccessToken();
+  const res = await api.get("/companies", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return res.data;
 };
 
-export const getCompanyById = async (id: string) => {
-  const res = await api.get(`/companies/${id}`);
+export const getCompanyById = async (id: number) => {
+  const token = getAccessToken();
+  const res = await api.get(`/companies/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return res.data;
 };
 
-export const createCompany = async (data: {
-  name: string;
-}) => {
-  const res = await api.post("/companies", data);
+export const createCompany = async (data: Company) => {
+  const token = getAccessToken();
+  const res = await api.post("/companies", data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return res.data;
 };
 
-export const updateCompany = async (id: string, data: any) => {
-  const res = await api.put(`/companies/${id}`, data);
+export const updateCompany = async (id: number, data: Company) => {
+  const token = getAccessToken();
+  const res = await api.put(`/companies/${id}`, data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return res.data;
 };
 
-export const deleteCompany = async (id: string) => {
-  const res = await api.delete(`/companies/${id}`);
+export const deleteCompany = async (id: number) => {
+  const token = getAccessToken();
+  const res = await api.delete(`/companies/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return res.data;
 };

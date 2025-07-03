@@ -6,9 +6,21 @@
 
   &__item {
     @include itemBase;
+    @include flexboxRow;
+    justify-content: space-between;
 
     &:hover {
       @include itemHoverBase;
+    }
+
+    &__id{
+      
+    }
+
+    &__info{
+      @include flexboxRow;
+      align-items: center;
+      gap: 2rem;
     }
   }
 }

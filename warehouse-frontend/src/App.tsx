@@ -45,7 +45,7 @@ function App() {
         {/* --- STOCKMOVEMENT PAGE --- */}
         <Route path="/stockmovements" element={<StockMovementsPage />} />
         <Route
-          path="/stockmovements/:stockMovementName"
+          path="/stockmovements/:stockMovementId"
           element={<StockMovementDetails />}
         />
         <Route path="/stockmovements/add" element={<StockMovementsForm />} />

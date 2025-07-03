@@ -2,19 +2,9 @@ import { Link } from "react-router-dom";
 import "./ProductList.scss";
 import { useEffect, useState } from "react";
 import { getProducts } from "../../services/productService.tsx";
-
-type Product = {
-  id: string;
-  name: string;
-};
+import { Product } from "../../types/ProductType.tsx";
 
 function ProductList() {
-  const productsMock = [
-    { id: "1", name: "Csavar M8" },
-    { id: "2", name: "Szög 20mm" },
-    { id: "3", name: "Alátét 10mm" },
-  ];
-
   const [products, setProducts] = useState<Product[]>([]);
   const [error, setError] = useState("");
 
@@ -24,8 +14,7 @@ function ProductList() {
         const data = await getProducts();
         setProducts(data);
       } catch (err: any) {
-        const msg =
-          err.response?.data?.message || "Nem sikerült betölteni a termékeket.";
+        const msg = err.response?.data?.message || "Couldn't load products";
         setError(msg);
       }
     };
