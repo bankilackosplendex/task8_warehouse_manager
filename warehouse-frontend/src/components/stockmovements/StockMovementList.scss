@@ -6,21 +6,47 @@
 
   &__item {
     @include itemBase;
-    @include flexboxRow;
+    height: fit-content;
+    @include flexboxColumn;
     justify-content: space-between;
 
     &:hover {
       @include itemHoverBase;
     }
 
-    &__id{
-      
-    }
-
-    &__info{
+    &__id {
       @include flexboxRow;
+      flex-wrap: wrap;
       align-items: center;
       gap: 2rem;
+      margin-left: 1rem;
+    }
+
+    &__info {
+      @include flexboxRow;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 2rem;
+      margin-left: 4.3rem;
+    }
+  }
+}
+
+@media (min-width: 55rem) {
+  .stockmovement-list {
+    &__item {
+      @include flexboxRow;
+      @include itemBase;
+      
+      &__id {
+        margin-left: 0rem;
+        flex-wrap: nowrap;
+      }
+
+      &__info {
+        margin-left: 0rem;
+        flex-wrap: nowrap;
+      }
     }
   }
 }

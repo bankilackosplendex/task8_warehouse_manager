@@ -29,7 +29,7 @@
       font-size: map-get($font-sizes , "small");
 
       &:hover {
-        color: darken($third-color, 60%);
+        text-decoration: underline;
       }
     }
   }

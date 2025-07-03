@@ -1,0 +1,37 @@
+@import "../../style/variables";
+@import "../../style/mixins";
+@import "../../style/maps";
+
+.companyDetails {
+  @include detailsBase;
+
+  &__name {
+    font-size: map-get($font-sizes, "medium");
+  }
+
+  &__movements {
+    @include flexboxColumn;
+    gap: 1rem;
+
+    &__key {
+      @include detailsKeyBase;
+    }
+
+    &__value {
+      @include detailsValueBase;
+      @include itemBase;
+      @include flexboxRow;
+      justify-content: space-between;
+
+      &__info {
+        @include flexboxRow;
+        align-items: center;
+        gap: 2rem;
+      }
+
+      &:hover{
+        @include itemHoverBase;
+      }
+    }
+  }
+}

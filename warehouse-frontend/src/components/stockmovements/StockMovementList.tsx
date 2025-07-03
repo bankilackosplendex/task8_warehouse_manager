@@ -15,18 +15,28 @@ function StockMovementsList() {
     const fetchStockMovement = async () => {
       try {
         const data = await getStockMovements();
-        setStockMovements(data);
-        await data.map(
-          async (stockMov) => (
-            (stockMov.product = await getProduct(stockMov.productId)),
-            (stockMov.warehouse = await getWarehouse(stockMov.warehouseId)),
-            (stockMov.company = await getCompany(stockMov.companyId))
-          )
+
+        const enrichedData = await Promise.all(
+          data.map(async (stockMov) => {
+            const [product, warehouse, company] = await Promise.all([
+              getProduct(stockMov.productId),
+              getWarehouse(stockMov.warehouseId),
+              getCompany(stockMov.companyId),
+            ]);
+
+            return {
+              ...stockMov,
+              product,
+              warehouse,
+              company,
+            };
+          })
         );
-        setStockMovements(data);
+
+        setStockMovements(enrichedData);
       } catch (err: any) {
         const msg =
-          err.response?.data?.message || "Couldn't load stockmovements";
+          err.response?.data?.message || "Couldn't load stock movements";
         setError(msg);
       }
     };
@@ -75,10 +85,14 @@ function StockMovementsList() {
           key={stockmovement.id}
           className="stockmovement-list__item"
         >
-          <div className="stockmovement-list__item__id">#{stockmovement.id}</div>
+          <div className="stockmovement-list__item__id">
+            <p>#{stockmovement.id}</p>
+            <p>{stockmovement.warehouse.name}</p>
+            <p>{stockmovement.product.name}</p>
+          </div>
           <div className="stockmovement-list__item__info">
-            <p>{stockmovement.movementType}</p> 
-            <p>{new Date(stockmovement.createdAt).toLocaleString()}</p>
+            <p>{stockmovement.movementType}</p>
+            <p>{new Date(stockmovement.createdAt).toLocaleDateString()}</p>
           </div>
         </Link>
       ))}

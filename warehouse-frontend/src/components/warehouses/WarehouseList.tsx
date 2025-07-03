@@ -26,7 +26,7 @@ function WarehouseList() {
     <div className="warehouse-list">
       {warehouses.map((warehouse) => (
         <Link
-          to={`/warehouses/${warehouse.name}`}
+          to={`/warehouses/${encodeURIComponent(warehouse.id)}`}
           key={warehouse.id}
           className="warehouse-list__item"
         >

@@ -29,18 +29,15 @@ function App() {
         <Route path="/" element={<HomePage />} />
         {/* --- WAREHOUSE PAGE --- */}
         <Route path="/warehouses" element={<WarehousesPage />} />
-        <Route
-          path="/warehouses/:warehouseName"
-          element={<WarehouseDetails />}
-        />
+        <Route path="/warehouses/:warehouseId" element={<WarehouseDetails />} />
         <Route path="/warehouses/add" element={<WarehouseForm />} />
         {/* --- PRODUCT PAGE --- */}
         <Route path="/products" element={<ProductsPage />} />
-        <Route path="/products/:productName" element={<ProductDetails />} />
+        <Route path="/products/:productId" element={<ProductDetails />} />
         <Route path="/products/add" element={<ProductForm />} />
         {/* --- COMPANY PAGE --- */}
         <Route path="/companies" element={<CompaniesPage />} />
-        <Route path="/companies/:companyName" element={<CompanyDetails />} />
+        <Route path="/companies/:companyId" element={<CompanyDetails />} />
         <Route path="/companies/add" element={<CompanyForm />} />
         {/* --- STOCKMOVEMENT PAGE --- */}
         <Route path="/stockmovements" element={<StockMovementsPage />} />

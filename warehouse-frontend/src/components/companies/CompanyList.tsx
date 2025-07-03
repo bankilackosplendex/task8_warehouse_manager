@@ -26,7 +26,7 @@ function CompanyList() {
     <div className="company-list">
       {companies.map((company) => (
         <Link
-          to={`/companies/${company.name}`}
+          to={`/companies/${company.id}`}
           key={company.id}
           className="company-list__item"
         >

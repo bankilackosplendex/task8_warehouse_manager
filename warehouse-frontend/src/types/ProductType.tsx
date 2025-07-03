@@ -5,6 +5,7 @@ import { WarehouseProduct } from "./WarehouseProductType";
 export type Product = {
   id: string;
   name: string;
+  number: number;
   quantityType: QuantityType;
   warehouses: WarehouseProduct[];
   movements: StockMovement[];

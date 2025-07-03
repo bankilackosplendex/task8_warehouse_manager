@@ -33,7 +33,9 @@
   margin-top: 5rem;
 
   &:hover {
-    background-color: darken($primary-color, 10%);
+    background-color: $third-color;
+    color: $primary-color;
+    border: 0.2rem solid $primary-color;
   }
 }
 
@@ -114,4 +116,30 @@
   margin-top: 2rem;
   padding-left: 1rem;
   font-family: $font-family;
+}
+
+// --- DETAILS ---
+
+@mixin detailsBase {
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: $spacing-md;
+  border-radius: $border-radius;
+  border: none;
+  box-shadow: 0rem 0rem 0.5rem rgb(0, 0, 0, 0.2);
+  text-decoration: none;
+  color: $text-color;
+  font-family: $font-family;
+  font-size: map-get($font-sizes, "small");
+  width: calc(80% - 2 * ($spacing-md));
+  margin: 3rem auto;
+}
+
+@mixin detailsKeyBase {
+  font-weight: bold;
+
+}
+
+@mixin detailsValueBase {
+
 }
