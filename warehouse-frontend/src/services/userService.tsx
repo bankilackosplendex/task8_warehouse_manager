@@ -1,4 +1,4 @@
-import api from "./api";
+import api from "./api.tsx";
 
 export const getUsers = async () => {
   const res = await api.get("/users");

@@ -1,24 +1,6 @@
 @import "../../style/variables";
 @import "../../style/mixins";
 
-// .report-list {
-//   @include listBase;
-
-//   &__item {
-//     @include itemBase;
-
-//     &:hover {
-//       @include itemHoverBase;
-//     }
-//   }
-
-//   &__downloadButton{
-//     @include buttonBase;
-//     margin: 0rem;
-//     text-align: right;
-//   }
-// }
-
 .report-list {
   @include listBase;
 

@@ -1,4 +1,4 @@
-import api from "./api";
+import api from "./api.tsx";
 
 export const getStockMovements = async () => {
   const res = await api.get("/stockmovements");

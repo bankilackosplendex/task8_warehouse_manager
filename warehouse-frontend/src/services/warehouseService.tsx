@@ -1,4 +1,4 @@
-import api from "./api";
+import api from "./api.tsx";
 
 export const getWarehouses = async () => {
   const response = await api.get("/warehouses");

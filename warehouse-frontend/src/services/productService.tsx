@@ -1,7 +1,12 @@
-import api from "./api";
+import api from "./api.tsx";
 
 export const getProducts = async () => {
-  const res = await api.get("/products");
+  const token = getToken();
+  const res = await api.get("/products", {
+  headers: {
+    Authorization: `Bearer ${token}`,
+  },
+});
   return res.data;
 };
 
@@ -28,3 +33,7 @@ export const deleteProduct = async (id: number) => {
   const res = await api.delete(`/products/${id}`);
   return res.data;
 };
+
+function getToken() {
+  return localStorage.getItem("accessToken");
+}
