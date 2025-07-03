@@ -1,14 +1,58 @@
 @import "../../style/variables";
 @import "../../style/mixins";
 
+// .report-list {
+//   @include listBase;
+
+//   &__item {
+//     @include itemBase;
+
+//     &:hover {
+//       @include itemHoverBase;
+//     }
+//   }
+
+//   &__downloadButton{
+//     @include buttonBase;
+//     margin: 0rem;
+//     text-align: right;
+//   }
+// }
+
 .report-list {
   @include listBase;
 
   &__item {
     @include itemBase;
+    position: relative; // fontos! hogy abszolút gombot rá tudjunk tenni
+    padding-right: 5rem; // hagyj helyet a gombnak
 
     &:hover {
       @include itemHoverBase;
+    }
+
+    &__link {
+      display: block;
+      width: 100%;
+      height: 100%;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    &__downloadButton {
+      @include buttonBase;
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      margin: 0;
+      z-index: 1;
+      border: 0.1rem solid $third-color;
+
+      &:hover {
+        color: $primary-color;
+        background-color: $third-color;
+      }
     }
   }
 }
