@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import "./Navbar.scss";
+import { Role } from "../../enums/UserRoleEnum.tsx";
+import { useAuth } from "../hooks/useAuth.tsx";
 
-function Navbar() {
+function Navbar({ user }) {
   return (
     <nav className="navbar">
       <h1 className="navbar__title">Warehouse Manager</h1>
@@ -24,15 +26,30 @@ function Navbar() {
         <li>
           <Link to="/reports">Reports</Link>
         </li>
-        <li>
-          <Link to="/statistics">Statistics</Link>
-        </li>
-        <li>
-          <Link to="/login">Login</Link>
-        </li>
-        <li>
-          <Link to="/registration">Registration</Link>
-        </li>
+        {user?.role === Role.ADMIN && (
+          <>
+            <li>
+              <Link to="/statistics">Statistics</Link>
+            </li>
+            <li>
+              <Link to="/users">Users</Link>
+            </li>
+          </>
+        )}
+        {user ? (
+          <li>
+            <Link to="/">Log out</Link>
+          </li>
+        ) : (
+          <>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+            <li>
+              <Link to="/registration">Registration</Link>
+            </li>
+          </>
+        )}
       </ul>
     </nav>
   );

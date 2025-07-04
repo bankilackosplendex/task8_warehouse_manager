@@ -19,11 +19,15 @@ import CompanyForm from "./components/companies/CompanyForm.tsx";
 import ProductForm from "./components/products/ProductForm.tsx";
 import WarehouseForm from "./components/warehouses/WarehouseForm.tsx";
 import StockMovementsForm from "./components/stockmovements/StockMovementForm.tsx";
+import UserList from "./components/users/UserList.tsx";
+import { useAuth } from "./components/hooks/useAuth.tsx";
 
 function App() {
+  const { user } = useAuth();
+
   return (
     <div>
-      <Navbar />
+      <Navbar user={user} />
       <Routes>
         {/* --- HOME PAGE --- */}
         <Route path="/" element={<HomePage />} />
@@ -55,6 +59,8 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         {/* --- REGISTRATION PAGE --- */}
         <Route path="/registration" element={<RegisterPage />} />
+        {/* --- USERS PAGE --- */}
+        <Route path="/profile" element={<UserList />} />
       </Routes>
     </div>
   );

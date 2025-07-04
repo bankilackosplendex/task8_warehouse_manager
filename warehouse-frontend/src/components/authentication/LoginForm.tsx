@@ -1,11 +1,19 @@
 import "./LoginForm.scss";
 import { useState } from "react";
 import { login } from "../../services/authService.tsx";
+import { Navigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext.tsx";
+import { jwtDecode } from "jwt-decode";
+import { DecodedAccessToken } from "../../types/DecodedAccessTokenType.tsx";
+
 
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  const { setUser } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,7 +25,11 @@ function LoginForm() {
       localStorage.setItem("accessToken", response.accessToken);
       localStorage.setItem("refreshToken", response.refreshToken);
 
+      const decoded = jwtDecode<DecodedAccessToken>(response.accessToken);
+      setUser({ email: decoded.sub, role: decoded.role });
+
       console.log("Sikeres bejelentkezés:", response);
+      <Navigate to="/" />;
     } catch (err: any) {
       console.error("Hiba a bejelentkezés során:", err);
       if (err.response && err.response.data && err.response.data.message) {
