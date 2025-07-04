@@ -1,3 +1,4 @@
+import { SquarePlus } from "lucide-react";
 import "./StockMovementForm.scss";
 
 function StockMovementsForm() {
@@ -40,7 +41,6 @@ function StockMovementsForm() {
       </label>
       <select
         className="stockMovementsForm__productField"
-        type="text"
         name="product"
         required
       >
@@ -55,7 +55,6 @@ function StockMovementsForm() {
       </label>
       <select
         className="stockMovementsForm__warehouseField"
-        type="text"
         name="warehouse"
         required
       >
@@ -73,7 +72,6 @@ function StockMovementsForm() {
       </label>
       <select
         className="stockMovementsForm__movementTypeField"
-        type="text"
         name="movementType"
         required
       >
@@ -86,7 +84,6 @@ function StockMovementsForm() {
       </label>
       <select
         className="stockMovementsForm__companyField"
-        type="text"
         name="company"
         required
       >
@@ -97,6 +94,7 @@ function StockMovementsForm() {
       </select>
       {/* Add button */}
       <button className="stockMovementsForm__button" type="submit">
+        <SquarePlus />
         Add
       </button>
     </form>

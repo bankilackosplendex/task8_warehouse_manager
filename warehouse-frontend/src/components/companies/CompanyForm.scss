@@ -1,22 +1,25 @@
 @import "../../style/variables.scss";
 @import "../../style/mixins.scss";
 
-.companyForm{
-    @include formBase;
+.companyForm {
+  @include formBase;
 
-    &__title{
-        @include pageTitle;
-    }
+  &__title {
+    @include pageTitle;
+  }
 
-    &__nameLabel{
-        @include inputLabelBase;
-    }
+  &__nameLabel {
+    @include inputLabelBase;
+  }
 
-    &__nameField{
-        @include inputFieldBase;
-    }
+  &__nameField {
+    @include inputFieldBase;
+  }
 
-    &__button{
-        @include buttonBase;
-    }
+  &__button {
+    @include buttonBase;
+    @include flexboxRow;
+    @include flexboxCenter;
+    gap: 0.5rem;
+  }
 }

@@ -1,3 +1,4 @@
+import { SquarePlus } from "lucide-react";
 import "./WarehouseForm.scss";
 
 function WarehouseForm() {
@@ -67,6 +68,7 @@ function WarehouseForm() {
       </div>
       {/* Add button */}
       <button className="warehouseForm__button" type="submit">
+        <SquarePlus />
         Add
       </button>
     </form>

@@ -11,10 +11,22 @@
   align-items: center;
   font-family: $font-family;
 
-  &__title {
-    margin: 0;
+  &__logo {
+    @include flexboxRow;
+    gap: 0.4rem;
+    align-items: center;
     margin-left: 1rem;
-    font-size: map-get($font-sizes , "medium");
+
+    &__title {
+      margin: 0;
+      margin-left: 2rem;
+      font-size: map-get($font-sizes, "medium");
+    }
+
+    &__icon {
+      min-width: 3rem;
+      min-height: 3rem;
+    }
   }
 
   &__links {
@@ -26,11 +38,17 @@
     a {
       color: $third-color;
       text-decoration: none;
-      font-size: map-get($font-sizes , "small");
+      font-size: map-get($font-sizes, "small");
 
       &:hover {
         text-decoration: underline;
       }
+    }
+
+    &__item {
+      @include flexboxRow;
+      gap: 0.4rem;
+      align-items: center;
     }
   }
 }

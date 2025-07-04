@@ -3,6 +3,7 @@ import "./CompanyList.scss";
 import { useEffect, useState } from "react";
 import { Company } from "../../types/CompanyType.tsx";
 import { getCompanies } from "../../services/companyService.tsx";
+import {Briefcase} from "lucide-react"; 
 
 function CompanyList() {
   const [companies, setCompanies] = useState<Company[]>([]);
@@ -30,6 +31,7 @@ function CompanyList() {
           key={company.id}
           className="company-list__item"
         >
+          <Briefcase />
           {company.name}
         </Link>
       ))}

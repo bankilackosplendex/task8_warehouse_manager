@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import "./WarehouseList.scss";
 import { getWarehouses } from "../../services/warehouseService.tsx";
 import { Warehouse } from "../../types/WarehouseType.tsx";
+import { WarehouseIcon } from "lucide-react";
 
 function WarehouseList() {
   const [warehouses, setWarehouses] = useState<Warehouse[]>([]);
@@ -30,6 +31,7 @@ function WarehouseList() {
           key={warehouse.id}
           className="warehouse-list__item"
         >
+          <WarehouseIcon />
           {warehouse.name}
         </Link>
       ))}

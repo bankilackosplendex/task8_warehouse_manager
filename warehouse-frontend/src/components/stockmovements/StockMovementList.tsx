@@ -6,6 +6,7 @@ import { getStockMovements } from "../../services/stockMovementService.tsx";
 import { getProductById } from "../../services/productService.tsx";
 import { getWarehouseById } from "../../services/warehouseService.tsx";
 import { getCompanyById } from "../../services/companyService.tsx";
+import { Truck } from "lucide-react";
 
 function StockMovementsList() {
   const [stockMovements, setStockMovements] = useState<StockMovement[]>([]);
@@ -86,6 +87,7 @@ function StockMovementsList() {
           className="stockmovement-list__item"
         >
           <div className="stockmovement-list__item__id">
+            <Truck />
             <p>#{stockmovement.id}</p>
             <p>{stockmovement.warehouse.name}</p>
             <p>{stockmovement.product.name}</p>

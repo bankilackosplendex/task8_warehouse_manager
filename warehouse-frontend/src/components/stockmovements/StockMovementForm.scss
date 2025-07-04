@@ -44,5 +44,8 @@
 
   &__button {
     @include buttonBase;
+    @include flexboxRow;
+    @include flexboxCenter;
+    gap: 0.5rem;
   }
 }

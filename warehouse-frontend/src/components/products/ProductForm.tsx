@@ -1,3 +1,4 @@
+import { PackagePlus } from "lucide-react";
 import "./ProductForm.scss";
 
 function ProductForm() {
@@ -7,7 +8,9 @@ function ProductForm() {
       {/* Title */}
       <h2 className="productForm__title">Add new product</h2>
       {/* Name */}
-      <label className="productForm__nameLabel" htmlFor="name">Name</label>
+      <label className="productForm__nameLabel" htmlFor="name">
+        Name
+      </label>
       <input
         className="productForm__nameField"
         type="text"
@@ -15,7 +18,12 @@ function ProductForm() {
         required
       />
       {/* Article number */}
-      <label className="productForm__articleNumberLabel" htmlFor="articleNumber">Article number</label>
+      <label
+        className="productForm__articleNumberLabel"
+        htmlFor="articleNumber"
+      >
+        Article number
+      </label>
       <input
         className="productForm__articleNumberField"
         type="text"
@@ -23,10 +31,11 @@ function ProductForm() {
         required
       />
       {/* Quantity type */}
-      <label className="productForm__quantityTypeLabel" htmlFor="quantityType">Quantity type</label>
+      <label className="productForm__quantityTypeLabel" htmlFor="quantityType">
+        Quantity type
+      </label>
       <select
         className="productForm__quantityTypeField"
-        type="text"
         name="quantityType"
         required
       >
@@ -34,7 +43,10 @@ function ProductForm() {
         <option value="KG">KG</option>
       </select>
       {/* Add button */}
-      <button className="productForm__button" type="submit">Add</button>
+      <button className="productForm__button" type="submit">
+        <PackagePlus />
+        Add
+      </button>
     </form>
   );
 }

@@ -23,11 +23,10 @@ import UserList from "./components/users/UserList.tsx";
 import { useAuth } from "./components/hooks/useAuth.tsx";
 
 function App() {
-  const { user } = useAuth();
 
   return (
     <div>
-      <Navbar user={user} />
+      <Navbar/>
       <Routes>
         {/* --- HOME PAGE --- */}
         <Route path="/" element={<HomePage />} />

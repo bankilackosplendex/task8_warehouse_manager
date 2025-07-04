@@ -37,7 +37,10 @@
     &__item {
       @include flexboxRow;
       @include itemBase;
-      
+      @include flexboxRow;
+      align-items: center;
+      gap: 1rem;
+
       &__id {
         margin-left: 0rem;
         flex-wrap: nowrap;

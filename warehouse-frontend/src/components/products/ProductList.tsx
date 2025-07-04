@@ -3,6 +3,7 @@ import "./ProductList.scss";
 import { useEffect, useState } from "react";
 import { getProducts } from "../../services/productService.tsx";
 import { Product } from "../../types/ProductType.tsx";
+import { Package } from "lucide-react";
 
 function ProductList() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -30,6 +31,7 @@ function ProductList() {
           key={product.id}
           className="product-list__item"
         >
+          <Package />
           {product.name}
         </Link>
       ))}

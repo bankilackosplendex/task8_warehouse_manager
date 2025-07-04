@@ -6,6 +6,9 @@
 
   &__item {
     @include itemBase;
+    @include flexboxRow;
+    align-items: center;
+    gap: 1rem;
 
     &:hover {
       @include itemHoverBase;
