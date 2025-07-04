@@ -35,4 +35,13 @@ export class ProductsService {
     await this.findOne(id);
     return this.prisma.product.delete({ where: { id } });
   }
+
+  async getProductWarehouses(productId: number) {
+  return this.prisma.warehouseProduct.findMany({
+    where: { productId },
+    include: {
+      warehouse: true,
+    },
+  });
+}
 }

@@ -46,4 +46,9 @@ export class ProductsController {
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.productsService.remove(id);
   }
+
+  @Get('/product/:id/warehouses')
+  getWarehousesByProduct(@Param('id', ParseIntPipe) id: number) {
+    return this.productsService.getProductWarehouses(id);
+  }
 }

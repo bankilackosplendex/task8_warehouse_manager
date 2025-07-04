@@ -34,7 +34,10 @@ export class WarehousesController {
 
   @Roles(Role.ADMIN)
   @Patch(':id')
-  update(@Param('id', ParseIntPipe) id: number, @Body() updateCoffeeDto: Prisma.WarehouseUpdateInput) {
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateCoffeeDto: Prisma.WarehouseUpdateInput,
+  ) {
     return this.warehousesService.update(+id, updateCoffeeDto);
   }
 
@@ -42,5 +45,10 @@ export class WarehousesController {
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.warehousesService.remove(+id);
+  }
+
+  @Get(':id/products')
+  getProductsByWarehouse(@Param('id', ParseIntPipe) id: number) {
+    return this.warehousesService.getWarehouseProducts(id);
   }
 }
