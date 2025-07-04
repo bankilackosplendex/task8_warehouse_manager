@@ -4,12 +4,15 @@ import { useEffect, useState } from "react";
 import { getCompanyById } from "../../services/companyService.tsx";
 import { Company } from "../../types/CompanyType";
 import { Pencil, Trash2 } from "lucide-react";
+import Backdrop from "../common/Backdrop.tsx";
+import PopUpWindow from "../common/PopUpWindow.tsx";
 
 function CompanyDetails() {
   const { companyId } = useParams();
 
   const [company, setCompany] = useState<Company>([]);
   const [error, setError] = useState("");
+  const [showPopUpWindow, setShowPopUpWindow] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchCompany = async () => {
@@ -39,6 +42,12 @@ function CompanyDetails() {
     fetchCompany();
   }, []);
 
+  function closeTab(): void {
+    setShowPopUpWindow(false);
+  }
+
+  function deleteCompany(): void {}
+
   return (
     <div className="companyDetails">
       <h2 className="companyDetails__name">{company.name}</h2>
@@ -58,13 +67,24 @@ function CompanyDetails() {
           ))}
       </div>
       <div className="companyDetails__optionsContainer">
-        <button className="companyDetails__optionsContainer__deleteButton">
+        <button
+          className="companyDetails__optionsContainer__deleteButton"
+          onClick={() => setShowPopUpWindow(true)}
+        >
           <Trash2 />
         </button>
         <button className="companyDetails__optionsContainer__deleteButton">
           <Pencil />
         </button>
       </div>
+      {showPopUpWindow && <Backdrop closePopUpWindow={closeTab} />}
+      {showPopUpWindow && (
+        <PopUpWindow
+          text={"Are you sure you want to delete company " + company.name +"?"}
+          closePopUpWindow={closeTab}
+          deleteItem={deleteCompany}
+        />
+      )}
     </div>
   );
 }

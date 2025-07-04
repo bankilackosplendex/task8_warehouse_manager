@@ -1,0 +1,36 @@
+@import "../../Style/variables";
+@import "../../Style/mixins";
+
+.popUpWindow {
+  border-radius: 0.8rem;
+  background-color: $third-color;
+  padding: 2rem;
+  text-align: center;
+  width: 28rem;
+  z-index: 10;
+  position: fixed;
+  top: 20rem;
+  left: calc(50% - 16rem);
+
+  &__text {
+    text-align: center;
+    font-size: map-get($font-sizes , "small");
+    color: $primary-color;
+  }
+
+  &__buttonContainer {
+    @include flexboxRow;
+    justify-content: center;
+    gap: 2rem;
+
+    &__cancelButton {
+      @include buttonBase;
+      width: 6rem;
+    }
+
+    &__deleteButton {
+      @include buttonBase;
+      width: 6rem;
+    }
+  }
+}

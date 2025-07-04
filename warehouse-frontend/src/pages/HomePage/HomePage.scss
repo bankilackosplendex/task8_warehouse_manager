@@ -5,11 +5,6 @@
   @include pageContainer;
   width: 100%;
 
-  // background-image: url("../../assets/images/istockphoto-1484852942-612x612.jpg");
-  // background-position: center;
-  // background-repeat: no-repeat;
-  // background-size: cover;
-
   &__title {
     @include pageTitle;
     font-size: map-get($font-sizes, "large");
@@ -38,11 +33,11 @@
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
+        background-color: rgba(15, 15, 15, 0.1);
 
         &__title {
           align-self: center;
           color: $third-color;
-          //margin-top: 3rem;
         }
       }
 
