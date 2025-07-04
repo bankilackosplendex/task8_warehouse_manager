@@ -1,0 +1,52 @@
+@import "../../style/variables";
+@import "../../style/mixins";
+@import "../../style/maps";
+
+.reportDetails {
+  @include detailsBase;
+
+  &__name {
+    font-size: map-get($font-sizes, "medium");
+  }
+
+  &__movements {
+    @include flexboxColumn;
+    gap: 1rem;
+
+    &__key {
+      @include detailsKeyBase;
+    }
+
+    &__value {
+      @include detailsValueBase;
+      @include itemBase;
+      @include flexboxRow;
+      justify-content: space-between;
+
+      &__info {
+        @include flexboxRow;
+        align-items: center;
+        gap: 2rem;
+      }
+
+      &:hover {
+        @include itemHoverBase;
+      }
+    }
+  }
+
+  &__optionsContainer {
+    @include flexboxRow;
+    gap: 1rem;
+    margin-top: 2rem;
+
+    &__deleteButton,
+    &__modifyButton {
+      @include buttonBase;
+      margin: 0rem;
+      width: 2.8rem;
+      height: 2.8rem;
+      padding-top: 0.3rem;
+    }
+  }
+}

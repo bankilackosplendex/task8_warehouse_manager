@@ -6,11 +6,15 @@
 
   &__item {
     @include itemBase;
-    position: relative; // fontos! hogy abszolút gombot rá tudjunk tenni
-    padding-right: 5rem; // hagyj helyet a gombnak
+    position: relative;
+    padding-right: 5rem;
 
     &:hover {
       @include itemHoverBase;
+
+      &__downloadButton {
+        color: red;
+      }
     }
 
     &__link {
@@ -29,11 +33,15 @@
       transform: translateY(-50%);
       margin: 0;
       z-index: 1;
-      border: 0.1rem solid $third-color;
+      background-color: $primary-color;
+      color: $third-color;
+      border: 0.15rem solid $primary-color;
+      border-radius: $border-radius;
 
       &:hover {
         color: $primary-color;
-        background-color: $third-color;
+        border: 0.15rem solid $third-color;
+        border-radius: $border-radius;
       }
     }
   }

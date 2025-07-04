@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getWarehouseById } from "../../services/warehouseService.tsx";
 import { Warehouse } from "../../types/WarehouseType.tsx";
+import { Trash2, Pencil } from "lucide-react";
 
 function WarehouseDetails() {
   const { warehouseId } = useParams();
@@ -46,6 +47,14 @@ function WarehouseDetails() {
       <div className="warehouseDetails__movements">
         <p className="warehouseDetails__movements__key">Movements: </p>
         <p className="warehouseDetails__movements__value">{warehouse.movements}</p>
+      </div>
+      <div className="warehouseDetails__optionsContainer">
+        <button className="warehouseDetails__optionsContainer__deleteButton">
+          <Trash2 />
+        </button>
+        <button className="warehouseDetails__optionsContainer__deleteButton">
+          <Pencil />
+        </button>
       </div>
     </div>
   );

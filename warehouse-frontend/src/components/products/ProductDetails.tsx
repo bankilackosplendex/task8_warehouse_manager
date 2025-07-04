@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Product } from "../../types/ProductType";
 import { getProductById } from "../../services/productService.tsx";
+import { Pencil, Trash2 } from "lucide-react";
 
 function ProductDetails() {
   const { productId } = useParams();
@@ -44,6 +45,14 @@ function ProductDetails() {
         <p className="productDetails__time__value">
           {new Date(product.createdAt).toLocaleDateString()}
         </p>
+      </div>
+      <div className="productDetails__optionsContainer">
+        <button className="productDetails__optionsContainer__deleteButton">
+          <Trash2 />
+        </button>
+        <button className="productDetails__optionsContainer__deleteButton">
+          <Pencil />
+        </button>
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getCompanyById } from "../../services/companyService.tsx";
 import { Company } from "../../types/CompanyType";
+import { Pencil, Trash2 } from "lucide-react";
 
 function CompanyDetails() {
   const { companyId } = useParams();
@@ -55,6 +56,14 @@ function CompanyDetails() {
               </div>
             </div>
           ))}
+      </div>
+      <div className="companyDetails__optionsContainer">
+        <button className="companyDetails__optionsContainer__deleteButton">
+          <Trash2 />
+        </button>
+        <button className="companyDetails__optionsContainer__deleteButton">
+          <Pencil />
+        </button>
       </div>
     </div>
   );

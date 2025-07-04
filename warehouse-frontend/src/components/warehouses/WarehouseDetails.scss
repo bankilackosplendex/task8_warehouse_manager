@@ -2,62 +2,77 @@
 @import "../../style/mixins";
 @import "../../style/maps";
 
-.warehouseDetails{
-    @include detailsBase;
+.warehouseDetails {
+  @include detailsBase;
 
-    &__name{
-        font-size: map-get($font-sizes, "medium");
+  &__name {
+    font-size: map-get($font-sizes, "medium");
+  }
+
+  &__address {
+    @include flexboxRow;
+    gap: 1rem;
+
+    &__key {
+      @include detailsKeyBase;
     }
 
-    &__address{
-        @include flexboxRow;
-        gap: 1rem;
+    &__value {
+      @include detailsValueBase;
+    }
+  }
 
-        &__key{
-            @include detailsKeyBase;
-        }
+  &__description {
+    @include flexboxRow;
+    gap: 1rem;
 
-        &__value{
-            @include detailsValueBase;
-        }
+    &__key {
+      @include detailsKeyBase;
     }
 
-    &__description{
-        @include flexboxRow;
-        gap: 1rem;
+    &__value {
+      @include detailsValueBase;
+    }
+  }
 
-        &__key{
-            @include detailsKeyBase;
-        }
+  &__products {
+    @include flexboxRow;
+    gap: 1rem;
 
-        &__value{
-            @include detailsValueBase;
-        }
+    &__key {
+      @include detailsKeyBase;
     }
 
-    &__products{
-        @include flexboxRow;
-        gap: 1rem;
+    &__value {
+      @include detailsValueBase;
+    }
+  }
 
-        &__key{
-            @include detailsKeyBase;
-        }
+  &__movements {
+    @include flexboxRow;
+    gap: 1rem;
 
-        &__value{
-            @include detailsValueBase;
-        }
+    &__key {
+      @include detailsKeyBase;
     }
 
-    &__movements{
-        @include flexboxRow;
-        gap: 1rem;
-
-        &__key{
-            @include detailsKeyBase;
-        }
-
-        &__value{
-            @include detailsValueBase;
-        }
+    &__value {
+      @include detailsValueBase;
     }
+  }
+
+  &__optionsContainer {
+    @include flexboxRow;
+    gap: 1rem;
+    margin-top: 2rem;
+
+    &__deleteButton,
+    &__modifyButton {
+      @include buttonBase;
+      margin: 0rem;
+      width: 2.8rem;
+      height: 2.8rem;
+      padding-top: 0.3rem;
+    }
+  }
 }

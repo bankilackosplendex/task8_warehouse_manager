@@ -27,7 +27,7 @@ function Navbar() {
         <h1 className="navbar__logo__title">Warehouse Manager</h1>
       </div>
       <ul className="navbar__links">
-        <li className="navbar__links__item">
+        <li>
           <Link className="navbar__links__item" to="/">
             <Home className="navbar__links__item__icon" />
             <div>Home</div>
@@ -45,19 +45,19 @@ function Navbar() {
             <div>Products</div>
           </Link>
         </li>
-        <li className="navbar__links__item">
+        <li>
           <Link className="navbar__links__item" to="/companies">
             <Briefcase />
             Companies
           </Link>
         </li>
-        <li className="navbar__links__item">
+        <li>
           <Link className="navbar__links__item" to="/stockmovements">
             <Truck className="navbar__links__item__icon" />
             <div>Stockmovements</div>
           </Link>
         </li>
-        <li className="navbar__links__item">
+        <li>
           <Link className="navbar__links__item" to="/reports">
             <FileText className="navbar__links__item__icon" />
             <div>Reports</div>
@@ -65,13 +65,13 @@ function Navbar() {
         </li>
         {user?.role === Role.ADMIN && (
           <>
-            <li className="navbar__links__item">
+            <li>
               <Link className="navbar__links__item" to="/statistics">
                 <BarChart3 className="navbar__links__item__icon" />
                 <div>Statistics</div>
               </Link>
             </li>
-            <li className="navbar__links__item">
+            <li>
               <Link className="navbar__links__item" to="/users">
                 <Users className="navbar__links__item__icon" />
                 <div>Users</div>
@@ -80,7 +80,7 @@ function Navbar() {
           </>
         )}
         {user ? (
-          <li className="navbar__links__item">
+          <li>
             <Link className="navbar__links__item" to="/">
               <LogOut className="navbar__links__item__icon" />
               <div>Log out</div>
@@ -88,13 +88,13 @@ function Navbar() {
           </li>
         ) : (
           <>
-            <li className="navbar__links__item">
+            <li>
               <Link className="navbar__links__item" to="/login">
                 <LogInIcon className="navbar__links__item__icon" />
                 <div>Login</div>
               </Link>
             </li>
-            <li className="navbar__links__item">
+            <li>
               <Link className="navbar__links__item" to="/registration">
                 <UserPlus className="navbar__links__item__icon" />
                 <div>Registration</div>

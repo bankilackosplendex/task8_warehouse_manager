@@ -2,49 +2,64 @@
 @import "../../style/mixins";
 @import "../../style/maps";
 
-.productDetails{
-    @include detailsBase;
+.productDetails {
+  @include detailsBase;
 
-    &__name{
-        font-size: map-get($font-sizes, "medium");
+  &__name {
+    font-size: map-get($font-sizes, "medium");
+  }
+
+  &__number {
+    @include flexboxRow;
+    gap: 1rem;
+
+    &__key {
+      @include detailsKeyBase;
     }
 
-    &__number{
-        @include flexboxRow;
-        gap: 1rem;
+    &__value {
+      @include detailsValueBase;
+    }
+  }
 
-        &__key{
-            @include detailsKeyBase;
-        }
+  &__quantityType {
+    @include flexboxRow;
+    gap: 1rem;
 
-        &__value{
-            @include detailsValueBase;
-        }
+    &__key {
+      @include detailsKeyBase;
     }
 
-    &__quantityType{
-        @include flexboxRow;
-        gap: 1rem;
+    &__value {
+      @include detailsValueBase;
+    }
+  }
 
-        &__key{
-            @include detailsKeyBase;
-        }
+  &__time {
+    @include flexboxRow;
+    gap: 1rem;
 
-        &__value{
-            @include detailsValueBase;
-        }
+    &__key {
+      @include detailsKeyBase;
     }
 
-    &__time{
-        @include flexboxRow;
-        gap: 1rem;
-
-        &__key{
-            @include detailsKeyBase;
-        }
-
-        &__value{
-            @include detailsValueBase;
-        }
+    &__value {
+      @include detailsValueBase;
     }
+  }
+
+  &__optionsContainer {
+    @include flexboxRow;
+    gap: 1rem;
+    margin-top: 2rem;
+
+    &__deleteButton,
+    &__modifyButton {
+      @include buttonBase;
+      margin: 0rem;
+      width: 2.8rem;
+      height: 2.8rem;
+      padding-top: 0.3rem;
+    }
+  }
 }

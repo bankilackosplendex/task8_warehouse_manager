@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import "./ReportList.scss";
+import { Download } from "lucide-react";
 
 function ReportList() {
   const reports = [
@@ -21,7 +22,7 @@ function ReportList() {
               e.stopPropagation();
             }}
           >
-            Download
+            <Download />
           </button>
         </div>
       ))}

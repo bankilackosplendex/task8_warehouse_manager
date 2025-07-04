@@ -29,9 +29,24 @@
         gap: 2rem;
       }
 
-      &:hover{
+      &:hover {
         @include itemHoverBase;
       }
+    }
+  }
+
+  &__optionsContainer {
+    @include flexboxRow;
+    gap: 1rem;
+    margin-top: 2rem;
+
+    &__deleteButton,
+    &__modifyButton {
+      @include buttonBase;
+      margin: 0rem;
+      width: 2.8rem;
+      height: 2.8rem;
+      padding-top: 0.3rem;
     }
   }
 }
