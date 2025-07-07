@@ -4,12 +4,15 @@ import { useEffect, useState } from "react";
 import { Product } from "../../types/ProductType";
 import { getProductById } from "../../services/productService.tsx";
 import { Pencil, Trash2 } from "lucide-react";
+import Backdrop from "../common/Backdrop.tsx";
+import PopUpWindow from "../common/PopUpWindow.tsx";
 
 function ProductDetails() {
   const { productId } = useParams();
 
   const [product, setProduct] = useState<Product>([]);
   const [error, setError] = useState("");
+  const [showPopUpWindow, setShowPopUpWindow] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -26,6 +29,12 @@ function ProductDetails() {
 
     fetchProduct();
   }, []);
+
+  function closeTab(): void {
+    setShowPopUpWindow(false);
+  }
+
+  function deleteWarehouse(): void {}
 
   return (
     <div className="productDetails">
@@ -47,13 +56,21 @@ function ProductDetails() {
         </p>
       </div>
       <div className="productDetails__optionsContainer">
-        <button className="productDetails__optionsContainer__deleteButton">
+        <button className="productDetails__optionsContainer__deleteButton" onClick={() => setShowPopUpWindow(true)}>
           <Trash2 />
         </button>
-        <button className="productDetails__optionsContainer__deleteButton">
+        <button className="productDetails__optionsContainer__modifyButton">
           <Pencil />
         </button>
       </div>
+      {showPopUpWindow && <Backdrop closePopUpWindow={closeTab} />}
+      {showPopUpWindow && (
+        <PopUpWindow
+          text={"Are you sure you want to delete product " + product.name +"?"}
+          closePopUpWindow={closeTab}
+          deleteItem={deleteWarehouse}
+        />
+      )}
     </div>
   );
 }

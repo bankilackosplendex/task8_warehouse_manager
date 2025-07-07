@@ -4,12 +4,15 @@ import { useEffect, useState } from "react";
 import { getWarehouseById } from "../../services/warehouseService.tsx";
 import { Warehouse } from "../../types/WarehouseType.tsx";
 import { Trash2, Pencil } from "lucide-react";
+import Backdrop from "../common/Backdrop.tsx";
+import PopUpWindow from "../common/PopUpWindow.tsx";
 
 function WarehouseDetails() {
   const { warehouseId } = useParams();
 
   const [warehouse, setWarehouse] = useState<Warehouse>([]);
   const [error, setError] = useState("");
+  const [showPopUpWindow, setShowPopUpWindow] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchWarehouse = async () => {
@@ -28,6 +31,12 @@ function WarehouseDetails() {
 
     fetchWarehouse();
   }, []);
+
+  function closeTab(): void {
+    setShowPopUpWindow(false);
+  }
+
+  function deleteWarehouse(): void {}
 
   return (
     <div className="warehouseDetails">
@@ -49,13 +58,21 @@ function WarehouseDetails() {
         <p className="warehouseDetails__movements__value">{warehouse.movements}</p>
       </div>
       <div className="warehouseDetails__optionsContainer">
-        <button className="warehouseDetails__optionsContainer__deleteButton">
+        <button className="warehouseDetails__optionsContainer__deleteButton" onClick={() => setShowPopUpWindow(true)}>
           <Trash2 />
         </button>
-        <button className="warehouseDetails__optionsContainer__deleteButton">
+        <button className="warehouseDetails__optionsContainer__modifyButton">
           <Pencil />
         </button>
       </div>
+      {showPopUpWindow && <Backdrop closePopUpWindow={closeTab} />}
+      {showPopUpWindow && (
+        <PopUpWindow
+          text={"Are you sure you want to delete warahouse " + warehouse.name +"?"}
+          closePopUpWindow={closeTab}
+          deleteItem={deleteWarehouse}
+        />
+      )}
     </div>
   );
 }

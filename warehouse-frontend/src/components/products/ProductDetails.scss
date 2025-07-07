@@ -61,5 +61,14 @@
       height: 2.8rem;
       padding-top: 0.3rem;
     }
+
+    &__deleteButton {
+      background-color: $error-color;
+
+      &:hover{
+        color: $error-color;
+        border-color: $error-color;
+      }
+    }
   }
 }

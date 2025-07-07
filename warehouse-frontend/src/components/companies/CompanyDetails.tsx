@@ -73,7 +73,7 @@ function CompanyDetails() {
         >
           <Trash2 />
         </button>
-        <button className="companyDetails__optionsContainer__deleteButton">
+        <button className="companyDetails__optionsContainer__modifyButton">
           <Pencil />
         </button>
       </div>

@@ -9,7 +9,7 @@
   width: 28rem;
   z-index: 10;
   position: fixed;
-  top: 20rem;
+  top: 18rem;
   left: calc(50% - 16rem);
 
   &__text {
@@ -31,6 +31,12 @@
     &__deleteButton {
       @include buttonBase;
       width: 6rem;
+      background-color: $error-color;
+
+      &:hover{
+        color: $error-color;
+        border-color: $error-color;
+      }
     }
   }
 }
