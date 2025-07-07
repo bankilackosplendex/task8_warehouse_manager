@@ -9,6 +9,7 @@
     &__nameLabel,
     &__passwordLabel{
         @include inputLabelBase;
+        @include iconContainer;
     }
 
     &__emailField,

@@ -6,7 +6,7 @@ import { AuthContext } from "../../contexts/AuthContext.tsx";
 import { jwtDecode } from "jwt-decode";
 import { DecodedAccessToken } from "../../types/DecodedAccessTokenType.tsx";
 import { useNavigate } from "react-router-dom";
-  
+import { KeyRound, Mail } from "lucide-react";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -33,19 +33,22 @@ function LoginForm() {
     } catch (err: any) {
       console.error("Hiba a bejelentkezés során:", err);
       if (err.response && err.response.data && err.response.data.message) {
-      const msg = Array.isArray(err.response.data.message)
-        ? err.response.data.message.join(", ")
-        : err.response.data.message;
-      setError(msg);
-    } else {
-      setError("Ismeretlen hiba történt.");
-    }
+        const msg = Array.isArray(err.response.data.message)
+          ? err.response.data.message.join(", ")
+          : err.response.data.message;
+        setError(msg);
+      } else {
+        setError("Ismeretlen hiba történt.");
+      }
     }
   };
 
   return (
     <form className="loginForm" onSubmit={handleSubmit}>
-      <label className="loginForm__emailLabel" htmlFor="email">Email</label>
+      <label className="loginForm__emailLabel" htmlFor="email">
+        <Mail className="loginForm__emailLabel__icon" />
+        Email
+      </label>
       <input
         className="loginForm__emailField"
         type="email"
@@ -54,7 +57,10 @@ function LoginForm() {
         onChange={(e) => setEmail(e.target.value)}
         required
       />
-      <label className="loginForm__passwordLabel" htmlFor="password">Password</label>
+      <label className="loginForm__passwordLabel" htmlFor="password">
+        <KeyRound className="loginForm__passwordLabel__icon"/>
+        Password
+      </label>
       <input
         className="loginForm__passwordField"
         type="password"
@@ -66,7 +72,9 @@ function LoginForm() {
 
       {error && <div className="loginForm__error">{error}</div>}
 
-      <button className="loginForm__button" type="submit">Login</button>
+      <button className="loginForm__button" type="submit">
+        Login
+      </button>
     </form>
   );
 }
