@@ -10,6 +10,7 @@
 
   &__nameLabel {
     @include inputLabelBase;
+    @include iconContainer;
   }
 
   &__nameField {

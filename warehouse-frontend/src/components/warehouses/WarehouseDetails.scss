@@ -7,50 +7,15 @@
 
   &__name {
     font-size: map-get($font-sizes, "medium");
-  }
-
-  &__address {
     @include flexboxRow;
-    gap: 1rem;
-
-    &__key {
-      @include detailsKeyBase;
-    }
-
-    &__value {
-      @include detailsValueBase;
-    }
   }
 
-  &__description {
-    @include flexboxRow;
-    gap: 1rem;
-
-    &__key {
-      @include detailsKeyBase;
-    }
-
-    &__value {
-      @include detailsValueBase;
-    }
-  }
-
-  &__products {
-    @include flexboxRow;
-    gap: 1rem;
-
-    &__key {
-      @include detailsKeyBase;
-    }
-
-    &__value {
-      @include detailsValueBase;
-    }
-  }
-
+  &__address,
+  &__description,
+  &__products,
   &__movements {
     @include flexboxRow;
-    gap: 1rem;
+    @include iconContainer;
 
     &__key {
       @include detailsKeyBase;

@@ -15,6 +15,7 @@
 
     &__key {
       @include detailsKeyBase;
+      @include iconContainer;
     }
 
     &__value {

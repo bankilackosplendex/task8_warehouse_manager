@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getWarehouseById } from "../../services/warehouseService.tsx";
 import { Warehouse } from "../../types/WarehouseType.tsx";
-import { Trash2, Pencil } from "lucide-react";
+import { Trash2, Pencil, MapPin, TextIcon, Package, Truck } from "lucide-react";
 import Backdrop from "../common/Backdrop.tsx";
 import PopUpWindow from "../common/PopUpWindow.tsx";
 
@@ -47,22 +47,26 @@ function WarehouseDetails() {
     <div className="warehouseDetails">
       <h2 className="warehouseDetails__name">{warehouse.name}</h2>
       <div className="warehouseDetails__address">
+        <MapPin className="warehouseDetails__address__icon" />
         <p className="warehouseDetails__address__key">Address: </p>
         <p className="warehouseDetails__address__value">{warehouse.address}</p>
       </div>
       <div className="warehouseDetails__description">
+        <TextIcon className="warehouseDetails__description__icon" />
         <p className="warehouseDetails__description__key">Description: </p>
         <p className="warehouseDetails__description__value">
           {warehouse.description}
         </p>
       </div>
       <div className="warehouseDetails__products">
+        <Package className="warehouseDetails__products__icon" />
         <p className="warehouseDetails__products__key">Products: </p>
         <p className="warehouseDetails__products__value">
           {warehouse.products}
         </p>
       </div>
       <div className="warehouseDetails__movements">
+        <Truck className="warehouseDetails__movements__icon" />
         <p className="warehouseDetails__movements__key">Movements: </p>
         <p className="warehouseDetails__movements__value">
           {warehouse.movements}

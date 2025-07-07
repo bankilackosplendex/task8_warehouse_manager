@@ -1,4 +1,4 @@
-import { PackagePlus, Save } from "lucide-react";
+import { FileDigit, PackagePlus, Ruler, Save, Tag } from "lucide-react";
 import "./ProductForm.scss";
 import { FormType } from "../../enums/FormTypeEnum.tsx";
 import { useState } from "react";
@@ -6,6 +6,7 @@ import { Product } from "../../types/ProductType.tsx";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getProductById } from "../../services/productService.tsx";
+import { QuantityType } from "../../enums/QuantityTypeEnum.tsx";
 
 function ProductForm({ type }: { type: FormType }) {
   const { productId } = useParams();
@@ -22,11 +23,12 @@ function ProductForm({ type }: { type: FormType }) {
           const msg = err.response?.data?.message || "Couldn't load product";
           setError(msg);
         }
-      }
-      else {
+      } else {
         const data = {
-
-        }
+          name: "",
+          number: null,
+          quantityType: QuantityType.DB,
+        };
       }
     };
 
@@ -50,6 +52,7 @@ function ProductForm({ type }: { type: FormType }) {
 
       {/* Name */}
       <label className="productForm__nameLabel" htmlFor="name">
+        <Tag className="productForm__nameLabel__icon" />
         Name
       </label>
       <input
@@ -64,6 +67,7 @@ function ProductForm({ type }: { type: FormType }) {
         className="productForm__articleNumberLabel"
         htmlFor="articleNumber"
       >
+        <FileDigit className="productForm__articleNumberLabel__icon" />
         Article number
       </label>
       <input
@@ -75,6 +79,7 @@ function ProductForm({ type }: { type: FormType }) {
       />
       {/* Quantity type */}
       <label className="productForm__quantityTypeLabel" htmlFor="quantityType">
+        <Ruler className="productForm__quantityTypeLabel__icon" />
         Quantity type
       </label>
       <select

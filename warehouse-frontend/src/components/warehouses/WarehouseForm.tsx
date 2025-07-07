@@ -1,4 +1,4 @@
-import { Save, SquarePlus } from "lucide-react";
+import { Building2, Earth, MapPin, Save, SquarePlus, Tag, MapPinHouse } from "lucide-react";
 import "./WarehouseForm.scss";
 import { FormType } from "../../enums/FormTypeEnum.tsx";
 import { useParams } from "react-router-dom";
@@ -64,6 +64,7 @@ function WarehouseForm({ type }: { type: FormType }) {
       )}
       {/* Name */}
       <label className="warehouseForm__nameLabel" htmlFor="name">
+        <Tag className="warehouseForm__nameLabel__icon"/>
         Name
       </label>
       <input
@@ -74,7 +75,9 @@ function WarehouseForm({ type }: { type: FormType }) {
         required
       />
       {/* Address */}
-      <label className="warehouseForm__locationLabel">Location</label>
+      <label className="warehouseForm__locationLabel">
+        <MapPin className="warehouseForm__locationLabel__icon"/>
+        Location</label>
       <div className="warehouseForm__location">
         {/* Country */}
         <div className="warehouseForm__location__country">
@@ -82,6 +85,7 @@ function WarehouseForm({ type }: { type: FormType }) {
             className="warehouseForm__location__country__countryLabel"
             htmlFor="country"
           >
+            <Earth className="warehouseForm__location__country__countryLabel__icon"/>
             Country
           </label>
           <input
@@ -98,6 +102,7 @@ function WarehouseForm({ type }: { type: FormType }) {
             className="warehouseForm__location__city__cityLabel"
             htmlFor="city"
           >
+            <Building2 className="warehouseForm__location__city__cityLabel__icon"/>
             City
           </label>
           <input
@@ -114,6 +119,7 @@ function WarehouseForm({ type }: { type: FormType }) {
             className="warehouseForm__location__address__addressLabel"
             htmlFor="address"
           >
+            <MapPinHouse className="warehouseForm__location__address__addressLabel__icon"/>
             Address
           </label>
           <input

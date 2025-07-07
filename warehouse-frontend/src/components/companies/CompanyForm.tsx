@@ -1,4 +1,4 @@
-import { Save, SquarePlus } from "lucide-react";
+import { Save, SquarePlus, Tag } from "lucide-react";
 import "./CompanyForm.scss";
 import { FormType } from "../../enums/FormTypeEnum.tsx";
 import { useState } from "react";
@@ -61,6 +61,7 @@ function CompanyForm({ type }: { type: FormType }) {
       )}
       {/* Name */}
       <label className="companyForm__nameLabel" htmlFor="name">
+        <Tag className="companyForm__nameLabel__icon"/>
         Name
       </label>
       <input

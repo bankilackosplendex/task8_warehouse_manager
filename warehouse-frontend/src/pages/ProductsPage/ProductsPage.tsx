@@ -2,10 +2,12 @@ import { Link } from "react-router-dom";
 import ProductList from "../../components/products/ProductList.tsx";
 import "./ProductsPage.scss";
 import { PackagePlus } from "lucide-react";
+import BackButton from "../../components/common/BackButton.tsx";
 
 function ProductsPage() {
   return (
     <div className="productsPage">
+      <BackButton />
       <h2 className="productsPage__title">Products</h2>
       <ProductList />
       <Link to="/products/add">

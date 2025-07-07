@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Product } from "../../types/ProductType";
 import { getProductById } from "../../services/productService.tsx";
-import { Pencil, Trash2 } from "lucide-react";
+import { CalendarDays, FileDigit, Pencil, Ruler, Trash2 } from "lucide-react";
 import Backdrop from "../common/Backdrop.tsx";
 import PopUpWindow from "../common/PopUpWindow.tsx";
 import { QuantityType } from "../../enums/QuantityTypeEnum.tsx";
@@ -26,13 +26,12 @@ function ProductDetails() {
           const msg = err.response?.data?.message || "Couldn't load product";
           setError(msg);
         }
-      }
-      else {
+      } else {
         const data = {
           name: "",
           number: null,
           quantityType: QuantityType.DB,
-        }
+        };
         setProduct(data);
       }
     };
@@ -54,33 +53,42 @@ function ProductDetails() {
     <div className="productDetails">
       <h2 className="productDetails__name">{product.name}</h2>
       <div className="productDetails__number">
+        <FileDigit className="productDetails__number__icon"/>
         <p className="productDetails__number__key">Article number: </p>
         <p className="productDetails__number__value">{product.number}</p>
       </div>
       <div className="productDetails__quantityType">
+        <Ruler className="productDetails__quantityTyp__icon"/>
         <p className="productDetails__quantityType__key">Quantity type: </p>
         <p className="productDetails__quantityType__value">
           {product.quantityType}
         </p>
       </div>
       <div className="productDetails__time">
+        <CalendarDays className="productDetails__time__icon"/>
         <p className="productDetails__time__key">Created at: </p>
         <p className="productDetails__time__value">
           {new Date(product.createdAt).toLocaleDateString()}
         </p>
       </div>
       <div className="productDetails__optionsContainer">
-        <button className="productDetails__optionsContainer__deleteButton" onClick={() => setShowPopUpWindow(true)}>
+        <button
+          className="productDetails__optionsContainer__deleteButton"
+          onClick={() => setShowPopUpWindow(true)}
+        >
           <Trash2 />
         </button>
-        <button className="productDetails__optionsContainer__modifyButton" onClick={() => modifyProduct(product.id)}>
+        <button
+          className="productDetails__optionsContainer__modifyButton"
+          onClick={() => modifyProduct(product.id)}
+        >
           <Pencil />
         </button>
       </div>
       {showPopUpWindow && <Backdrop closePopUpWindow={closeTab} />}
       {showPopUpWindow && (
         <PopUpWindow
-          text={"Are you sure you want to delete product " + product.name +"?"}
+          text={"Are you sure you want to delete product " + product.name + "?"}
           closePopUpWindow={closeTab}
           deleteItem={deleteProduct}
         />

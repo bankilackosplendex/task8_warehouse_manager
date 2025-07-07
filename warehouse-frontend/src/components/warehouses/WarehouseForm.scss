@@ -10,6 +10,7 @@
 
   &__nameLabel {
     @include inputLabelBase;
+    @include iconContainer;
   }
 
   &__nameField {
@@ -18,6 +19,7 @@
 
   &__locationLabel {
     @include inputLabelBase;
+    @include iconContainer;
     margin-bottom: -1rem;
   }
 
@@ -35,6 +37,7 @@
 
       &__countryLabel {
         @include inputLabelBase;
+        @include iconContainer;
       }
 
       &__countryField {
@@ -50,6 +53,7 @@
 
       &__cityLabel {
         @include inputLabelBase;
+        @include iconContainer;
       }
 
       &__cityField {
@@ -65,6 +69,7 @@
 
       &__addressLabel {
         @include inputLabelBase;
+        @include iconContainer;
         margin-top: -1rem;
       }
 

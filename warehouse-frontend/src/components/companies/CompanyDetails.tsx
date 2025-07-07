@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getCompanyById } from "../../services/companyService.tsx";
 import { Company } from "../../types/CompanyType";
-import { Pencil, Trash2 } from "lucide-react";
+import { Pencil, Trash2, Truck } from "lucide-react";
 import Backdrop from "../common/Backdrop.tsx";
 import PopUpWindow from "../common/PopUpWindow.tsx";
 
@@ -57,7 +57,11 @@ function CompanyDetails() {
     <div className="companyDetails">
       <h2 className="companyDetails__name">{company.name}</h2>
       <div className="companyDetails__movements">
-        <p className="companyDetails__movements__key">Stockmovements: </p>
+        <p className="companyDetails__movements__key">
+          {" "}
+          <Truck className="companyDetails__movements__icon" />
+          Movements:{" "}
+        </p>
         {company.movements &&
           company.movements.map((movement) => (
             <div className="companyDetails__movements__value" key={movement.id}>
@@ -78,14 +82,17 @@ function CompanyDetails() {
         >
           <Trash2 />
         </button>
-        <button className="companyDetails__optionsContainer__modifyButton" onClick={() => modifyCompany(company.id)}>
+        <button
+          className="companyDetails__optionsContainer__modifyButton"
+          onClick={() => modifyCompany(company.id)}
+        >
           <Pencil />
         </button>
       </div>
       {showPopUpWindow && <Backdrop closePopUpWindow={closeTab} />}
       {showPopUpWindow && (
         <PopUpWindow
-          text={"Are you sure you want to delete company " + company.name +"?"}
+          text={"Are you sure you want to delete company " + company.name + "?"}
           closePopUpWindow={closeTab}
           deleteItem={deleteCompany}
         />

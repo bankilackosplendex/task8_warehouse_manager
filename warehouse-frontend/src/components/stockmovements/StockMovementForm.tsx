@@ -1,4 +1,11 @@
-import { SquarePlus } from "lucide-react";
+import {
+  ArrowRightLeft,
+  Briefcase,
+  CalendarDays,
+  Package,
+  SquarePlus,
+  Warehouse,
+} from "lucide-react";
 import "./StockMovementForm.scss";
 
 function StockMovementsForm() {
@@ -27,6 +34,7 @@ function StockMovementsForm() {
       <h2 className="stockMovementsForm__title">Add new stockmovement</h2>
       {/* Date */}
       <label className="stockMovementsForm__dateLabel" htmlFor="date">
+        <CalendarDays className="stockMovementsForm__dateLabel__icon" />
         Date
       </label>
       <input
@@ -37,6 +45,7 @@ function StockMovementsForm() {
       />
       {/* Product */}
       <label className="stockMovementsForm__productLabel" htmlFor="product">
+        <Package className="stockMovementsForm__productLabel__icon" />
         Product
       </label>
       <select
@@ -51,6 +60,7 @@ function StockMovementsForm() {
       </select>
       {/* Warehouse */}
       <label className="stockMovementsForm__warehouseLabel" htmlFor="warehouse">
+        <Warehouse className="stockMovementsForm__warehouseLabel__icon" />
         Warehouse
       </label>
       <select
@@ -68,6 +78,7 @@ function StockMovementsForm() {
         className="stockMovementsForm__movementTypeLabel"
         htmlFor="movementType"
       >
+        <ArrowRightLeft className="stockMovementsForm__movementTypeLabel__icon" />
         Movement type
       </label>
       <select
@@ -80,6 +91,7 @@ function StockMovementsForm() {
       </select>
       {/* Company */}
       <label className="stockMovementsForm__companyLabel" htmlFor="company">
+        <Briefcase className="stockMovementsForm__companyLabel__icon" />
         Company
       </label>
       <select
