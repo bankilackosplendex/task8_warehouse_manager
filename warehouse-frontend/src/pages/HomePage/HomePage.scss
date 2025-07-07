@@ -36,7 +36,7 @@
       background-repeat: no-repeat;
       background-size: cover;
       cursor: pointer;
-      filter: grayscale(30%) brightness(0.8);
+      filter: grayscale(80%) brightness(0.8);
 
       &__title {
         align-self: center;
@@ -47,7 +47,6 @@
       &:hover{
         filter: none;
       }
-
     }
 
     &__warehouseCard {

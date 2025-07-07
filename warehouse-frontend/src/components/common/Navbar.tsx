@@ -14,13 +14,18 @@ import {
   UserPlus,
   Users,
   PackageCheck,
+  Menu,
+  X,
 } from "lucide-react";
 import { useAuth } from "../../hooks/useAuth.tsx";
 import { useLogout } from "../../hooks/useLogOut.tsx";
+import { useState } from "react";
 
 function Navbar() {
   const { user } = useAuth();
   const logout = useLogout();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const toggleMenu = () => setMenuOpen((prev) => !prev);
 
   return (
     <nav className="navbar">
@@ -28,7 +33,11 @@ function Navbar() {
         <PackageCheck className="navbar__logo__icon" />
         <h1 className="navbar__logo__title">Warehouse Manager</h1>
       </div>
-      <ul className="navbar__links">
+      <button className="navbar__hamburger" onClick={toggleMenu}>
+        {menuOpen ? <X /> : <Menu />}
+      </button>
+
+      <ul className={`navbar__links ${menuOpen ? "navbar__links--open" : ""}`}>
         <li>
           <Link className="navbar__links__item" to="/">
             <Home className="navbar__links__item__icon" />
@@ -58,7 +67,7 @@ function Navbar() {
             <li>
               <Link className="navbar__links__item" to="/stockmovements">
                 <Truck className="navbar__links__item__icon" />
-                <div>Stockmovements</div>
+                <div>Movements</div>
               </Link>
             </li>
             <li>

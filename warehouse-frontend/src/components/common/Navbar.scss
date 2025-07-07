@@ -29,9 +29,20 @@
     }
   }
 
+  &__hamburger {
+    position: absolute;
+    top: 2.3rem;
+    right: 2rem;
+    background: none;
+    border: none;
+    color: $third-color;
+    cursor: pointer;
+    margin-right: 0.5rem;
+  }
+
   &__links {
     list-style: none;
-    display: flex;
+    display: none;
     flex-wrap: wrap;
     justify-content: end;
     gap: $spacing-md;
@@ -45,6 +56,24 @@
       text-decoration: none;
       font-size: map-get($font-sizes, "small");
       @include hoverGrow;
+    }
+
+    &--open {
+      display: flex;
+      margin-top: 4rem;
+    }
+  }
+}
+
+@media (min-width: 52.65rem) {
+  .navbar {
+    &__hamburger {
+      display: none;
+    }
+
+    &__links {
+      display: flex;
+      margin-top: 1rem;
     }
   }
 }
