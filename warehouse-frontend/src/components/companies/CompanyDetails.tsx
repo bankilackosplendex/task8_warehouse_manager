@@ -1,5 +1,5 @@
 import "./CompanyDetails.scss";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getCompanyById } from "../../services/companyService.tsx";
 import { Company } from "../../types/CompanyType";
@@ -9,6 +9,7 @@ import PopUpWindow from "../common/PopUpWindow.tsx";
 
 function CompanyDetails() {
   const { companyId } = useParams();
+  const navigate = useNavigate();
 
   const [company, setCompany] = useState<Company>([]);
   const [error, setError] = useState("");
@@ -48,6 +49,10 @@ function CompanyDetails() {
 
   function deleteCompany(): void {}
 
+  function modifyCompany(id: number): void {
+    navigate(`/companies/modify/${id}`);
+  }
+
   return (
     <div className="companyDetails">
       <h2 className="companyDetails__name">{company.name}</h2>
@@ -73,7 +78,7 @@ function CompanyDetails() {
         >
           <Trash2 />
         </button>
-        <button className="companyDetails__optionsContainer__modifyButton">
+        <button className="companyDetails__optionsContainer__modifyButton" onClick={() => modifyCompany(company.id)}>
           <Pencil />
         </button>
       </div>

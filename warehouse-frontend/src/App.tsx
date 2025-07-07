@@ -23,6 +23,7 @@ import UserList from "./components/users/UserList.tsx";
 import { useAuth } from "./components/hooks/useAuth.tsx";
 import { Role } from "./enums/UserRoleEnum.tsx";
 import ProtectedRoute from "./components/authorization/ProtectedRoute.tsx";
+import { FormType } from "./enums/FormTypeEnum.tsx";
 
 function App() {
   return (
@@ -34,15 +35,18 @@ function App() {
         {/* --- WAREHOUSE PAGE --- */}
         <Route path="/warehouses" element={<WarehousesPage />} />
         <Route path="/warehouses/:warehouseId" element={<WarehouseDetails />} />
-        <Route path="/warehouses/add" element={<WarehouseForm />} />
+        <Route path="/warehouses/add" element={<WarehouseForm type={FormType.CREATE}/>} />
+        <Route path="/warehouses/modify/:warehouseId" element={<WarehouseForm type={FormType.MODIFY}/>} />
         {/* --- PRODUCT PAGE --- */}
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/products/:productId" element={<ProductDetails />} />
-        <Route path="/products/add" element={<ProductForm />} />
+        <Route path="/products/add" element={<ProductForm type={FormType.CREATE}/>} />
+        <Route path="/products/modify/:productId" element={<ProductForm type={FormType.MODIFY}/>} />
         {/* --- COMPANY PAGE --- */}
         <Route path="/companies" element={<CompaniesPage />} />
         <Route path="/companies/:companyId" element={<CompanyDetails />} />
-        <Route path="/companies/add" element={<CompanyForm />} />
+        <Route path="/companies/add" element={<CompanyForm type={FormType.CREATE}/>} />
+        <Route path="/companies/modify/:companyId" element={<CompanyForm type={FormType.MODIFY}/>} />
         {/* --- STOCKMOVEMENT PAGE --- */}
         <Route path="/stockmovements" element={<StockMovementsPage />} />
         <Route

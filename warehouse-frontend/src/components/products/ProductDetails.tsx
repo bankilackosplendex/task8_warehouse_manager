@@ -1,14 +1,16 @@
 import "./ProductDetails.scss";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Product } from "../../types/ProductType";
 import { getProductById } from "../../services/productService.tsx";
 import { Pencil, Trash2 } from "lucide-react";
 import Backdrop from "../common/Backdrop.tsx";
 import PopUpWindow from "../common/PopUpWindow.tsx";
+import { QuantityType } from "../../enums/QuantityTypeEnum.tsx";
 
 function ProductDetails() {
   const { productId } = useParams();
+  const navigate = useNavigate();
 
   const [product, setProduct] = useState<Product>([]);
   const [error, setError] = useState("");
@@ -25,6 +27,14 @@ function ProductDetails() {
           setError(msg);
         }
       }
+      else {
+        const data = {
+          name: "",
+          number: null,
+          quantityType: QuantityType.DB,
+        }
+        setProduct(data);
+      }
     };
 
     fetchProduct();
@@ -34,7 +44,11 @@ function ProductDetails() {
     setShowPopUpWindow(false);
   }
 
-  function deleteWarehouse(): void {}
+  function deleteProduct(): void {}
+
+  function modifyProduct(id: number): void {
+    navigate(`/products/modify/${product.id}`);
+  }
 
   return (
     <div className="productDetails">
@@ -59,7 +73,7 @@ function ProductDetails() {
         <button className="productDetails__optionsContainer__deleteButton" onClick={() => setShowPopUpWindow(true)}>
           <Trash2 />
         </button>
-        <button className="productDetails__optionsContainer__modifyButton">
+        <button className="productDetails__optionsContainer__modifyButton" onClick={() => modifyProduct(product.id)}>
           <Pencil />
         </button>
       </div>
@@ -68,7 +82,7 @@ function ProductDetails() {
         <PopUpWindow
           text={"Are you sure you want to delete product " + product.name +"?"}
           closePopUpWindow={closeTab}
-          deleteItem={deleteWarehouse}
+          deleteItem={deleteProduct}
         />
       )}
     </div>

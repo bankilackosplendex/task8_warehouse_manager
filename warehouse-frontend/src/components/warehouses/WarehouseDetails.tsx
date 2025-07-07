@@ -1,5 +1,5 @@
 import "./WarehouseDetails.scss";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getWarehouseById } from "../../services/warehouseService.tsx";
 import { Warehouse } from "../../types/WarehouseType.tsx";
@@ -9,6 +9,7 @@ import PopUpWindow from "../common/PopUpWindow.tsx";
 
 function WarehouseDetails() {
   const { warehouseId } = useParams();
+  const navigate = useNavigate();
 
   const [warehouse, setWarehouse] = useState<Warehouse>([]);
   const [error, setError] = useState("");
@@ -19,11 +20,11 @@ function WarehouseDetails() {
       if (warehouseId) {
         try {
           const data = await getWarehouseById(+warehouseId);
-          if(!data.products) data.products = "-";
-          if(!data.movements) data.movements = "-";
+          if (!data.products) data.products = "-";
+          if (!data.movements) data.movements = "-";
           setWarehouse(data);
         } catch (err: any) {
-          const msg = err.response?.data?.message || "Couldn't load warehous";
+          const msg = err.response?.data?.message || "Couldn't load warehouse";
           setError(msg);
         }
       }
@@ -38,37 +39,55 @@ function WarehouseDetails() {
 
   function deleteWarehouse(): void {}
 
+  function modifyWarehouse(id: number): void {
+    navigate(`/warehouses/modify/${warehouse.id}`);
+  }
+
   return (
     <div className="warehouseDetails">
-      <h2 className="warehouseDetails__name" >{warehouse.name}</h2>
+      <h2 className="warehouseDetails__name">{warehouse.name}</h2>
       <div className="warehouseDetails__address">
-        <p className="warehouseDetails__address__key">Address: </p> 
+        <p className="warehouseDetails__address__key">Address: </p>
         <p className="warehouseDetails__address__value">{warehouse.address}</p>
       </div>
       <div className="warehouseDetails__description">
         <p className="warehouseDetails__description__key">Description: </p>
-        <p className="warehouseDetails__description__value">{warehouse.description}</p>
+        <p className="warehouseDetails__description__value">
+          {warehouse.description}
+        </p>
       </div>
       <div className="warehouseDetails__products">
         <p className="warehouseDetails__products__key">Products: </p>
-        <p className="warehouseDetails__products__value">{warehouse.products}</p>
+        <p className="warehouseDetails__products__value">
+          {warehouse.products}
+        </p>
       </div>
       <div className="warehouseDetails__movements">
         <p className="warehouseDetails__movements__key">Movements: </p>
-        <p className="warehouseDetails__movements__value">{warehouse.movements}</p>
+        <p className="warehouseDetails__movements__value">
+          {warehouse.movements}
+        </p>
       </div>
       <div className="warehouseDetails__optionsContainer">
-        <button className="warehouseDetails__optionsContainer__deleteButton" onClick={() => setShowPopUpWindow(true)}>
+        <button
+          className="warehouseDetails__optionsContainer__deleteButton"
+          onClick={() => setShowPopUpWindow(true)}
+        >
           <Trash2 />
         </button>
-        <button className="warehouseDetails__optionsContainer__modifyButton">
+        <button
+          className="warehouseDetails__optionsContainer__modifyButton"
+          onClick={() => modifyWarehouse(warehouse.id)}
+        >
           <Pencil />
         </button>
       </div>
       {showPopUpWindow && <Backdrop closePopUpWindow={closeTab} />}
       {showPopUpWindow && (
         <PopUpWindow
-          text={"Are you sure you want to delete warahouse " + warehouse.name +"?"}
+          text={
+            "Are you sure you want to delete warahouse " + warehouse.name + "?"
+          }
           closePopUpWindow={closeTab}
           deleteItem={deleteWarehouse}
         />
