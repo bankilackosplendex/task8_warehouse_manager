@@ -20,42 +20,50 @@
     gap: 3rem;
     margin-bottom: 5rem;
 
-    &__linkCard {
-      &__card {
-        @include hoverGrow;
-        @include flexboxColumn;
-        justify-content: center;
-        width: 15rem;
-        height: 16rem;
-        background-color: $third-color;
-        color: $primary-color;
-        border-radius: $border-radius;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-color: rgba(15, 15, 15, 0.1);
+    &__warehouseCard,
+    &__productCard,
+    &__companyCard,
+    &__stockmovementCard {
+      @include hoverGrow;
+      @include flexboxColumn;
+      justify-content: center;
+      width: 15rem;
+      height: 16rem;
+      background-color: $third-color;
+      color: $primary-color;
+      border-radius: $border-radius;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      cursor: pointer;
+      filter: grayscale(30%) brightness(0.8);
 
-        &__title {
-          align-self: center;
-          color: $third-color;
-        }
+      &__title {
+        align-self: center;
+        color: $third-color;
+        filter: none;
       }
 
-      &__warehouseCard {
-        background-image: url("../../assets/images/pexels-erwinfhm-24862481.jpg");
+      &:hover{
+        filter: none;
       }
 
-      &__productCard {
-        background-image: url("../../assets/images/360_F_645501984_rjNGGzJZB24DjnZFxX9zlcTQfSHe1YnT.jpg");
-      }
+    }
 
-      &__companyCard {
-        background-image: url("../../assets/images/pexels-fauxels-3183197.jpg");
-      }
+    &__warehouseCard {
+      background-image: url("../../assets/images/pexels-erwinfhm-24862481.jpg");
+    }
 
-      &__stockmovementCard {
-        background-image: url("../../assets/images/AdobeStock_622375139-1024x574.jpeg");
-      }
+    &__productCard {
+      background-image: url("../../assets/images/360_F_645501984_rjNGGzJZB24DjnZFxX9zlcTQfSHe1YnT.jpg");
+    }
+
+    &__companyCard {
+      background-image: url("../../assets/images/pexels-fauxels-3183197.jpg");
+    }
+
+    &__stockmovementCard {
+      background-image: url("../../assets/images/AdobeStock_622375139-1024x574.jpeg");
     }
   }
 }

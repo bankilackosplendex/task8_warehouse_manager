@@ -21,12 +21,13 @@ import WarehouseForm from "./components/warehouses/WarehouseForm.tsx";
 import StockMovementsForm from "./components/stockmovements/StockMovementForm.tsx";
 import UserList from "./components/users/UserList.tsx";
 import { useAuth } from "./components/hooks/useAuth.tsx";
+import { Role } from "./enums/UserRoleEnum.tsx";
+import ProtectedRoute from "./components/authorization/ProtectedRoute.tsx";
 
 function App() {
-
   return (
     <div>
-      <Navbar/>
+      <Navbar />
       <Routes>
         {/* --- HOME PAGE --- */}
         <Route path="/" element={<HomePage />} />
@@ -54,6 +55,14 @@ function App() {
         <Route path="/reports/:reportId" element={<ReportDetails />} />
         {/* --- STATISTICS PAGE --- */}
         <Route path="/statistics" element={<StatisticsPage />} />
+        <Route
+          path="/statistics"
+          element={
+            <ProtectedRoute allowedRoles={[Role.ADMIN]}>
+              <StatisticsPage />
+            </ProtectedRoute>
+          }
+        />
         {/* --- LOGIN PAGE --- */}
         <Route path="/login" element={<LoginPage />} />
         {/* --- REGISTRATION PAGE --- */}

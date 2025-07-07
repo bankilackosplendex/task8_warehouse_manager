@@ -10,20 +10,23 @@ export const AuthContext = createContext<{
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-  const token = localStorage.getItem("accessToken");
-  if (token) {
-    try {
-      const decoded = jwtDecode<DecodedAccessToken>(token);
-      setUser({ id: +decoded.sub, role: decoded.role });
-    } catch (e) {
-      console.error("Invalid token:", e);
-      setUser(null);
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      try {
+        const decoded = jwtDecode<DecodedAccessToken>(token);
+        setUser({ id: +decoded.sub, role: decoded.role });
+      } catch (e) {
+        console.error("Invalid token:", e);
+        setUser(null);
+      }
     }
-  }
-  else setUser(null);
-}, []);
+    setLoading(false);
+  }, []);
+
+  if (loading) return <div>Loading...</div>;
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>

@@ -1,45 +1,55 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./HomePage.scss";
+import { useAuth } from "../../hooks/useAuth.tsx";
 
 function HomePage() {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  function handleNavigation(path: string) {
+    if (!user) {
+      navigate("/login");
+    } else {
+      navigate(path);
+    }
+  }
+
   return (
     <div className="homePage">
       <h1 className="homePage__title">Warehouse Manager</h1>
       <div className="homePage__linkCardContainer">
-        <Link
-          className="homePage__linkCardContainer__linkCard"
-          to="/warehouses"
+        <div
+          className="homePage__linkCardContainer__warehouseCard"
+          onClick={() => handleNavigation("/warehouses")}
         >
-          <div className="homePage__linkCardContainer__linkCard__card homePage__linkCardContainer__linkCard__warehouseCard">
-            <h2 className="homePage__linkCardContainer__linkCard__card__title">
-              Warehouses
-            </h2>
-          </div>
-        </Link>
-        <Link className="homePage__linkCardContainer__linkCard" to="/products">
-          <div className="homePage__linkCardContainer__linkCard__card homePage__linkCardContainer__linkCard__productCard">
-            <h2 className="homePage__linkCardContainer__linkCard__card__title">
-              Products
-            </h2>
-          </div>
-        </Link>
-        <Link className="homePage__linkCardContainer__linkCard" to="/companies">
-          <div className="homePage__linkCardContainer__linkCard__card homePage__linkCardContainer__linkCard__companyCard">
-            <h2 className="homePage__linkCardContainer__linkCard__card__title">
-              Companies
-            </h2>
-          </div>
-        </Link>
-        <Link
-          className="homePage__linkCardContainer__linkCard"
-          to="/stockmovements"
+          <h2 className="homePage__linkCardContainer__warehouseCard__title">
+            Warehouses
+          </h2>
+        </div>
+        <div
+          className="homePage__linkCardContainer__productCard"
+          onClick={() => handleNavigation("/products")}
         >
-          <div className="homePage__linkCardContainer__linkCard__card homePage__linkCardContainer__linkCard__stockmovementCard">
-            <h2 className="homePage__linkCardContainer__linkCard__card__title">
-              Stockmovements
-            </h2>
-          </div>
-        </Link>
+          <h2 className="homePage__linkCardContainer__productCard__title">
+            Products
+          </h2>
+        </div>
+        <div
+          className="homePage__linkCardContainer__companyCard"
+          onClick={() => handleNavigation("/companies")}
+        >
+          <h2 className="homePage__linkCardContainer__companyCard__title">
+            Companies
+          </h2>
+        </div>
+        <div
+          className="homePage__linkCardContainer__stockmovementCard"
+          onClick={() => handleNavigation("/stockmovements")}
+        >
+          <h2 className="homePage__linkCardContainer__stockmovementCard__title">
+            Stockmovements
+          </h2>
+        </div>
       </div>
     </div>
   );

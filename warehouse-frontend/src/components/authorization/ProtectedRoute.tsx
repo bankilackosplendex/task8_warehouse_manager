@@ -1,20 +1,19 @@
-import { Navigate, Route } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth.tsx";
-import { Role } from "../../enums/UserRoleEnum.tsx";
-import { useContext } from "react";
-import { AuthContext } from "../../contexts/AuthContext.tsx";
+import { Navigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth.tsx";
+import { Role } from "../../enums/UserRoleEnum";
 
-// type ProtectedRouteProps = {
-//   allowedRoles: Role[];
-//   element: JSX.Element;
-//   path: string;
-// };
+const RequireAuth = ({ allowedRoles, children }) => {
+  const { user } = useAuth();
 
-// export const ProtectedRoute = ({ allowedRoles, element, path }: ProtectedRouteProps) => {
-//   const { user } = useAuth();
+  if (!user) {
+    return <Navigate to="/login" />;
+  }
 
-//   if (!user) return <Route path={path} element={<Navigate to="/login" />} />;
-//   if (!allowedRoles.includes(user.role)) return <Route path={path} element={<h2>Access Denied</h2>} />;
+  if (!allowedRoles.includes(user.role)) {
+    return <h2>Access Denied</h2>;
+  }
 
-//   return <Route path={path} element={element} />;
-// };
+  return children;
+};
+
+export default RequireAuth;
