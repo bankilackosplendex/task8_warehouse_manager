@@ -1,0 +1,84 @@
+@import "../../style/variables";
+@import "../../style/mixins";
+@import "../../style/maps";
+
+.stockMovementDetails {
+  @include detailsBase;
+
+  &__name {
+    font-size: map-get($font-sizes, "medium");
+  }
+
+  &__quantity,
+  &__movementType,
+  &__time {
+    @include flexboxRow;
+    @include iconContainer;
+
+    &__key {
+      @include detailsKeyBase;
+    }
+
+    &__value {
+      @include detailsValueBase;
+    }
+  }
+
+  &__product,
+  &__warehouse,
+  &__company {
+    @include flexboxColumn;
+
+    &__key {
+      @include iconContainer;
+
+      &__icon{
+        min-width: 1.5rem;
+        min-height: 1.5rem;
+      }
+
+      &__text {
+        @include detailsKeyBase;
+      }
+    }
+
+    &__value {
+      margin-top: 0rem;  
+
+      &__item {
+        @include itemBase;
+        @include flexboxRow;
+        align-items: center;
+        justify-content: space-between;
+
+        &:hover {
+          @include itemHoverBase;
+        }
+      }
+    }
+  }
+
+  &__optionsContainer {
+    @include flexboxRow;
+    gap: 1rem;
+    margin-top: 2rem;
+
+    &__deleteButton,
+    &__modifyButton {
+      @include buttonBase;
+      margin: 0rem;
+      width: 2.8rem;
+      height: 2.8rem;
+      padding-top: 0.3rem;
+    }
+
+    &__deleteButton {
+      background-color: $error-color;
+
+      &:hover{
+        color: $error-color;
+        border-color: $error-color;
+      }
+    }
+  }
+}

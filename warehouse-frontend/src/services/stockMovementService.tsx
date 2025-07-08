@@ -12,7 +12,7 @@ export const getStockMovements = async () => {
   return res.data;
 };
 
-export const getStockMovementById = async (id: string) => {
+export const getStockMovementById = async (id: number) => {
   const token = getAccessToken();
   const res = await api.get(`/stockmovements/${id}`, {
     headers: {
@@ -32,7 +32,7 @@ export const createStockMovement = async (data: StockMovement) => {
   return res.data;
 };
 
-export const updateStockMovement = async (id: string, data: StockMovement) => {
+export const updateStockMovement = async (id: number, data: StockMovement) => {
   const token = getAccessToken();
   const res = await api.put(`/stockmovements/${id}`, data, {
     headers: {
@@ -42,7 +42,7 @@ export const updateStockMovement = async (id: string, data: StockMovement) => {
   return res.data;
 };
 
-export const deleteStockMovement = async (id: string) => {
+export const deleteStockMovement = async (id: number) => {
   const token = getAccessToken();
   const res = await api.delete(`/stockmovements/${id}`, {
     headers: {

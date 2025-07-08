@@ -96,7 +96,7 @@ function WarehouseDetails() {
                 </p>
                 <p className="warehouseDetails__products__value__header__date">
                   <CalendarDays />
-                  Registred
+                  Registered
                 </p>
               </div>
               {warehouseProducts.map((warehouseproduct) => (
@@ -108,10 +108,10 @@ function WarehouseDetails() {
                   <p className="warehouseDetails__products__value__item__name">
                     {warehouseproduct.product.name}
                   </p>
-                  <p className="warehouseDetails__products__value__item__quantity">
+                  <div className="warehouseDetails__products__value__item__quantity">
                     <p>{warehouseproduct.quantity}</p>
                     <p>{warehouseproduct.product.quantityType}</p>
-                  </p>
+                  </div>
                   <p>
                     {new Date(warehouseproduct.createdAt).toLocaleDateString()}
                   </p>

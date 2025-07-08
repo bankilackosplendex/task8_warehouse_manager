@@ -78,7 +78,7 @@ function ProductDetails() {
         <p className="productDetails__number__value">{product.number}</p>
       </div>
       <div className="productDetails__quantityType">
-        <Ruler className="productDetails__quantityTyp__icon" />
+        <Ruler className="productDetails__quantityType__icon" />
         <p className="productDetails__quantityType__key">Quantity type: </p>
         <p className="productDetails__quantityType__value">
           {product.quantityType}
@@ -112,7 +112,7 @@ function ProductDetails() {
                 </p>
                 <p className="productDetails__warehouses__value__header__date">
                   <CalendarDays />
-                  Registred
+                  Registered
                 </p>
               </div>
               {warehouseProducts.map((warehouseproduct) => (
@@ -124,10 +124,10 @@ function ProductDetails() {
                   <p className="productDetails__warehouses__value__item__name">
                     {warehouseproduct.warehouse.name}
                   </p>
-                  <p className="productDetails__warehouses__value__item__quantity">
+                  <div className="productDetails__warehouses__value__item__quantity">
                     <p>{warehouseproduct.quantity}</p>
                     <p>{product.quantityType}</p>
-                  </p>
+                  </div>
                   <p>
                     {new Date(warehouseproduct.createdAt).toLocaleDateString()}
                   </p>

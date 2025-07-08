@@ -93,7 +93,6 @@ function StockMovementsList() {
         >
           <div className="stockmovementList__item__id">
             <Truck />
-            <p>#{stockmovement.id}</p>
             <p>{stockmovement.warehouse.name}</p>
             <p>{stockmovement.product.name}</p>
           </div>

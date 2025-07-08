@@ -5,6 +5,7 @@ import { SquarePlus } from "lucide-react";
 import BackButton from "../../components/common/BackButton.tsx";
 import StockMovementDetails from "../../components/stockmovements/StockMovementDetails.tsx";
 import StockMovementsForm from "../../components/stockmovements/StockMovementForm.tsx";
+import { FormType } from "../../enums/FormTypeEnum.tsx";
 
 function StockMovementsPage() {
   return (
@@ -22,7 +23,9 @@ function StockMovementsPage() {
         {/* Stockmovement details */}
         <Route path="/:stockMovementId" element={<StockMovementDetails />} />
         {/* Stockmovement create form */}
-        <Route path="/add" element={<StockMovementsForm />} />
+        <Route path="/add" element={<StockMovementsForm type={FormType.CREATE}/>} />
+        {/* Stockmovement update form */}
+        <Route path="/modify/:stockMovementId" element={<StockMovementsForm type={FormType.MODIFY}/>} />
       </Routes>
     </div>
   );
