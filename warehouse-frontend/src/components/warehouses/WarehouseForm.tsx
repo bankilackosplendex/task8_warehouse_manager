@@ -71,7 +71,7 @@ function WarehouseForm({ type }: { type: FormType }) {
         className="warehouseForm__nameField"
         type="text"
         name="name"
-        value={warehouse.name}
+        defaultValue={warehouse.name ? warehouse.name : ""}
         required
       />
       {/* Address */}
@@ -92,7 +92,7 @@ function WarehouseForm({ type }: { type: FormType }) {
             className="warehouseForm__location__country__countryField"
             type="text"
             name="country"
-            value={getAddressFields(warehouse.address)[0]}
+            defaultValue={warehouse.address ? getAddressFields(warehouse.address)[0] : ""}
             required
           />
         </div>
@@ -109,7 +109,7 @@ function WarehouseForm({ type }: { type: FormType }) {
             className="warehouseForm__location__city__cityField"
             type="text"
             name="city"
-            value={getAddressFields(warehouse.address)[1]}
+            defaultValue={warehouse.address ? getAddressFields(warehouse.address)[1] : ""}
             required
           />
         </div>
@@ -126,7 +126,7 @@ function WarehouseForm({ type }: { type: FormType }) {
             className="warehouseForm__location__address__addressField"
             type="text"
             name="address"
-            value={getAddressFields(warehouse.address)[2]}
+            defaultValue={warehouse.address ? getAddressFields(warehouse.address)[2] : ""}
             required
           />
         </div>

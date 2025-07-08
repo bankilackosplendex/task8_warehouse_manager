@@ -59,7 +59,7 @@ function ProductForm({ type }: { type: FormType }) {
         className="productForm__nameField"
         type="text"
         name="name"
-        value={product.name}
+        defaultValue={product.name ? product.name : ""}
         required
       />
       {/* Article number */}
@@ -74,7 +74,7 @@ function ProductForm({ type }: { type: FormType }) {
         className="productForm__articleNumberField"
         type="text"
         name="articleNumber"
-        value={product.number}
+        defaultValue={product.number ? product.number : ""}
         required
       />
       {/* Quantity type */}
@@ -85,8 +85,8 @@ function ProductForm({ type }: { type: FormType }) {
       <select
         className="productForm__quantityTypeField"
         name="quantityType"
+        defaultValue={product.quantityType ? product.quantityType : "DB"}
         required
-        value={product.quantityType}
       >
         <option value="DB">DB</option>
         <option value="KG">KG</option>

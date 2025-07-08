@@ -68,7 +68,7 @@ function CompanyForm({ type }: { type: FormType }) {
         className="companyForm__nameField"
         type="text"
         name="name"
-        value={company.name}
+        defaultValue={company.name ? company.name : ""}
         required
       />
       {/* Add button */}

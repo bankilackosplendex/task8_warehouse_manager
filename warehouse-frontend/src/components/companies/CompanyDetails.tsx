@@ -1,11 +1,13 @@
 import "./CompanyDetails.scss";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getCompanyById } from "../../services/companyService.tsx";
 import { Company } from "../../types/CompanyType";
 import { Pencil, Trash2, Truck } from "lucide-react";
 import Backdrop from "../common/Backdrop.tsx";
 import PopUpWindow from "../common/PopUpWindow.tsx";
+import { getWarehouseById } from "../../services/warehouseService.tsx";
+import { getProductById } from "../../services/productService.tsx";
 
 function CompanyDetails() {
   const { companyId } = useParams();
@@ -20,18 +22,6 @@ function CompanyDetails() {
       if (companyId) {
         try {
           const data = await getCompanyById(+companyId);
-          data.movements = [
-            {
-              id: 1,
-              movementType: "IMPORT",
-              createdAt: new Date(),
-            },
-            {
-              id: 2,
-              movementType: "EXPORT",
-              createdAt: new Date(),
-            },
-          ];
           setCompany(data);
         } catch (err: any) {
           const msg = err.response?.data?.message || "Couldn't load company";
@@ -64,15 +54,18 @@ function CompanyDetails() {
         </p>
         {company.movements &&
           company.movements.map((movement) => (
-            <div className="companyDetails__movements__value" key={movement.id}>
-              <div className="companyDetails__movements__value__id">
-                #{movement.id}
+            <Link to={`/stockmovements/${movement.id}`} className="companyDetails__movements__value" key={movement.id}>
+              <div className="companyDetails__movements__value__warehouse">
+                {movement.warehouse?.name}
+              </div>
+              <div className="companyDetails__movements__value__product">
+                {movement.product?.name}
               </div>
               <div className="companyDetails__movements__value__info">
                 <p>{movement.movementType}</p>
                 <p>{new Date(movement.createdAt).toLocaleDateString()}</p>
               </div>
-            </div>
+            </Link>
           ))}
       </div>
       <div className="companyDetails__optionsContainer">
