@@ -12,7 +12,6 @@
 
   &__address,
   &__description,
-  &__products,
   &__movements {
     @include flexboxRow;
     @include iconContainer;
@@ -23,6 +22,59 @@
 
     &__value {
       @include detailsValueBase;
+    }
+  }
+
+  &__products {
+    @include flexboxColumn;
+
+    &__key {
+      @include iconContainer;
+
+      &__text {
+        @include detailsKeyBase;
+      }
+    }
+
+    &__value {
+      @include flexboxColumn;
+
+      &__header {
+        @include flexboxRow;
+        align-items: center;
+        justify-content: space-between;
+        padding-left: $spacing-md;
+        padding-right: $spacing-md;
+
+        &__name,
+        &__quantity,
+        &__date {
+          @include iconContainer;
+        }
+
+        &__quantity{
+          margin-right: -1rem;
+        }
+      }
+
+      &__item {
+        @include itemBase;
+        @include flexboxRow;
+        align-items: center;
+        justify-content: space-between;
+        margin-left: 1rem;
+        margin-bottom: 1rem;
+
+        &:hover {
+          @include itemHoverBase;
+        }
+
+        &__quantity {
+          @include flexboxRow;
+          align-items: center;
+          gap: 0.3rem;
+        }
+      }
     }
   }
 
@@ -43,7 +95,7 @@
     &__deleteButton {
       background-color: $error-color;
 
-      &:hover{
+      &:hover {
         color: $error-color;
         border-color: $error-color;
       }

@@ -51,3 +51,13 @@ export const deleteWarehouse = async (id: number) => {
   });
   return response.data;
 };
+
+export const getWarehouseProductsById = async (warehouseId: number) => {
+  const token = getAccessToken();
+  const response = await api.get(`/warehouses/${warehouseId}/products`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
+  });
+  return response.data;
+};

@@ -10,20 +10,9 @@ import ReportsPage from "./pages/ReportsPage/ReportsPage.tsx";
 import StatisticsPage from "./pages/StatisticsPage/StatisticsPage.tsx";
 import LoginPage from "./pages/LoginPage/LoginPage.tsx";
 import RegisterPage from "./pages/RegisterPage/RegisterPage.tsx";
-import WarehouseDetails from "./components/warehouses/WarehouseDetails.tsx";
-import ProductDetails from "./components/products/ProductDetails.tsx";
-import CompanyDetails from "./components/companies/CompanyDetails.tsx";
-import StockMovementDetails from "./components/stockmovements/StockMovementDetails.tsx";
-import ReportDetails from "./components/reports/ReportDetails.tsx";
-import CompanyForm from "./components/companies/CompanyForm.tsx";
-import ProductForm from "./components/products/ProductForm.tsx";
-import WarehouseForm from "./components/warehouses/WarehouseForm.tsx";
-import StockMovementsForm from "./components/stockmovements/StockMovementForm.tsx";
 import UserList from "./components/users/UserList.tsx";
-import { useAuth } from "./components/hooks/useAuth.tsx";
 import { Role } from "./enums/UserRoleEnum.tsx";
 import ProtectedRoute from "./components/authorization/ProtectedRoute.tsx";
-import { FormType } from "./enums/FormTypeEnum.tsx";
 
 function App() {
   return (
@@ -33,7 +22,7 @@ function App() {
         {/* --- HOME PAGE --- */}
         <Route path="/" element={<HomePage />} />
         {/* --- WAREHOUSE PAGE --- */}
-        <Route path="/warehouses*" element={<WarehousesPage />} />
+        <Route path="/warehouses/*" element={<WarehousesPage />} />
         {/* --- PRODUCT PAGE --- */}
         <Route path="/products/*" element={<ProductsPage />} />
         {/* --- COMPANY PAGE --- */}
