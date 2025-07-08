@@ -8,9 +8,11 @@ function ReportsPage() {
   return (
     // Reports page
     <div className="reportsPage">
-      <BackButton />
-      {/* Title */}
-      <h2 className="reportsPage__title">Reports</h2>
+      <div className="reportsPage__header">
+        <BackButton />
+        {/* Title */}
+        <h2 className="reportsPage__header__title">Reports</h2>
+      </div>
       {/* Routes in /reports */}
       <Routes>
         {/* Report list */}

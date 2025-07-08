@@ -11,9 +11,11 @@ function ProductsPage() {
   return (
     // Proudcts page
     <div className="productsPage">
-      <BackButton />
-      {/* Title */}
-      <h2 className="productsPage__title">Products</h2>
+      <div className="productsPage__header">
+        <BackButton />
+        {/* Title */}
+        <h2 className="productsPage__header__title">Products</h2>
+      </div>
       {/* Routes in /products */}
       <Routes>
         {/* Product list */}

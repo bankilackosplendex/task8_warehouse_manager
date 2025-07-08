@@ -9,9 +9,11 @@ function StatisticsPage() {
   return (
     // Statistics page
     <div className="statisticsPage">
-      <BackButton />
-      {/* Title */}
-      <h2 className="statisticsPage__title">Statistics</h2>
+      <div className="statisticsPage__header">
+        <BackButton />
+        {/* Title */}
+        <h2 className="statisticsPage__header__title">Statistics</h2>
+      </div>
       {/* Routes in /statistics */}
       <Routes>
         {/* Statistics list */}

@@ -10,9 +10,11 @@ function WarehousePage() {
   return (
     // Warehouse page
     <div className="warehousesPage">
-      <BackButton />
-      {/* Title */}
-      <h2 className="warehousesPage__title">Warehouses</h2>
+      <div className="warehousesPage__header">
+        <BackButton />
+        {/* Title */}
+        <h2 className="warehousesPage__header__title">Warehouses</h2>
+      </div>
       {/* Routes in /warehouses */}
       <Routes>
         {/* Warehouse list */}

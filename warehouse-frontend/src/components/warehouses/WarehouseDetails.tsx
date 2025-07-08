@@ -1,5 +1,5 @@
 import "./WarehouseDetails.scss";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {
   getWarehouseById,
@@ -32,9 +32,6 @@ function WarehouseDetails() {
 
           const productsData = await getWarehouseProductsById(+warehouseId);
           setWarehouseProducts(productsData);
-          // const extractedProducts = productsData.map((wp: any) => wp.product);
-          // console.log(extractedProducts);
-          // setWarehouseProducts(extractedProducts);
         } catch (err: any) {
           const msg = err.response?.data?.message || "Couldn't load warehouse";
           setError(msg);
@@ -82,9 +79,10 @@ function WarehouseDetails() {
             <p className="warehouseDetails__products__value__header__date"><CalendarDays />Registred</p>
           </div>
           {warehouseProducts.map((warehouseproduct) => (
-            <div
+            <Link
               className="warehouseDetails__products__value__item"
               key={warehouseproduct.id}
+              to={`/products/${warehouseproduct.product.id}`}
             >
               <p className="warehouseDetails__products__value__item__name">
                 {warehouseproduct.product.name}
@@ -96,7 +94,7 @@ function WarehouseDetails() {
               <p>
                 {new Date(warehouseproduct.createdAt).toLocaleDateString()}
               </p>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

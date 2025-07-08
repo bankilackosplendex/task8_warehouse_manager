@@ -11,9 +11,11 @@ function CompaniesPage() {
   return (
     // Companies page
     <div className="companiesPage">
-      <BackButton />
-      {/* Title */}
-      <h2 className="companiesPage__title">Companies</h2>
+      <div className="companiesPage__header">
+        <BackButton />
+        {/* Title */}
+        <h2 className="companiesPage__header__title">Companies</h2>
+      </div>
       {/* Routes in /companies */}
       <Routes>
         {/* Company list */}

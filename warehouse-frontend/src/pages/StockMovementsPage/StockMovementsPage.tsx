@@ -10,9 +10,11 @@ function StockMovementsPage() {
   return (
     // Stockmovements page
     <div className="stockmovementsPage">
-      <BackButton />
+      <div className="stockmovementsPage__header">
+        <BackButton />
       {/* Title */}
-      <h2 className="stockmovementsPage__title">Stockmovements</h2>
+      <h2 className="stockmovementsPage__header__title">Stockmovements</h2>
+      </div>
       {/* Routes in /stockmovements */}
       <Routes>
         {/* Stockmovement list */}

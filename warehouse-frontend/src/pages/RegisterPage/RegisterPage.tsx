@@ -5,8 +5,10 @@ import BackButton from "../../components/common/BackButton.tsx";
 function RegisterPage() {
   return (
     <div className="registerPage">
-      <BackButton />
-      <h2 className="registerPage__title">Registration</h2>
+      <div className="registerPage__header">
+        <BackButton />
+        <h2 className="registerPage__header__title">Registration</h2>
+      </div>
       <RegisterForm />
     </div>
   );

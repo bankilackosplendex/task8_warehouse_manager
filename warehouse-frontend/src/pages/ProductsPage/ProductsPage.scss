@@ -3,7 +3,11 @@
 .productsPage {
   @include pageContainer;
 
-  &__title {
-    @include pageTitle;
+  &__header {
+    width: 80%;
+
+    &__title {
+      @include pageTitle;
+    }
   }
 }
