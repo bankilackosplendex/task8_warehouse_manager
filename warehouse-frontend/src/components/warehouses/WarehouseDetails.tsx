@@ -78,42 +78,54 @@ function WarehouseDetails() {
         </p>
       </div>
       <div className="warehouseDetails__products">
-        <div className="warehouseDetails__products__key">
-          <Package className="warehouseDetails__products__key__icon" />
-          <p className="warehouseDetails__products__key__text">Products: </p>
-        </div>
-        <div className="warehouseDetails__products__value">
-          <div className="warehouseDetails__products__value__header">
-            <p className="warehouseDetails__products__value__header__name">
-              <Tag />
-              Name
-            </p>
-            <p className="warehouseDetails__products__value__header__quantity">
-              <Container />
-              Quantity
-            </p>
-            <p className="warehouseDetails__products__value__header__date">
-              <CalendarDays />
-              Registred
-            </p>
+        {warehouseProducts.length > 0 ? (
+          <>
+            <div className="warehouseDetails__products__key">
+              <Package className="warehouseDetails__products__key__icon" />
+              <p className="warehouseDetails__products__key__text">Products:</p>
+            </div>
+            <div className="warehouseDetails__products__value">
+              <div className="warehouseDetails__products__value__header">
+                <p className="warehouseDetails__products__value__header__name">
+                  <Tag />
+                  Name
+                </p>
+                <p className="warehouseDetails__products__value__header__quantity">
+                  <Container />
+                  Quantity
+                </p>
+                <p className="warehouseDetails__products__value__header__date">
+                  <CalendarDays />
+                  Registred
+                </p>
+              </div>
+              {warehouseProducts.map((warehouseproduct) => (
+                <Link
+                  className="warehouseDetails__products__value__item"
+                  key={warehouseproduct.id}
+                  to={`/products/${warehouseproduct.product.id}`}
+                >
+                  <p className="warehouseDetails__products__value__item__name">
+                    {warehouseproduct.product.name}
+                  </p>
+                  <p className="warehouseDetails__products__value__item__quantity">
+                    <p>{warehouseproduct.quantity}</p>
+                    <p>{warehouseproduct.product.quantityType}</p>
+                  </p>
+                  <p>
+                    {new Date(warehouseproduct.createdAt).toLocaleDateString()}
+                  </p>
+                </Link>
+              ))}
+            </div>
+          </>
+        ) : (
+          <div className="warehouseDetails__products__key">
+            <Package className="warehouseDetails__products__key__icon" />
+            <p className="warehouseDetails__products__key__text">Products:</p>
+            <p className="warehouseDetails__products__value">This warehouse is empty</p>
           </div>
-          {warehouseProducts.map((warehouseproduct) => (
-            <Link
-              className="warehouseDetails__products__value__item"
-              key={warehouseproduct.id}
-              to={`/products/${warehouseproduct.product.id}`}
-            >
-              <p className="warehouseDetails__products__value__item__name">
-                {warehouseproduct.product.name}
-              </p>
-              <p className="warehouseDetails__products__value__item__quantity">
-                <p>{warehouseproduct.quantity}</p>
-                <p>{warehouseproduct.product.quantityType}</p>
-              </p>
-              <p>{new Date(warehouseproduct.createdAt).toLocaleDateString()}</p>
-            </Link>
-          ))}
-        </div>
+        )}
       </div>
       <div className="warehouseDetails__movements">
         <Truck className="warehouseDetails__movements__icon" />

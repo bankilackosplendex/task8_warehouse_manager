@@ -30,6 +30,11 @@
     &__key {
       @include iconContainer;
 
+      &__icon{
+        min-width: 1.5rem;
+        min-height: 1.5rem;
+      }
+
       &__text {
         @include detailsKeyBase;
       }

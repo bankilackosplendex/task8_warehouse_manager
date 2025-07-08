@@ -9,6 +9,7 @@ import {
 import {
   CalendarDays,
   Container,
+  Divide,
   FileDigit,
   Pencil,
   Ruler,
@@ -91,42 +92,58 @@ function ProductDetails() {
         </p>
       </div>
       <div className="productDetails__warehouses">
-        <div className="productDetails__warehouses__key">
-          <Warehouse className="productDetails__warehouses__key__icon" />
-          <p className="productDetails__warehouses__key__text">Warehouses: </p>
-        </div>
-        <div className="productDetails__warehouses__value">
-          <div className="productDetails__warehouses__value__header">
-            <p className="productDetails__warehouses__value__header__name">
-              <Tag />
-              Name
-            </p>
-            <p className="productDetails__warehouses__value__header__quantity">
-              <Container />
-              Quantity
-            </p>
-            <p className="productDetails__warehouses__value__header__date">
-              <CalendarDays />
-              Registred
+        {warehouseProducts.length > 0 ? (
+          <>
+            <div className="productDetails__warehouses__key">
+              <Warehouse className="productDetails__warehouses__key__icon" />
+              <p className="productDetails__warehouses__key__text">
+                Warehouses:
+              </p>
+            </div>
+            <div className="productDetails__warehouses__value">
+              <div className="productDetails__warehouses__value__header">
+                <p className="productDetails__warehouses__value__header__name">
+                  <Tag />
+                  Name
+                </p>
+                <p className="productDetails__warehouses__value__header__quantity">
+                  <Container />
+                  Quantity
+                </p>
+                <p className="productDetails__warehouses__value__header__date">
+                  <CalendarDays />
+                  Registred
+                </p>
+              </div>
+              {warehouseProducts.map((warehouseproduct) => (
+                <Link
+                  className="productDetails__warehouses__value__item"
+                  key={warehouseproduct.id}
+                  to={`/warehouses/${warehouseproduct.warehouse.id}`}
+                >
+                  <p className="productDetails__warehouses__value__item__name">
+                    {warehouseproduct.warehouse.name}
+                  </p>
+                  <p className="productDetails__warehouses__value__item__quantity">
+                    <p>{warehouseproduct.quantity}</p>
+                    <p>{product.quantityType}</p>
+                  </p>
+                  <p>
+                    {new Date(warehouseproduct.createdAt).toLocaleDateString()}
+                  </p>
+                </Link>
+              ))}
+            </div>
+          </>
+        ) : (
+          <div className="productDetails__warehouses__key">
+            <Warehouse className="productDetails__warehouses__key__icon" />
+            <p className="productDetails__warehouses__key__text">Warehouses:</p>
+            <p className="productDetails__warehouses__value">
+              This product is not stored in any of the warehouses
             </p>
           </div>
-          {warehouseProducts.map((warehouseproduct) => (
-            <Link
-              className="productDetails__warehouses__value__item"
-              key={warehouseproduct.id}
-              to={`/warehouses/${warehouseproduct.warehouse.id}`}
-            >
-              <p className="productDetails__warehouses__value__item__name">
-                {warehouseproduct.warehouse.name}
-              </p>
-              <p className="productDetails__warehouses__value__item__quantity">
-                <p>{warehouseproduct.quantity}</p>
-                <p>{product.quantityType}</p>
-              </p>
-              <p>{new Date(warehouseproduct.createdAt).toLocaleDateString()}</p>
-            </Link>
-          ))}
-        </div>
+        )}
       </div>
       <div className="productDetails__optionsContainer">
         <button
