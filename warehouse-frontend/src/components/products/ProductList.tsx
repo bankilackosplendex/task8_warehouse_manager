@@ -3,7 +3,7 @@ import "./ProductList.scss";
 import { useEffect, useState } from "react";
 import { getProducts } from "../../services/productService.tsx";
 import { Product } from "../../types/ProductType.tsx";
-import { Package } from "lucide-react";
+import { Package, PackagePlus } from "lucide-react";
 
 function ProductList() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -24,17 +24,23 @@ function ProductList() {
   }, []);
 
   return (
-    <div className="product-list">
+    <div className="productList">
       {products.map((product) => (
         <Link
           to={`/products/${product.id}`}
           key={product.id}
-          className="product-list__item"
+          className="productList__item"
         >
           <Package />
           {product.name}
         </Link>
       ))}
+      <Link to="add">
+        <button className="productList__addButton">
+          <PackagePlus />
+          Add new product
+        </button>
+      </Link>
     </div>
   );
 }

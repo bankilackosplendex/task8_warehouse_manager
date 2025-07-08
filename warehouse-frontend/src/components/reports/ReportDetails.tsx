@@ -37,7 +37,7 @@ function ReportDetails() {
         <button className="reportDetails__optionsContainer__deleteButton">
           <Trash2 />
         </button>
-        <button className="reportDetails__optionsContainer__deleteButton">
+        <button className="reportDetails__optionsContainer__modifyButton">
           <Pencil />
         </button>
       </div>

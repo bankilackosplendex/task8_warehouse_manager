@@ -3,7 +3,7 @@ import "./CompanyList.scss";
 import { useEffect, useState } from "react";
 import { Company } from "../../types/CompanyType.tsx";
 import { getCompanies } from "../../services/companyService.tsx";
-import {Briefcase} from "lucide-react"; 
+import { Briefcase, SquarePlus } from "lucide-react";
 
 function CompanyList() {
   const [companies, setCompanies] = useState<Company[]>([]);
@@ -24,17 +24,23 @@ function CompanyList() {
   }, []);
 
   return (
-    <div className="company-list">
+    <div className="companyList">
       {companies.map((company) => (
         <Link
           to={`/companies/${company.id}`}
           key={company.id}
-          className="company-list__item"
+          className="companyList__item"
         >
           <Briefcase />
           {company.name}
         </Link>
       ))}
+      <Link to="/companies/add">
+        <button className="companyList__addButton">
+          <SquarePlus />
+          Add new company
+        </button>
+      </Link>
     </div>
   );
 }

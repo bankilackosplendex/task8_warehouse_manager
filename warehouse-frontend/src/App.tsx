@@ -33,20 +33,11 @@ function App() {
         {/* --- HOME PAGE --- */}
         <Route path="/" element={<HomePage />} />
         {/* --- WAREHOUSE PAGE --- */}
-        <Route path="/warehouses" element={<WarehousesPage />} />
-        <Route path="/warehouses/:warehouseId" element={<WarehouseDetails />} />
-        <Route path="/warehouses/add" element={<WarehouseForm type={FormType.CREATE}/>} />
-        <Route path="/warehouses/modify/:warehouseId" element={<WarehouseForm type={FormType.MODIFY}/>} />
+        <Route path="/warehouses*" element={<WarehousesPage />} />
         {/* --- PRODUCT PAGE --- */}
-        <Route path="/products" element={<ProductsPage />} />
-        <Route path="/products/:productId" element={<ProductDetails />} />
-        <Route path="/products/add" element={<ProductForm type={FormType.CREATE}/>} />
-        <Route path="/products/modify/:productId" element={<ProductForm type={FormType.MODIFY}/>} />
+        <Route path="/products/*" element={<ProductsPage />} />
         {/* --- COMPANY PAGE --- */}
-        <Route path="/companies" element={<CompaniesPage />} />
-        <Route path="/companies/:companyId" element={<CompanyDetails />} />
-        <Route path="/companies/add" element={<CompanyForm type={FormType.CREATE}/>} />
-        <Route path="/companies/modify/:companyId" element={<CompanyForm type={FormType.MODIFY}/>} />
+        <Route path="/companies/*" element={<CompaniesPage />} />
         {/* --- STOCKMOVEMENT PAGE --- */}
         <Route path="/stockmovements" element={<StockMovementsPage />} />
         <Route
@@ -55,12 +46,10 @@ function App() {
         />
         <Route path="/stockmovements/add" element={<StockMovementsForm />} />
         {/* --- REPORTS PAGE --- */}
-        <Route path="/reports" element={<ReportsPage />} />
-        <Route path="/reports/:reportId" element={<ReportDetails />} />
+        <Route path="/reports/*" element={<ReportsPage />} />
         {/* --- STATISTICS PAGE --- */}
-        <Route path="/statistics" element={<StatisticsPage />} />
         <Route
-          path="/statistics"
+          path="/statistics/*"
           element={
             <ProtectedRoute allowedRoles={[Role.ADMIN]}>
               <StatisticsPage />
@@ -72,7 +61,7 @@ function App() {
         {/* --- REGISTRATION PAGE --- */}
         <Route path="/registration" element={<RegisterPage />} />
         {/* --- USERS PAGE --- */}
-        <Route path="/profile" element={<UserList />} />
+        <Route path="/users" element={<UserList />} />
       </Routes>
     </div>
   );

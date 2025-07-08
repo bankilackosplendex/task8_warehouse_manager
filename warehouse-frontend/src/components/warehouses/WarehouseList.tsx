@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import "./WarehouseList.scss";
 import { getWarehouses } from "../../services/warehouseService.tsx";
 import { Warehouse } from "../../types/WarehouseType.tsx";
-import { WarehouseIcon } from "lucide-react";
+import { SquarePlus, WarehouseIcon } from "lucide-react";
 
 function WarehouseList() {
   const [warehouses, setWarehouses] = useState<Warehouse[]>([]);
@@ -24,17 +24,23 @@ function WarehouseList() {
   }, []);
 
   return (
-    <div className="warehouse-list">
+    <div className="warehouseList">
       {warehouses.map((warehouse) => (
         <Link
           to={`/warehouses/${encodeURIComponent(warehouse.id)}`}
           key={warehouse.id}
-          className="warehouse-list__item"
+          className="warehouseList__item"
         >
           <WarehouseIcon />
           {warehouse.name}
         </Link>
       ))}
+      <Link to="/add">
+        <button className="warehouseList__addButton">
+          <SquarePlus />
+          Add new warehouse
+        </button>
+      </Link>
     </div>
   );
 }
