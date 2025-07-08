@@ -17,7 +17,12 @@ export class CompaniesService {
   }
 
   async findOne(id: number) {
-    const company = await this.prisma.company.findUnique({ where: { id } });
+    const company = await this.prisma.company.findUnique({
+      where: { id },
+      include: {
+        movements: true,
+      },
+    });
     if (!company)
       throw new NotFoundException(`Company with id ${id} not found`);
     return company;

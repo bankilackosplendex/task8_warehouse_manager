@@ -47,7 +47,7 @@ export class ProductsController {
     return this.productsService.remove(id);
   }
 
-  @Get('/product/:id/warehouses')
+  @Get(':id/warehouses')
   getWarehousesByProduct(@Param('id', ParseIntPipe) id: number) {
     return this.productsService.getProductWarehouses(id);
   }
