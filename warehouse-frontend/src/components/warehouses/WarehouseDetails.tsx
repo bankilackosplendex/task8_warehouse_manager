@@ -6,7 +6,17 @@ import {
   getWarehouseProductsById,
 } from "../../services/warehouseService.tsx";
 import { Warehouse } from "../../types/WarehouseType.tsx";
-import { Trash2, Pencil, MapPin, TextIcon, Package, Truck, CalendarDays, Ruler, Tag } from "lucide-react";
+import {
+  Trash2,
+  Pencil,
+  MapPin,
+  TextIcon,
+  Package,
+  Truck,
+  CalendarDays,
+  Tag,
+  Container,
+} from "lucide-react";
 import Backdrop from "../common/Backdrop.tsx";
 import PopUpWindow from "../common/PopUpWindow.tsx";
 import { WarehouseProduct } from "../../types/WarehouseProductType.tsx";
@@ -74,9 +84,18 @@ function WarehouseDetails() {
         </div>
         <div className="warehouseDetails__products__value">
           <div className="warehouseDetails__products__value__header">
-            <p className="warehouseDetails__products__value__header__name"><Tag />Name</p>
-            <p className="warehouseDetails__products__value__header__quantity"><Ruler />Quantity</p>
-            <p className="warehouseDetails__products__value__header__date"><CalendarDays />Registred</p>
+            <p className="warehouseDetails__products__value__header__name">
+              <Tag />
+              Name
+            </p>
+            <p className="warehouseDetails__products__value__header__quantity">
+              <Container />
+              Quantity
+            </p>
+            <p className="warehouseDetails__products__value__header__date">
+              <CalendarDays />
+              Registred
+            </p>
           </div>
           {warehouseProducts.map((warehouseproduct) => (
             <Link
@@ -91,9 +110,7 @@ function WarehouseDetails() {
                 <p>{warehouseproduct.quantity}</p>
                 <p>{warehouseproduct.product.quantityType}</p>
               </p>
-              <p>
-                {new Date(warehouseproduct.createdAt).toLocaleDateString()}
-              </p>
+              <p>{new Date(warehouseproduct.createdAt).toLocaleDateString()}</p>
             </Link>
           ))}
         </div>

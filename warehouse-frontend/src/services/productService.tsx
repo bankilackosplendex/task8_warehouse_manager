@@ -51,3 +51,13 @@ export const deleteProduct = async (id: number) => {
   });
   return res.data;
 };
+
+export const getProductWarehousesById = async (id:number) => {
+  const token = getAccessToken();
+  const res = await api.get(`/products/${id}/warehouses`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
+  });
+  return res.data;
+}

@@ -53,7 +53,7 @@
         }
 
         &__quantity{
-          margin-right: -1rem;
+          margin-right: -6rem;
         }
       }
 
@@ -69,10 +69,19 @@
           @include itemHoverBase;
         }
 
+        &__name{
+          flex: 1.5;
+        }
+
         &__quantity {
+          flex: 1;
           @include flexboxRow;
           align-items: center;
           gap: 0.3rem;
+        }
+
+        &__date {
+          flex: 1;
         }
       }
     }

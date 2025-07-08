@@ -24,6 +24,68 @@
     }
   }
 
+  &__warehouses {
+    @include flexboxColumn;
+
+    &__key {
+      @include iconContainer;
+
+      &__text {
+        @include detailsKeyBase;
+      }
+    }
+
+    &__value {
+      @include flexboxColumn;
+
+      &__header {
+        @include flexboxRow;
+        align-items: center;
+        justify-content: space-between;
+        padding-left: $spacing-md;
+        padding-right: $spacing-md;
+
+        &__name,
+        &__quantity,
+        &__date {
+          @include iconContainer;
+        }
+
+        &__quantity{
+          margin-right: -6rem;
+        }
+      }
+
+      &__item {
+        @include itemBase;
+        @include flexboxRow;
+        align-items: center;
+        justify-content: space-between;
+        margin-left: 1rem;
+        margin-bottom: 1rem;
+
+        &:hover {
+          @include itemHoverBase;
+        }
+
+        &__name{
+          flex: 1.5;
+        }
+
+        &__quantity {
+          flex: 1;
+          @include flexboxRow;
+          align-items: center;
+          gap: 0.3rem;
+        }
+
+        &__date {
+          flex: 1;
+        }
+      }
+    }
+  }
+
   &__optionsContainer {
     @include flexboxRow;
     gap: 1rem;
