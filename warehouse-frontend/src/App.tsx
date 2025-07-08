@@ -39,12 +39,7 @@ function App() {
         {/* --- COMPANY PAGE --- */}
         <Route path="/companies/*" element={<CompaniesPage />} />
         {/* --- STOCKMOVEMENT PAGE --- */}
-        <Route path="/stockmovements" element={<StockMovementsPage />} />
-        <Route
-          path="/stockmovements/:stockMovementId"
-          element={<StockMovementDetails />}
-        />
-        <Route path="/stockmovements/add" element={<StockMovementsForm />} />
+        <Route path="/stockmovements/*" element={<StockMovementsPage />} />
         {/* --- REPORTS PAGE --- */}
         <Route path="/reports/*" element={<ReportsPage />} />
         {/* --- STATISTICS PAGE --- */}

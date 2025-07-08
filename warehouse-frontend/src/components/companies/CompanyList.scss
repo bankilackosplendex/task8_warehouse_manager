@@ -15,9 +15,9 @@
     }
   }
 
-  &__addButton{
+  &__addButton {
     @include buttonBase;
-     @include flexboxRow;
+    @include flexboxRow;
     @include flexboxCenter;
     gap: 0.5rem;
     width: 14rem;

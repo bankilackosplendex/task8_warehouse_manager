@@ -1,7 +1,7 @@
 @import "../../style/variables";
 @import "../../style/mixins";
 
-.stockmovement-list {
+.stockmovementList {
   @include listBase;
 
   &__item {
@@ -30,10 +30,20 @@
       margin-left: 4.3rem;
     }
   }
+
+  &__addButton {
+    @include buttonBase;
+    @include flexboxRow;
+    @include flexboxCenter;
+    gap: 0.5rem;
+    width: 16rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 @media (min-width: 55rem) {
-  .stockmovement-list {
+  .stockmovementList {
     &__item {
       @include flexboxRow;
       @include itemBase;

@@ -3,15 +3,7 @@
 .stockmovementsPage {
   @include pageContainer;
 
-  &__title{
+  &__title {
     @include pageTitle;
-  }
-
-  &__addButton{
-    @include buttonBase;
-     @include flexboxRow;
-    @include flexboxCenter;
-    gap: 0.5rem;
-    width: 16rem;
   }
 }

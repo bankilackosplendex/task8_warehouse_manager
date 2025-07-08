@@ -3,7 +3,7 @@
 .companiesPage {
   @include pageContainer;
 
-  &__title{
+  &__title {
     @include pageTitle;
   }
 }

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./ProductList.scss";
 import { useEffect, useState } from "react";
 import { getProducts } from "../../services/productService.tsx";
@@ -6,6 +6,7 @@ import { Product } from "../../types/ProductType.tsx";
 import { Package, PackagePlus } from "lucide-react";
 
 function ProductList() {
+  const navigate = useNavigate();
   const [products, setProducts] = useState<Product[]>([]);
   const [error, setError] = useState("");
 
@@ -23,6 +24,10 @@ function ProductList() {
     fetchProducts();
   }, []);
 
+  function onAddButtonClick() {
+    navigate("/products/add");
+  }
+
   return (
     <div className="productList">
       {products.map((product) => (
@@ -35,12 +40,13 @@ function ProductList() {
           {product.name}
         </Link>
       ))}
-      <Link to="add">
-        <button className="productList__addButton">
-          <PackagePlus />
-          Add new product
-        </button>
-      </Link>
+      <button
+        className="productList__addButton"
+        onClick={() => onAddButtonClick()}
+      >
+        <PackagePlus />
+        Add new product
+      </button>
     </div>
   );
 }

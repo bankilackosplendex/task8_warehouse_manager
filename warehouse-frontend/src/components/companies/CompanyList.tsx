@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./CompanyList.scss";
 import { useEffect, useState } from "react";
 import { Company } from "../../types/CompanyType.tsx";
@@ -6,6 +6,7 @@ import { getCompanies } from "../../services/companyService.tsx";
 import { Briefcase, SquarePlus } from "lucide-react";
 
 function CompanyList() {
+  const navigate = useNavigate();
   const [companies, setCompanies] = useState<Company[]>([]);
   const [error, setError] = useState("");
 
@@ -23,6 +24,10 @@ function CompanyList() {
     fetchCompanies();
   }, []);
 
+  function onAddButtonClick() {
+    navigate("/companies/add");
+  }
+
   return (
     <div className="companyList">
       {companies.map((company) => (
@@ -36,7 +41,10 @@ function CompanyList() {
         </Link>
       ))}
       <Link to="/companies/add">
-        <button className="companyList__addButton">
+        <button
+          className="companyList__addButton"
+          onClick={() => onAddButtonClick()}
+        >
           <SquarePlus />
           Add new company
         </button>

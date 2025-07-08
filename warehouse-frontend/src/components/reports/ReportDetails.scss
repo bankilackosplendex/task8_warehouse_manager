@@ -49,10 +49,10 @@
       padding-top: 0.3rem;
     }
 
-    &__deleteButton{
+    &__deleteButton {
       background-color: $error-color;
 
-      &:hover{
+      &:hover {
         color: $error-color;
         border-color: $error-color;
       }

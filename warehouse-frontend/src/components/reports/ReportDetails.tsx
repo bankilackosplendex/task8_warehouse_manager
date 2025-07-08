@@ -17,8 +17,8 @@ function ReportDetails() {
         try {
           //const data = await getReportById(+reportId);
           const data = {
-            name: "Daily report"
-          }
+            name: "Daily report",
+          };
           setReport(data);
         } catch (err: any) {
           const msg = err.response?.data?.message || "Couldn't load company";

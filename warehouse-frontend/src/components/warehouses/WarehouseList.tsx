@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./WarehouseList.scss";
 import { getWarehouses } from "../../services/warehouseService.tsx";
@@ -6,6 +6,7 @@ import { Warehouse } from "../../types/WarehouseType.tsx";
 import { SquarePlus, WarehouseIcon } from "lucide-react";
 
 function WarehouseList() {
+  const navigate = useNavigate();
   const [warehouses, setWarehouses] = useState<Warehouse[]>([]);
   const [error, setError] = useState("");
 
@@ -23,6 +24,10 @@ function WarehouseList() {
     fetchWarehouses();
   }, []);
 
+  function onAddButtonClick() {
+    navigate("/warehouses/add");
+  }
+
   return (
     <div className="warehouseList">
       {warehouses.map((warehouse) => (
@@ -35,12 +40,13 @@ function WarehouseList() {
           {warehouse.name}
         </Link>
       ))}
-      <Link to="/add">
-        <button className="warehouseList__addButton">
-          <SquarePlus />
-          Add new warehouse
-        </button>
-      </Link>
+      <button
+        className="warehouseList__addButton"
+        onClick={() => onAddButtonClick()}
+      >
+        <SquarePlus />
+        Add new warehouse
+      </button>
     </div>
   );
 }

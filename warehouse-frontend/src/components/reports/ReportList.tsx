@@ -12,10 +12,12 @@ function ReportList() {
   return (
     <div className="report-list">
       {reports.map((report) => (
-        <div className="report-list__item" key={report.id}>
-          <Link to={`/reports/${report.id}`} className="report-list__item__link">
-            {report.name}
-          </Link>
+        <Link
+          to={`/reports/${report.id}`}
+          className="report-list__item"
+          key={report.id}
+        >
+          <div className="report-list__item__name">{report.name}</div>
           <button
             className="report-list__item__downloadButton"
             onClick={(e) => {
@@ -24,7 +26,7 @@ function ReportList() {
           >
             <Download />
           </button>
-        </div>
+        </Link>
       ))}
     </div>
   );

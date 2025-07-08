@@ -80,7 +80,6 @@
   font-family: $font-family;
   height: 1.5rem;
   font-size: map-get($font-sizes, "small");
-  width: calc(100% - 2 * ($spacing-md));
 }
 
 @mixin itemHoverBase {
