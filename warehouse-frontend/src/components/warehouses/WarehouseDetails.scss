@@ -52,8 +52,18 @@
           @include iconContainer;
         }
 
+        &__name{
+          flex: 1.2;
+        }
+
         &__quantity{
-          margin-right: -6rem;
+          flex: 1;
+          justify-content: center;
+        }
+
+        &__date{
+          flex: 1;
+          justify-content: flex-end;
         }
       }
 
@@ -70,17 +80,17 @@
         }
 
         &__name{
-          flex: 1.5;
+          flex: 1.2;
         }
 
         &__quantity {
-          flex: 1;
           @include flexboxRow;
+          flex: 1;
           align-items: center;
           gap: 0.3rem;
         }
 
-        &__date {
+        &__date{
           flex: 1;
         }
       }
