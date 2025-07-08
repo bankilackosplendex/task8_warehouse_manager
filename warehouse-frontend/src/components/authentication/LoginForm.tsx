@@ -6,7 +6,7 @@ import { AuthContext } from "../../contexts/AuthContext.tsx";
 import { jwtDecode } from "jwt-decode";
 import { DecodedAccessToken } from "../../types/DecodedAccessTokenType.tsx";
 import { useNavigate } from "react-router-dom";
-import { KeyRound, Mail } from "lucide-react";
+import { KeyRound, LogIn, Mail } from "lucide-react";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -73,6 +73,7 @@ function LoginForm() {
       {error && <div className="loginForm__error">{error}</div>}
 
       <button className="loginForm__button" type="submit">
+        <LogIn />
         Login
       </button>
     </form>

@@ -1,4 +1,4 @@
-import { KeyRound, LetterText, Mail } from "lucide-react";
+import { KeyRound, LetterText, Mail, UserPlus } from "lucide-react";
 import "./RegisterForm.scss";
 
 function RegisterForm() {
@@ -7,7 +7,7 @@ function RegisterForm() {
     <form className="registerForm" method="post">
       {/* Email */}
       <label className="registerForm__emailLabel" htmlFor="email">
-        <Mail className="registerForm__emailLabel__icon"/>
+        <Mail className="registerForm__emailLabel__icon" />
         Email
       </label>
       <input
@@ -18,7 +18,7 @@ function RegisterForm() {
       />
       {/* Name */}
       <label className="registerForm__nameLabel" htmlFor="name">
-        <LetterText className="registerForm__nameLabel__icon"/>
+        <LetterText className="registerForm__nameLabel__icon" />
         Name
       </label>
       <input
@@ -29,7 +29,7 @@ function RegisterForm() {
       />
       {/* Password */}
       <label className="registerForm__passwordLabel" htmlFor="password">
-        <KeyRound className="registerForm__passwordLabel__icon"/>
+        <KeyRound className="registerForm__passwordLabel__icon" />
         Password
       </label>
       <input
@@ -39,6 +39,7 @@ function RegisterForm() {
         required
       />
       <button className="registerForm__button" type="submit">
+        <UserPlus />
         Register
       </button>
     </form>

@@ -1,24 +1,25 @@
 @import "../../style/variables.scss";
 @import "../../style/mixins.scss";
 
-.registerForm{
-    @include formBase;
-    
+.registerForm {
+  @include formBase;
 
-    &__emailLabel,
-    &__nameLabel,
-    &__passwordLabel{
-        @include inputLabelBase;
-        @include iconContainer;
-    }
+  &__emailLabel,
+  &__nameLabel,
+  &__passwordLabel {
+    @include inputLabelBase;
+    @include iconContainer;
+  }
 
-    &__emailField,
-    &__nameField,
-    &__passwordField{
-        @include inputFieldBase;
-    }
+  &__emailField,
+  &__nameField,
+  &__passwordField {
+    @include inputFieldBase;
+  }
 
-    &__button{
-        @include buttonBase;
-    }
+  &__button {
+    @include buttonBase;
+    @include iconContainer;
+    justify-content: center;
+  }
 }
