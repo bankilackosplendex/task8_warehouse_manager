@@ -20,7 +20,12 @@ export class CompaniesService {
     const company = await this.prisma.company.findUnique({
       where: { id },
       include: {
-        movements: true,
+        movements: {
+          include: {
+            product: true,
+            warehouse: true,
+          },
+        },
       },
     });
     if (!company)
