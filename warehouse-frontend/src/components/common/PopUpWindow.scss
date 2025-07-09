@@ -2,7 +2,7 @@
 @import "../../Style/mixins";
 
 .popUpWindow {
-  border-radius: 0.8rem;
+  border-radius: $border-radius;
   background-color: $third-color;
   padding: 2rem;
   text-align: center;

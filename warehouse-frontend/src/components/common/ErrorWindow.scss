@@ -1,0 +1,48 @@
+@import "../../style/mixins.scss";
+@import "../../style/variables.scss";
+
+.errorWindow {
+  @include flexboxColumn;
+  align-items: center;
+  border-radius: $border-radius;
+  background-color: $third-color;
+  padding: 1rem;
+  padding-top: 0rem;
+  width: 28rem;
+  margin: 3rem auto;
+  border: 0.2rem solid $error-color;
+
+  &__text {
+    font-size: map-get($font-sizes, "large");
+    font-family: $font-family;
+    color: $error-color;
+    margin-top: 2rem;
+  }
+
+  &__icon {
+    color: $error-color;
+    width: 8rem;
+    height: 8rem;
+  }
+
+  &__buttonContainer {
+    @include flexboxRow;
+    justify-content: center;
+    gap: 2rem;
+
+    &__backButton,
+    &__homeButton,
+    &__loginButton {
+      @include buttonBase;
+      background-color: $error-color;
+      padding-top: 0.4rem;
+      width: 2.5rem;
+
+      &:hover {
+        color: $error-color;
+        background-color: transparent;
+        border-color: $error-color;
+      }
+    }
+  }
+}

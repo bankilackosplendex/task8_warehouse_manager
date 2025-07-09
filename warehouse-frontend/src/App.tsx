@@ -13,6 +13,7 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage.tsx";
 import { Role } from "./enums/UserRoleEnum.tsx";
 import ProtectedRoute from "./components/authorization/ProtectedRoute.tsx";
 import UsersPage from "./pages/UsersPage/UsersPage.tsx";
+import ErrorWindow from "./components/common/ErrorWindow.tsx";
 
 function App() {
   return (
@@ -46,6 +47,8 @@ function App() {
         <Route path="/registration" element={<RegisterPage />} />
         {/* --- USERS PAGE --- */}
         <Route path="/users" element={<UsersPage />} />
+        {/* NOT FOUND PAGE */}
+        <Route path="/*" element={<ErrorWindow text={"404 Not found"} statusCode={404}/>} />
       </Routes>
     </div>
   );

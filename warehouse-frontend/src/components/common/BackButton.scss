@@ -1,7 +1,7 @@
 @import "../../style/mixins.scss";
 @import "../../style/variables.scss";
 
-.back-button {
+.backButton {
   @include buttonBase;
   @include flexboxCenter;
   align-items: center;

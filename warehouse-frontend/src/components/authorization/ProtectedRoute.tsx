@@ -1,5 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth.tsx";
+import PopUpWindow from "../common/PopUpWindow.tsx";
+import ErrorWindow from "../common/ErrorWindow.tsx";
 
 const RequireAuth = ({ allowedRoles, children }) => {
   const { user } = useAuth();
@@ -9,7 +11,7 @@ const RequireAuth = ({ allowedRoles, children }) => {
   }
 
   if (!allowedRoles.includes(user.role)) {
-    return <h2>Access Denied</h2>;
+    return <ErrorWindow text="Access Denied" statusCode={401}/>;
   }
 
   return children;
