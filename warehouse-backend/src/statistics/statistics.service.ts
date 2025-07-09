@@ -8,7 +8,7 @@ export class StatisticsService {
   async topSuppliers() {
     return this.prisma.stockMovement.groupBy({
       by: ['companyId'],
-      where: { movementType: 'IMPORT', companyId: { not: null } },
+      where: { movementType: 'EXPORT', companyId: { not: null } },
       _count: true,
       orderBy: { _count: { id: 'desc' } },
       take: 5,
@@ -18,7 +18,7 @@ export class StatisticsService {
   async topCustomers() {
     return this.prisma.stockMovement.groupBy({
       by: ['companyId'],
-      where: { movementType: 'EXPORT', companyId: { not: null } },
+      where: { movementType: 'IMPORT', companyId: { not: null } },
       _count: true,
       orderBy: { _count: { id: 'desc' } },
       take: 5,
