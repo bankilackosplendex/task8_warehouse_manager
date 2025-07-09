@@ -17,7 +17,17 @@ export class WarehousesService {
   }
 
   async findOne(id: number) {
-    const warehouse = await this.prisma.warehouse.findUnique({ where: { id } });
+    const warehouse = await this.prisma.warehouse.findUnique({
+      where: { id },
+      include: {
+        movements: {
+          include: {
+            product: true,
+            warehouse: true,
+          },
+        },
+      },
+    });
     if (!warehouse)
       throw new NotFoundException(`Warehouse with id ${id} not found`);
     return warehouse;
@@ -37,11 +47,11 @@ export class WarehousesService {
   }
 
   async getWarehouseProducts(warehouseId: number) {
-  return this.prisma.warehouseProduct.findMany({
-    where: { warehouseId },
-    include: {
-      product: true,
-    },
-  });
-}
+    return this.prisma.warehouseProduct.findMany({
+      where: { warehouseId },
+      include: {
+        product: true,
+      },
+    });
+  }
 }
