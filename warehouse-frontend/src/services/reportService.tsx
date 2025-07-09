@@ -1,53 +1,35 @@
-import { Report } from "../types/ReportType.tsx";
 import api from "./api.tsx";
 import { getAccessToken } from "./authService.tsx";
 
-export const getReports = async () => {
+export const downloadWarehouseReportById = async (warehouseId: number) => {
   const token = getAccessToken();
-  const res = await api.get("/reports", {
-  headers: {
-    Authorization: `Bearer ${token}`,
-  },
-});
+  const res = await api.get(`/reports/warehouse/${warehouseId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    responseType: "blob",
+  });
+
+  const blob = new Blob([res.data], { type: "application/pdf" });
+  const url = window.URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = window.URL.createObjectURL(blob);
+  link.download = `warehouse-report-${warehouseId}.pdf`;
+  link.click();
+
+  setTimeout(() => window.URL.revokeObjectURL(url), 1000);
+
   return res.data;
 };
 
-export const getReportById = async (id: number) => {
+export const getWarehouseReportById = async (warehouseId: number) => {
   const token = getAccessToken();
-  const res = await api.get(`/reports/${id}`, {
+  const res = await api.get(`/reports/warehouse/${warehouseId}`, {
     headers: {
       Authorization: `Bearer ${token}`,
-    }
+    },
+    responseType: "blob",
   });
-  return res.data;
-};
 
-export const createReport = async (data: Report) => {
-  const token = getAccessToken();
-  const res = await api.post("/reports", data, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    }
-  });
-  return res.data;
-};
-
-export const updateReport = async (id: number, data: Report) => {
-  const token = getAccessToken();
-  const res = await api.put(`/reports/${id}`, data, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    }
-  });
-  return res.data;
-};
-
-export const deleteReport = async (id: number) => {
-  const token = getAccessToken();
-  const res = await api.delete(`/reports/${id}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    }
-  });
   return res.data;
 };

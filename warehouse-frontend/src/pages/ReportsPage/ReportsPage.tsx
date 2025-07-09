@@ -3,26 +3,46 @@ import ReportList from "../../components/reports/ReportList.tsx";
 import BackButton from "../../components/common/BackButton.tsx";
 import { Routes, Route } from "react-router-dom";
 import ReportDetails from "../../components/reports/ReportDetails.tsx";
-import { LayoutList } from "lucide-react";
+import { FileText, LayoutList } from "lucide-react";
 
 function ReportsPage() {
   return (
     // Reports page
     <div className="reportsPage">
-      <div className="reportsPage__header">
-        <BackButton />
-        {/* Title */}
-        <h2 className="reportsPage__header__title">
-          <LayoutList />
-          Reports
-        </h2>
-      </div>
       {/* Routes in /reports */}
       <Routes>
         {/* Report list */}
-        <Route path="/" element={<ReportList />} />
+        <Route
+          path="/"
+          element={
+            <>
+              {/* Page header */}
+              <div className="reportsPage__header">
+                <BackButton />
+                {/* Title */}
+                <h2 className="reportsPage__header__title">
+                  <LayoutList />
+                  Reports
+                </h2>
+              </div>
+              {/* List component */}
+              <ReportList />
+            </>
+          }
+        />
         {/* Report details */}
-        <Route path="/:reportId" element={<ReportDetails />} />
+        <Route path="/:reportId" element={<>
+        {/* Page header */}
+              <div className="reportsPage__header">
+                <BackButton />
+                {/* Title */}
+                <h2 className="reportsPage__header__title">
+                  <FileText />
+                  Report PDF preview
+                </h2>
+              </div>
+              {/* Details component */}
+        <ReportDetails /></>} />
       </Routes>
     </div>
   );

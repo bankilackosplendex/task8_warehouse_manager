@@ -41,7 +41,8 @@
     margin-top: 2rem;
 
     &__deleteButton,
-    &__modifyButton {
+    &__modifyButton,
+    &__downloadButton {
       @include buttonBase;
       margin: 0rem;
       width: 2.8rem;

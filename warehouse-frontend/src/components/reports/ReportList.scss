@@ -13,28 +13,51 @@
       @include itemHoverBase;
     }
 
-    &__name{
+    &__name {
       @include iconContainer;
     }
 
-    &__downloadButton {
-      @include buttonBase;
-      position: absolute;
-      right: 1rem;
-      top: 50%;
-      transform: translateY(-50%);
-      margin: 0;
-      z-index: 1;
-      background-color: $primary-color;
-      color: $third-color;
-      border: 0.15rem solid $primary-color;
-      border-radius: $border-radius;
-      padding-top: 0.3rem;
-
-      &:hover {
-        color: $primary-color;
-        border: 0.15rem solid $third-color;
+    &__optionsContainer {
+      &__downloadButton {
+        @include buttonBase;
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        margin: 0;
+        z-index: 1;
+        background-color: $primary-color;
+        color: $third-color;
+        border: 0.15rem solid $primary-color;
         border-radius: $border-radius;
+        padding-top: 0.3rem;
+
+        &:hover {
+          color: $primary-color;
+          border: 0.15rem solid $third-color;
+          border-radius: $border-radius;
+        }
+      }
+
+      &__previewButton {
+        @include buttonBase;
+        position: absolute;
+        right: 4rem;
+        top: 50%;
+        transform: translateY(-50%);
+        margin: 0;
+        z-index: 1;
+        background-color: $primary-color;
+        color: $third-color;
+        border: 0.15rem solid $primary-color;
+        border-radius: $border-radius;
+        padding-top: 0.3rem;
+
+        &:hover {
+          color: $primary-color;
+          border: 0.15rem solid $third-color;
+          border-radius: $border-radius;
+        }
       }
     }
   }
