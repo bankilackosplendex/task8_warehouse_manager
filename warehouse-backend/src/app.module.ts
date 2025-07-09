@@ -9,6 +9,7 @@ import { CompaniesModule } from './companies/companies.module';
 import { StockmovementsModule } from './stockmovements/stockmovements.module';
 import { IamModule } from './iam/iam.module';
 import { WarehouseproductModule } from './warehouseproduct/warehouseproduct.module';
+import { ReportsModule } from './reports/reports.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { WarehouseproductModule } from './warehouseproduct/warehouseproduct.modu
     StockmovementsModule,
     IamModule,
     WarehouseproductModule,
+    ReportsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
