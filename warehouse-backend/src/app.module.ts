@@ -10,6 +10,7 @@ import { StockmovementsModule } from './stockmovements/stockmovements.module';
 import { IamModule } from './iam/iam.module';
 import { WarehouseproductModule } from './warehouseproduct/warehouseproduct.module';
 import { ReportsModule } from './reports/reports.module';
+import { StatisticsModule } from './statistics/statistics.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { ReportsModule } from './reports/reports.module';
     IamModule,
     WarehouseproductModule,
     ReportsModule,
+    StatisticsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
