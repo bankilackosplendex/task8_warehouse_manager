@@ -181,7 +181,9 @@ function WarehouseDetails() {
         <div className="warehouseDetails__movements warehouseDetails__empty">
           <Truck className="warehouseDetails__movements__icon" />
           <p className="warehouseDetails__movements__key">Movements: </p>
-          <p className="warehouseDetails__movements__value">This warehouse has no movements</p>
+          <p className="warehouseDetails__movements__value">
+            This warehouse has no movements
+          </p>
         </div>
       )}
       <div className="warehouseDetails__optionsContainer">
