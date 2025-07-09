@@ -87,17 +87,6 @@ function StockMovementsForm({ type }: { type: FormType }) {
   return (
     // StockMovements form
     <form className="stockMovementsForm" method="post">
-      {/* Title */}
-      {type == FormType.CREATE && (
-        <>
-          <h2 className="stockMovementsForm__title">Add new stockmovement</h2>
-        </>
-      )}
-      {type == FormType.MODIFY && (
-        <>
-          <h2 className="stockMovementsForm__title">Update stockmovement</h2>
-        </>
-      )}
       {/* Product */}
       <label className="stockMovementsForm__productLabel" htmlFor="product">
         <Package className="stockMovementsForm__productLabel__icon" />

@@ -4,10 +4,13 @@
   @include pageContainer;
 
   &__header {
-    width: 80%;
+    width: 90%;
+    max-width: 30rem;
 
     &__title {
       @include pageTitle;
+      @include iconContainer;
+      justify-content: center;
     }
   }
 }

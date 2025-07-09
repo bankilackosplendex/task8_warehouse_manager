@@ -38,18 +38,6 @@ function ProductForm({ type }: { type: FormType }) {
   return (
     // Product form
     <form className="productForm" method="post">
-      {/* Title */}
-      {type == FormType.CREATE && (
-        <>
-          <h2 className="productForm__title">Add new product</h2>
-        </>
-      )}
-      {type == FormType.MODIFY && (
-        <>
-          <h2 className="productForm__title">Update product</h2>
-        </>
-      )}
-
       {/* Name */}
       <label className="productForm__nameLabel" htmlFor="name">
         <Tag className="productForm__nameLabel__icon" />

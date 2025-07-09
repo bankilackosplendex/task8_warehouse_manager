@@ -5,29 +5,95 @@ import ProductForm from "../../components/products/ProductForm.tsx";
 import ProductDetails from "../../components/products/ProductDetails.tsx";
 import { Link, Route, Routes } from "react-router-dom";
 import { FormType } from "../../enums/FormTypeEnum.tsx";
-import { PackagePlus } from "lucide-react";
+import {
+  ClipboardList,
+  LayoutList,
+  PackagePlus,
+  Pencil,
+  SquarePlus,
+} from "lucide-react";
 
 function ProductsPage() {
   return (
     // Proudcts page
     <div className="productsPage">
-      <div className="productsPage__header">
-        <BackButton />
-        {/* Title */}
-        <h2 className="productsPage__header__title">Products</h2>
-      </div>
       {/* Routes in /products */}
       <Routes>
         {/* Product list */}
-        <Route path="/" element={<ProductList />} />
+        <Route
+          path="/"
+          element={
+            <>
+              {/* Page header */}
+              <div className="productsPage__listHeader">
+                <BackButton />
+                {/* Title */}
+                <h2 className="productsPage__listHeader__title">
+                  <LayoutList />
+                  Products
+                </h2>
+              </div>
+              {/* List component */}
+              <ProductList />
+            </>
+          }
+        />
         {/* Product details */}
-        <Route path="add" element={<ProductForm type={FormType.CREATE} />} />
+        <Route
+          path=":productId"
+          element={
+            <>
+              {/* Page header */}
+              <div className="productsPage__detailsHeader">
+                <BackButton />
+                {/* Title */}
+                <h2 className="productsPage__detailsHeader__title">
+                  <ClipboardList />
+                  Product details
+                </h2>
+              </div>
+              {/* Deatils component */}
+              <ProductDetails />
+            </>
+          }
+        />
         {/* Product create form */}
-        <Route path=":productId" element={<ProductDetails />} />
+        <Route
+          path="add"
+          element={
+            <>
+              {/* Page header */}
+              <div className="productsPage__formHeader">
+                <BackButton />
+                {/* Title */}
+                <h2 className="productsPage__formHeader__title">
+                  <SquarePlus />
+                  Add new product
+                </h2>
+              </div>
+              {/* Form component */}
+              <ProductForm type={FormType.CREATE} />
+            </>
+          }
+        />
         {/* Product upadte form */}
         <Route
           path="modify/:productId"
-          element={<ProductForm type={FormType.MODIFY} />}
+          element={
+            <>
+              {/* Page header */}
+              <div className="productsPage__formHeader">
+                <BackButton />
+                {/* Title */}
+                <h2 className="productsPage__formHeader__title">
+                  <Pencil />
+                  Modify product
+                </h2>
+              </div>
+              {/* Form component */}
+              <ProductForm type={FormType.MODIFY} />
+            </>
+          }
         />
       </Routes>
     </div>

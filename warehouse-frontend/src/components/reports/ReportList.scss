@@ -1,7 +1,7 @@
 @import "../../style/variables";
 @import "../../style/mixins";
 
-.report-list {
+.reportList {
   @include listBase;
 
   &__item {
@@ -11,6 +11,10 @@
 
     &:hover {
       @include itemHoverBase;
+    }
+
+    &__name{
+      @include iconContainer;
     }
 
     &__downloadButton {

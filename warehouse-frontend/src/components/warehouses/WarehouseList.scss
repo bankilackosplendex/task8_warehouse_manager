@@ -6,8 +6,7 @@
 
   &__item {
     @include itemBase;
-    @include flexboxRow;
-    align-items: center;
+    @include iconContainer;
     gap: 1rem;
 
     &:hover {

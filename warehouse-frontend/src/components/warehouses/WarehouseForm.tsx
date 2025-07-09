@@ -51,17 +51,6 @@ function WarehouseForm({ type }: { type: FormType }) {
   return (
     // Warehouse form
     <form className="warehouseForm" method="post">
-      {/* Title */}
-      {type == FormType.CREATE && (
-        <>
-          <h2 className="warehouseForm__title">Add new warehouse</h2>
-        </>
-      )}
-      {type == FormType.MODIFY && (
-        <>
-          <h2 className="warehouseForm__title">Update warehouse</h2>
-        </>
-      )}
       {/* Name */}
       <label className="warehouseForm__nameLabel" htmlFor="name">
         <Tag className="warehouseForm__nameLabel__icon"/>

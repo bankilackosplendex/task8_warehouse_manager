@@ -48,20 +48,9 @@ function CompanyForm({ type }: { type: FormType }) {
   return (
     // Company form
     <form className="companyForm" method="post">
-      {/* Title */}
-      {type == FormType.CREATE && (
-        <>
-          <h2 className="warehouseForm__title">Add new company</h2>
-        </>
-      )}
-      {type == FormType.MODIFY && (
-        <>
-          <h2 className="warehouseForm__title">Update company</h2>
-        </>
-      )}
       {/* Name */}
       <label className="companyForm__nameLabel" htmlFor="name">
-        <Tag className="companyForm__nameLabel__icon"/>
+        <Tag className="companyForm__nameLabel__icon" />
         Name
       </label>
       <input

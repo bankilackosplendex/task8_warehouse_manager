@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "./ReportList.scss";
-import { Download } from "lucide-react";
+import { Download, FileText } from "lucide-react";
 
 function ReportList() {
   const reports = [
@@ -10,16 +10,18 @@ function ReportList() {
   ];
 
   return (
-    <div className="report-list">
+    <div className="reportList">
       {reports.map((report) => (
         <Link
           to={`/reports/${report.id}`}
-          className="report-list__item"
+          className="reportList__item"
           key={report.id}
         >
-          <div className="report-list__item__name">{report.name}</div>
+          <div className="reportList__item__name">
+            <FileText />
+            {report.name}</div>
           <button
-            className="report-list__item__downloadButton"
+            className="reportList__item__downloadButton"
             onClick={(e) => {
               e.stopPropagation();
             }}

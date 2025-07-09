@@ -135,7 +135,7 @@
 // --- DETAILS ---
 
 @mixin detailsBase {
-  background-color: white;
+  background-color: $third-color;
   border: 1px solid #ccc;
   padding: $spacing-md;
   border-radius: $border-radius;
@@ -147,6 +147,7 @@
   font-size: map-get($font-sizes, "small");
   width: calc(80% - 2 * ($spacing-md));
   margin: 3rem auto;
+  margin-top: 0rem;
 }
 
 @mixin detailsKeyBase {

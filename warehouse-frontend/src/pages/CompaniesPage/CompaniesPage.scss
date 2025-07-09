@@ -3,11 +3,25 @@
 .companiesPage {
   @include pageContainer;
 
-  &__header {
+  &__listHeader ,
+  &__detailsHeader {
     width: 80%;
 
     &__title {
       @include pageTitle;
+      @include iconContainer;
+      justify-content: center;
+    }
+  }
+
+  &__formHeader {
+    width: 90%;
+    max-width: 30rem;
+
+    &__title {
+      @include pageTitle;
+      @include iconContainer;
+      justify-content: center;
     }
   }
 }
