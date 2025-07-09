@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import PDFDocument from 'pdfkit';
+import * as PDFDocument from 'pdfkit';
 import { Response } from 'express';
 import { DatabaseService } from '../database/database.service';
 
@@ -35,23 +35,46 @@ export class ReportsService {
     );
     doc.pipe(res);
 
-    doc
-      .fontSize(18)
-      .text(`Warehouse report: ${warehouse.name}`, { underline: true });
-    doc.moveDown().fontSize(14).text('Products:');
+    // Title
+    doc.fontSize(20).text(`Warehouse Report`, { align: 'center' });
+    doc.moveDown(0.5);
+    doc.fontSize(16).text(`Warehouse: ${warehouse.name}`, { align: 'center' });
+    doc.moveDown(0.5);
+    doc.fontSize(12).text(`Generated at: ${new Date().toLocaleString()}`, { align: 'center' });
+    doc.moveDown(2);
 
-    warehouse.products.forEach((stockItem) => {
-      doc.text(
-        `- ${stockItem.product.name}: ${stockItem.quantity} ${stockItem.product.quantityType}`,
-      );
-    });
+    // Products section
+    doc.fontSize(14).text('Products in stock', { underline: true });
+    doc.moveDown(0.5);
+    if (warehouse.products.length === 0) {
+      doc.text('No products found.');
+    } else {
+      warehouse.products.forEach((item) => {
+        doc
+          .fontSize(12)
+          .text(`• ${item.product.name}`, { continued: true })
+          .text(`  | Quantity: ${item.quantity}`, { continued: true })
+          .text(`  ${item.product.quantityType}`);
+      });
+    }
 
-    doc.moveDown().fontSize(14).text('Stockmovements:');
-    warehouse.movements.forEach((movement) => {
-      doc.text(
-        `- ${movement.createdAt.toDateString()} | ${movement.movementType} | ${movement.product.name} (${movement.quantity}) | ${movement.company?.name ?? 'N/A'}`,
-      );
-    });
+    doc.moveDown(1.5);
+
+    // Movements section
+    doc.fontSize(14).text('Stock Movements', { underline: true });
+    doc.moveDown(0.5);
+    if (warehouse.movements.length === 0) {
+      doc.text('No stock movements found.');
+    } else {
+      warehouse.movements.forEach((movement) => {
+        const company = movement.company?.name ?? 'N/A';
+        doc
+          .fontSize(12)
+          .text(
+            `• ${movement.createdAt.toLocaleDateString()} | ${movement.movementType} | ${movement.product.name} (${movement.quantity}) | ${company}`,
+          );
+      });
+    }
 
     doc.end();
   }
