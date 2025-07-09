@@ -10,9 +10,9 @@ import ReportsPage from "./pages/ReportsPage/ReportsPage.tsx";
 import StatisticsPage from "./pages/StatisticsPage/StatisticsPage.tsx";
 import LoginPage from "./pages/LoginPage/LoginPage.tsx";
 import RegisterPage from "./pages/RegisterPage/RegisterPage.tsx";
-import UserList from "./components/users/UserList.tsx";
 import { Role } from "./enums/UserRoleEnum.tsx";
 import ProtectedRoute from "./components/authorization/ProtectedRoute.tsx";
+import UsersPage from "./pages/UsersPage/UsersPage.tsx";
 
 function App() {
   return (
@@ -45,7 +45,7 @@ function App() {
         {/* --- REGISTRATION PAGE --- */}
         <Route path="/registration" element={<RegisterPage />} />
         {/* --- USERS PAGE --- */}
-        <Route path="/users" element={<UserList />} />
+        <Route path="/users" element={<UsersPage />} />
       </Routes>
     </div>
   );

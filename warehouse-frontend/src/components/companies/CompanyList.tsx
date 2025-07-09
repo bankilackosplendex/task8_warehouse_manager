@@ -40,15 +40,13 @@ function CompanyList() {
           {company.name}
         </Link>
       ))}
-      <Link to="/companies/add">
-        <button
-          className="companyList__addButton"
-          onClick={() => onAddButtonClick()}
-        >
-          <SquarePlus />
-          Add new company
-        </button>
-      </Link>
+      <button
+        className="companyList__addButton"
+        onClick={() => onAddButtonClick()}
+      >
+        <SquarePlus />
+        Add new company
+      </button>
     </div>
   );
 }

@@ -1,0 +1,22 @@
+@import "../../style/variables";
+@import "../../style/mixins";
+
+.userList {
+  @include listBase;
+
+  &__item {
+    @include itemBase;
+    @include flexboxRow;
+    align-items: center;
+    justify-content: space-between;
+
+    &__email {
+      @include iconContainer;
+      gap: 1rem;
+    }
+
+    &:hover {
+      @include itemHoverBase;
+    }
+  }
+}
