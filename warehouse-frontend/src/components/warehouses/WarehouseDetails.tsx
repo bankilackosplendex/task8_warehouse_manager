@@ -16,6 +16,7 @@ import {
   CalendarDays,
   Tag,
   Container,
+  ArrowLeftRight,
 } from "lucide-react";
 import Backdrop from "../common/Backdrop.tsx";
 import PopUpWindow from "../common/PopUpWindow.tsx";
@@ -77,63 +78,112 @@ function WarehouseDetails() {
           {warehouse?.description}
         </p>
       </div>
-      <div className="warehouseDetails__products">
-        {warehouseProducts.length > 0 ? (
-          <>
-            <div className="warehouseDetails__products__key">
-              <Package className="warehouseDetails__products__key__icon" />
-              <p className="warehouseDetails__products__key__text">Products:</p>
-            </div>
-            <div className="warehouseDetails__products__value">
-              <div className="warehouseDetails__products__value__header">
-                <p className="warehouseDetails__products__value__header__name">
-                  <Tag />
-                  Name
-                </p>
-                <p className="warehouseDetails__products__value__header__quantity">
-                  <Container />
-                  Quantity
-                </p>
-                <p className="warehouseDetails__products__value__header__date">
-                  <CalendarDays />
-                  Registered
-                </p>
-              </div>
-              {warehouseProducts.map((warehouseproduct) => (
-                <Link
-                  className="warehouseDetails__products__value__item"
-                  key={warehouseproduct.id}
-                  to={`/products/${warehouseproduct.product.id}`}
-                >
-                  <p className="warehouseDetails__products__value__item__name">
-                    {warehouseproduct.product.name}
-                  </p>
-                  <div className="warehouseDetails__products__value__item__quantity">
-                    <p>{warehouseproduct.quantity}</p>
-                    <p>{warehouseproduct.product.quantityType}</p>
-                  </div>
-                  <p>
-                    {new Date(warehouseproduct.createdAt).toLocaleDateString()}
-                  </p>
-                </Link>
-              ))}
-            </div>
-          </>
-        ) : (
+      {warehouseProducts.length > 0 ? (
+        <div className="warehouseDetails__products">
           <div className="warehouseDetails__products__key">
             <Package className="warehouseDetails__products__key__icon" />
             <p className="warehouseDetails__products__key__text">Products:</p>
-            <p className="warehouseDetails__products__value">This warehouse is empty</p>
           </div>
-        )}
-      </div>
-      <div className="warehouseDetails__movements">
-        <Truck className="warehouseDetails__movements__icon" />
-        <p className="warehouseDetails__movements__key">Movements: </p>
-        <p className="warehouseDetails__movements__value">
-          {warehouse.movements}
-        </p>
-      </div>
+          <div className="warehouseDetails__products__value">
+            <div className="warehouseDetails__products__value__header">
+              <p className="warehouseDetails__products__value__header__name">
+                <Tag />
+                Name
+              </p>
+              <p className="warehouseDetails__products__value__header__quantity">
+                <Container />
+                Quantity
+              </p>
+              <p className="warehouseDetails__products__value__header__date">
+                <CalendarDays />
+                Registered
+              </p>
+            </div>
+            {warehouseProducts.map((warehouseproduct) => (
+              <Link
+                className="warehouseDetails__products__value__item"
+                key={warehouseproduct.id}
+                to={`/products/${warehouseproduct.product.id}`}
+              >
+                <p className="warehouseDetails__products__value__item__name">
+                  {warehouseproduct.product.name}
+                </p>
+                <div className="warehouseDetails__products__value__item__quantity">
+                  <p>{warehouseproduct.quantity}</p>
+                  <p>{warehouseproduct.product.quantityType}</p>
+                </div>
+                <p>
+                  {new Date(warehouseproduct.createdAt).toLocaleDateString()}
+                </p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div className="warehouseDetails__products warehouseDetails__empty">
+          <div className="warehouseDetails__products__key">
+            <Package className="warehouseDetails__products__key__icon" />
+            <p className="warehouseDetails__products__key__text">Products:</p>
+          </div>
+          <p className="warehouseDetails__products__value">
+            This warehouse is empty
+          </p>
+        </div>
+      )}
+      {warehouse.movements ? (
+        <div className="warehouseDetails__movements">
+          <div className="warehouseDetails__movements__key">
+            <Truck className="warehouseDetails__movements__key__icon" />
+            <p className="warehouseDetails__movements__key__text">Movements:</p>
+          </div>
+          <div className="warehouseDetails__movements__value">
+            <div className="warehouseDetails__movements__value__header">
+              <p className="warehouseDetails__movements__value__header__product">
+                <Package />
+                Product
+              </p>
+              <p className="warehouseDetails__movements__value__header__quantity">
+                <Container />
+                Quantity
+              </p>
+              <p className="warehouseDetails__movements__value__header__movementType">
+                <ArrowLeftRight />
+                Movement type
+              </p>
+              <p className="warehouseDetails__movements__value__header__date">
+                <CalendarDays />
+                Date
+              </p>
+            </div>
+            {warehouse.movements.map((movement) => (
+              <Link
+                to={`/stockmovements/${movement.id}`}
+                className="warehouseDetails__movements__value__item"
+                key={movement.id}
+              >
+                <div className="warehouseDetails__movements__value__item__product">
+                  {movement.product?.name}
+                </div>
+                <div className="warehouseDetails__movements__value__item__quantity">
+                  {movement.quantity} {movement.product.quantityType}
+                </div>
+                <div className="warehouseDetails__movements__value__item__movementType">
+                  {movement.movementType}
+                </div>
+                <div className="warehouseDetails__movements__value__item__date">
+                  {new Date(movement.createdAt).toLocaleDateString()}
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div className="warehouseDetails__movements warehouseDetails__empty">
+          <Truck className="warehouseDetails__movements__icon" />
+          <p className="warehouseDetails__movements__key">Movements: </p>
+          <p className="warehouseDetails__movements__value">This warehouse has no movements</p>
+        </div>
+      )}
       <div className="warehouseDetails__optionsContainer">
         <button
           className="warehouseDetails__optionsContainer__deleteButton"

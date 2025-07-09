@@ -11,8 +11,7 @@
   }
 
   &__address,
-  &__description,
-  &__movements {
+  &__description{
     @include flexboxRow;
     @include iconContainer;
 
@@ -100,6 +99,101 @@
         }
       }
     }
+  }
+
+  &__movements {
+    @include flexboxColumn;
+
+    &__key {
+      @include iconContainer;
+
+      &__icon{
+        min-height: 1.5rem;
+        min-width: 1.5rem;
+      }
+
+      &__text {
+        @include detailsKeyBase;
+      }
+    }
+
+    &__value {
+      @include flexboxColumn;
+
+      &__header {
+        @include flexboxRow;
+        align-items: center;
+        justify-content: space-between;
+        padding-left: $spacing-md;
+        padding-right: $spacing-md;
+
+        &__product,
+        &__quantity,
+        &__movementType,
+        &__date {
+          @include iconContainer;
+        }
+
+        &__product{
+          flex: 1.2;
+        }
+
+        &__quantity{
+          flex: 1;
+        }
+
+        &__movementType{
+          flex: 1;
+          justify-content: center;
+        }
+
+        &__date{
+          flex: 1;
+          justify-content: flex-end;
+        }
+      }
+
+      &__item {
+        @include itemBase;
+        @include flexboxRow;
+        align-items: center;
+        justify-content: space-between;
+        margin-left: 1rem;
+        margin-bottom: 1rem;
+
+        &:hover {
+          @include itemHoverBase;
+        }
+
+        &__product{
+          flex: 1.2;
+        }
+
+        &__quantity {
+          @include flexboxRow;
+          flex: 1;
+          align-items: center;
+          gap: 0.3rem;
+        }
+
+        &__movementType{
+          flex: 1;
+          @include flexboxRow;
+          justify-content: center;
+        }  
+
+        &__date{
+          flex: 1;
+          @include flexboxRow;
+          justify-content: flex-end;
+        }
+      }
+    }
+  }
+
+  &__empty {
+    @include flexboxRow;
+    gap: 1rem;
   }
 
   &__optionsContainer {

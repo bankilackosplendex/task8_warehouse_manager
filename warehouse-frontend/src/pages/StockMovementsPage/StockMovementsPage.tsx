@@ -6,6 +6,7 @@ import BackButton from "../../components/common/BackButton.tsx";
 import StockMovementDetails from "../../components/stockmovements/StockMovementDetails.tsx";
 import StockMovementsForm from "../../components/stockmovements/StockMovementForm.tsx";
 import { FormType } from "../../enums/FormTypeEnum.tsx";
+import ErrorWindow from "../../components/common/ErrorWindow.tsx";
 
 function StockMovementsPage() {
   return (
@@ -88,6 +89,11 @@ function StockMovementsPage() {
               <StockMovementsForm type={FormType.MODIFY} />
             </>
           }
+        />
+        {/* NOT FOUND PAGE */}
+        <Route
+          path="/*"
+          element={<ErrorWindow text={"404 Not found"} statusCode={404} />}
         />
       </Routes>
     </div>

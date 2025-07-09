@@ -3,6 +3,7 @@ import BackButton from "../../components/common/BackButton.tsx";
 import { LayoutList } from "lucide-react";
 import { Routes, Route } from "react-router-dom";
 import UserList from "../../components/users/UserList.tsx";
+import ErrorWindow from "../../components/common/ErrorWindow.tsx";
 
 function UsersPage() {
   return (
@@ -27,6 +28,11 @@ function UsersPage() {
               <UserList />
             </>
           }
+        />
+        {/* NOT FOUND PAGE */}
+        <Route
+          path="/*"
+          element={<ErrorWindow text={"404 Not found"} statusCode={404} />}
         />
       </Routes>
     </div>

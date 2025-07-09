@@ -4,6 +4,7 @@ import BackButton from "../../components/common/BackButton.tsx";
 import { Routes, Route } from "react-router-dom";
 import ReportDetails from "../../components/reports/ReportDetails.tsx";
 import { FileText, LayoutList } from "lucide-react";
+import ErrorWindow from "../../components/common/ErrorWindow.tsx";
 
 function ReportsPage() {
   return (
@@ -31,8 +32,11 @@ function ReportsPage() {
           }
         />
         {/* Report details */}
-        <Route path="/:reportId" element={<>
-        {/* Page header */}
+        <Route
+          path="/:reportId"
+          element={
+            <>
+              {/* Page header */}
               <div className="reportsPage__header">
                 <BackButton />
                 {/* Title */}
@@ -42,7 +46,15 @@ function ReportsPage() {
                 </h2>
               </div>
               {/* Details component */}
-        <ReportDetails /></>} />
+              <ReportDetails />
+            </>
+          }
+        />
+        {/* NOT FOUND PAGE */}
+        <Route
+          path="/*"
+          element={<ErrorWindow text={"404 Not found"} statusCode={404} />}
+        />
       </Routes>
     </div>
   );

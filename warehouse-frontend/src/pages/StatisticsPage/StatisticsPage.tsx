@@ -6,6 +6,7 @@ import ProtectedRoute from "../../components/authorization/ProtectedRoute.tsx";
 import { Routes, Route } from "react-router-dom";
 import { Role } from "../../enums/UserRoleEnum.tsx";
 import { ChartColumnDecreasing, LayoutList } from "lucide-react";
+import ErrorWindow from "../../components/common/ErrorWindow.tsx";
 
 function StatisticsPage() {
   return (
@@ -50,6 +51,11 @@ function StatisticsPage() {
               </ProtectedRoute>
             </>
           }
+        />
+        {/* NOT FOUND PAGE */}
+        <Route
+          path="/*"
+          element={<ErrorWindow text={"404 Not found"} statusCode={404} />}
         />
       </Routes>
     </div>

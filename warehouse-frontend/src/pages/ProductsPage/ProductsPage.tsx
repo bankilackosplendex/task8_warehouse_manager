@@ -12,6 +12,7 @@ import {
   Pencil,
   SquarePlus,
 } from "lucide-react";
+import ErrorWindow from "../../components/common/ErrorWindow.tsx";
 
 function ProductsPage() {
   return (
@@ -94,6 +95,11 @@ function ProductsPage() {
               <ProductForm type={FormType.MODIFY} />
             </>
           }
+        />
+        {/* NOT FOUND PAGE */}
+        <Route
+          path="/*"
+          element={<ErrorWindow text={"404 Not found"} statusCode={404} />}
         />
       </Routes>
     </div>

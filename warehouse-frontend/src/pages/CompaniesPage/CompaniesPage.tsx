@@ -6,6 +6,7 @@ import CompanyForm from "../../components/companies/CompanyForm.tsx";
 import { Link, Route, Routes } from "react-router-dom";
 import { FormType } from "../../enums/FormTypeEnum.tsx";
 import { ClipboardList, LayoutList, Pencil, SquarePlus } from "lucide-react";
+import ErrorWindow from "../../components/common/ErrorWindow.tsx";
 
 function CompaniesPage() {
   return (
@@ -88,6 +89,11 @@ function CompaniesPage() {
               <CompanyForm type={FormType.MODIFY} />
             </>
           }
+        />
+        {/* NOT FOUND PAGE */}
+        <Route
+          path="/*"
+          element={<ErrorWindow text={"404 Not found"} statusCode={404} />}
         />
       </Routes>
     </div>

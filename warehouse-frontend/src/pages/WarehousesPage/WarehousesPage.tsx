@@ -6,6 +6,7 @@ import WarehouseForm from "../../components/warehouses/WarehouseForm.tsx";
 import { FormType } from "../../enums/FormTypeEnum.tsx";
 import { Route, Routes } from "react-router-dom";
 import { ClipboardList, LayoutList, Pencil, SquarePlus } from "lucide-react";
+import ErrorWindow from "../../components/common/ErrorWindow.tsx";
 
 function WarehousePage() {
   return (
@@ -88,6 +89,11 @@ function WarehousePage() {
               <WarehouseForm type={FormType.MODIFY} />
             </>
           }
+        />
+        {/* NOT FOUND PAGE */}
+        <Route
+          path="/*"
+          element={<ErrorWindow text={"404 Not found"} statusCode={404} />}
         />
       </Routes>
     </div>
