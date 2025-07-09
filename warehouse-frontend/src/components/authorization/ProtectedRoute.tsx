@@ -1,6 +1,5 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth.tsx";
-import { Role } from "../../enums/UserRoleEnum";
 
 const RequireAuth = ({ allowedRoles, children }) => {
   const { user } = useAuth();

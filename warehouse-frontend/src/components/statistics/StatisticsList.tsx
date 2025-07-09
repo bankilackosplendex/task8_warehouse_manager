@@ -1,21 +1,24 @@
 import { Link } from "react-router-dom";
 import "./StatisticsList.scss";
+import { Statistics } from "../../types/StatisticsType.tsx";
+import { ChartColumn } from "lucide-react";
 
 function StatisticsList() {
-  const statistics = [
-    { id: "1", name: "Daily statistics" },
-    { id: "2", name: "Weekly statistics" },
-    { id: "3", name: "Monthly statistics" },
+  const statistics: Statistics[] = [
+    { id: 1, name: "Top Suppliers", urlId: "topsuppliers" },
+    { id: 2, name: "Top Customers", urlId: "topcostumers" },
+    { id: 3, name: "Most Moved Products", urlId: "mostmovedproducts" },
   ];
-  
+
   return (
-    <div className="statistic-list">
+    <div className="statisticsList">
       {statistics.map((statistic) => (
         <Link
-          to={`/statistic/${statistic.id}`}
+          to={`/statistics/${statistic.urlId}`}
           key={statistic.id}
-          className="statistic-list__item"
+          className="statisticsList__item"
         >
+          <ChartColumn />
           {statistic.name}
         </Link>
       ))}

@@ -8,6 +8,8 @@
 
     &__title {
       @include pageTitle;
+      @include iconContainer;
+      justify-content: center;
     }
   }
 }

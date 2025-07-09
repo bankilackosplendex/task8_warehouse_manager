@@ -1,11 +1,12 @@
 @import "../../style/variables";
 @import "../../style/mixins";
 
-.statistic-list {
+.statisticsList {
   @include listBase;
 
   &__item {
     @include itemBase;
+    @include iconContainer;
 
     &:hover {
       @include itemHoverBase;
