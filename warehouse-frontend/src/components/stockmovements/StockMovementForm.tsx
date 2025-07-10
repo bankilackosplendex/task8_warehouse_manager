@@ -38,8 +38,8 @@ function StockMovementsForm({ type }: { type: FormType }) {
 
   useEffect(() => {
     const fetchStockMovement = async () => {
-      if (stockMovementId) {
-        try {
+      try {
+        if (stockMovementId) {
           const data = await getStockMovementById(+stockMovementId);
           if (data.productId)
             data.product = await getProductById(data.productId);
@@ -48,23 +48,19 @@ function StockMovementsForm({ type }: { type: FormType }) {
           if (data.companyId)
             data.company = await getCompanyById(data.companyId);
           setStockMovement(data);
-
-          const productsData = await getProducts();
-          setProducts(productsData);
-
-          const warehousesData = await getWarehouses();
-          setWarehouses(warehousesData);
-
-          const companiesData = await getCompanies();
-          setCompanies(companiesData);
-        } catch (err: any) {
-          const msg =
-            err.response?.data?.message || "Couldn't load stockmovement";
-          setError(msg);
         }
-      } else {
-        const data = {};
-        setStockMovement(data);
+        const productsData = await getProducts();
+        setProducts(productsData);
+
+        const warehousesData = await getWarehouses();
+        setWarehouses(warehousesData);
+
+        const companiesData = await getCompanies();
+        setCompanies(companiesData);
+      } catch (err: any) {
+        const msg =
+          err.response?.data?.message || "Couldn't load stockmovement";
+        setError(msg);
       }
     };
 
