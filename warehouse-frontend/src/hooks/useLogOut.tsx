@@ -9,7 +9,7 @@ export const useLogout = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
     setUser(null);
-    //navigate("/");
+    navigate("/");
   };
 
   return logout;
