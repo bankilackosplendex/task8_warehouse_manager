@@ -5,8 +5,14 @@ import { Routes, Route } from "react-router-dom";
 import ReportDetails from "../../components/reports/ReportDetails.tsx";
 import { FileText, LayoutList } from "lucide-react";
 import ErrorWindow from "../../components/common/ErrorWindow.tsx";
+import { useAuth } from "../../hooks/useAuth.tsx";
 
 function ReportsPage() {
+  // --- USER INFO ---
+  const { user } = useAuth();
+
+  if (!user) return <ErrorWindow text="Access Denied" statusCode={401} />;
+
   return (
     // Reports page
     <div className="reportsPage">

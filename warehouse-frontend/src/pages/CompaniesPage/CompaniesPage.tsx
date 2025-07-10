@@ -3,14 +3,20 @@ import BackButton from "../../components/common/BackButton.tsx";
 import CompanyList from "../../components/companies/CompanyList.tsx";
 import CompanyDetails from "../../components/companies/CompanyDetails.tsx";
 import CompanyForm from "../../components/companies/CompanyForm.tsx";
-import { Link, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { FormType } from "../../enums/FormTypeEnum.tsx";
 import { ClipboardList, LayoutList, Pencil, SquarePlus } from "lucide-react";
 import ErrorWindow from "../../components/common/ErrorWindow.tsx";
 import ProtectedRoute from "../../components/authorization/ProtectedRoute.tsx";
 import { Role } from "../../enums/UserRoleEnum.tsx";
+import { useAuth } from "../../hooks/useAuth.tsx";
 
 function CompaniesPage() {
+  // --- USER INFO ---
+  const { user } = useAuth();
+
+  if (!user) return <ErrorWindow text="Access Denied" statusCode={401} />;
+
   return (
     // Companies page
     <div className="companiesPage">

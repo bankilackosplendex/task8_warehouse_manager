@@ -6,8 +6,14 @@ import UserList from "../../components/users/UserList.tsx";
 import ErrorWindow from "../../components/common/ErrorWindow.tsx";
 import ProtectedRoute from "../../components/authorization/ProtectedRoute.tsx";
 import { Role } from "../../enums/UserRoleEnum.tsx";
+import { useAuth } from "../../hooks/useAuth.tsx";
 
 function UsersPage() {
+  // --- USER INFO ---
+  const { user } = useAuth();
+
+  if (!user) return <ErrorWindow text="Access Denied" statusCode={401} />;
+
   return (
     // Users page
     <div className="usersPage">

@@ -7,8 +7,14 @@ import { Routes, Route } from "react-router-dom";
 import { Role } from "../../enums/UserRoleEnum.tsx";
 import { ChartColumnDecreasing, LayoutList } from "lucide-react";
 import ErrorWindow from "../../components/common/ErrorWindow.tsx";
+import { useAuth } from "../../hooks/useAuth.tsx";
 
 function StatisticsPage() {
+  // --- USER INFO ---
+  const { user } = useAuth();
+
+  if (!user) return <ErrorWindow text="Access Denied" statusCode={401} />;
+
   return (
     // Statistics page
     <div className="statisticsPage">

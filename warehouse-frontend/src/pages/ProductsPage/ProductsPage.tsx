@@ -5,17 +5,18 @@ import ProductForm from "../../components/products/ProductForm.tsx";
 import ProductDetails from "../../components/products/ProductDetails.tsx";
 import { Route, Routes } from "react-router-dom";
 import { FormType } from "../../enums/FormTypeEnum.tsx";
-import {
-  ClipboardList,
-  LayoutList,
-  Pencil,
-  SquarePlus,
-} from "lucide-react";
+import { ClipboardList, LayoutList, Pencil, SquarePlus } from "lucide-react";
 import ErrorWindow from "../../components/common/ErrorWindow.tsx";
 import ProtectedRoute from "../../components/authorization/ProtectedRoute.tsx";
 import { Role } from "../../enums/UserRoleEnum.tsx";
+import { useAuth } from "../../hooks/useAuth.tsx";
 
 function ProductsPage() {
+  // --- USER INFO ---
+  const { user } = useAuth();
+
+  if (!user) return <ErrorWindow text="Access Denied" statusCode={401} />;
+
   return (
     // Proudcts page
     <div className="productsPage">
