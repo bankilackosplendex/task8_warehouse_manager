@@ -1,20 +1,30 @@
 @import "../../style/variables.scss";
 @import "../../style/mixins.scss";
 
+// --- WAREHOUSE FORM ---
 .warehouseForm {
   @include formBase;
 
+  // --- TITLE ---
   &__title {
     @include pageTitle;
   }
 
+  // --- LABELS ---
   &__nameLabel,
   &__descriptionLabel {
     @include inputLabelBase;
     @include iconContainer;
   }
 
-  &__nameField{
+  &__locationLabel {
+    @include inputLabelBase;
+    @include iconContainer;
+    margin-bottom: -1rem;
+  }
+
+  // --- FIELDS ---
+  &__nameField {
     @include inputFieldBase;
   }
 
@@ -24,12 +34,7 @@
     padding-top: 1rem;
   }
 
-  &__locationLabel {
-    @include inputLabelBase;
-    @include iconContainer;
-    margin-bottom: -1rem;
-  }
-
+  // --- LOCATION ---
   &__location {
     @include flexboxRow;
     flex-wrap: wrap;
@@ -37,6 +42,7 @@
     gap: 2rem;
     width: 100%;
 
+    // --- COUNTRY ---
     &__country {
       @include flexboxColumn;
       gap: 1rem;
@@ -53,6 +59,7 @@
       }
     }
 
+    // --- CITY ---
     &__city {
       @include flexboxColumn;
       gap: 1rem;
@@ -69,6 +76,7 @@
       }
     }
 
+    // --- STREET ADDRESS ---
     &__address {
       @include flexboxColumn;
       gap: 1rem;
@@ -87,6 +95,7 @@
     }
   }
 
+  // --- BUTTON ---
   &__button {
     @include buttonBase;
     @include flexboxRow;

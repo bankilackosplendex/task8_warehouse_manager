@@ -11,11 +11,19 @@ import { Role } from "../../enums/UserRoleEnum.tsx";
 import { useAuth } from "../../hooks/useAuth.tsx";
 
 function StockMovementsList() {
+  // --- USER INFO ---
   const { user } = useAuth();
+
+  // --- NAVIGATION ---
   const navigate = useNavigate();
+
+  // --- MOVEMENT ENTITIES ---
   const [stockMovements, setStockMovements] = useState<StockMovement[]>([]);
+
+  // --- ERROR ---
   const [error, setError] = useState("");
 
+  // --- FETCH THE MOVEMENTS DATA FROM BACKEND ---
   useEffect(() => {
     const fetchStockMovement = async () => {
       try {
@@ -49,6 +57,7 @@ function StockMovementsList() {
     fetchStockMovement();
   }, []);
 
+  // --- FETCH THE PRODUCT DATA FROM BACKEND ---
   const getProduct = async (id: number) => {
     if (!id) return null;
     try {
@@ -60,6 +69,7 @@ function StockMovementsList() {
     }
   };
 
+  // --- FETCH THE WAREHOUSE DATA FROM BACKEND ---
   const getWarehouse = async (id: number) => {
     if (!id) return null;
     try {
@@ -71,6 +81,7 @@ function StockMovementsList() {
     }
   };
 
+  // --- FETCH THE COMPANY DATA FROM BACKEND ---
   const getCompany = async (id: number) => {
     if (!id) return null;
     try {
@@ -82,12 +93,15 @@ function StockMovementsList() {
     }
   };
 
+  // --- ADD MOVEMENT FUNCTION ---
   function onAddButtonClick() {
     navigate("/stockmovements/add");
   }
 
   return (
+    // Movement List
     <div className="stockmovementList">
+      {/* Header */}
       <div className="stockmovementList__header">
         <div className="stockmovementList__header__warehouse">
             <Warehouse />
@@ -106,6 +120,7 @@ function StockMovementsList() {
             Date
           </div>
       </div>
+      {/* Movement records */}
       {stockMovements.map((stockmovement) => (
         <Link
           to={`/stockmovements/${stockmovement.id}`}
@@ -127,6 +142,7 @@ function StockMovementsList() {
           </div>
         </Link>
       ))}
+      {/* Add button */}
       {user?.role === Role.ADMIN && (
         <button
           className="stockmovementList__addButton"

@@ -1,6 +1,5 @@
 import "./StockMovementDetails.scss";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { StockMovement } from "../../types/StockMovementType.tsx";
 import { deleteStockMovement, getStockMovementById } from "../../services/stockMovementService.tsx";
@@ -23,29 +22,36 @@ import { useAuth } from "../../hooks/useAuth.tsx";
 import { Role } from "../../enums/UserRoleEnum.tsx";
 
 function StockMovementsDetails() {
+  // --- USER INFO ---
   const { user } = useAuth();
+
+  // --- STOCKMOVEMENT ID URL PARAMETER ---
   const { stockMovementId } = useParams();
+
+  // --- NAVIGATION ---
   const navigate = useNavigate();
 
+  // --- STOCKMOVEMENT ENTITY ---
   const [stockMovement, setStockMovement] = useState<StockMovement>([]);
+
+  // --- ERROR ---
   const [error, setError] = useState("");
+
+  // --- SHOW POPUP WINDOW VARIABLE ---
   const [showPopUpWindow, setShowPopUpWindow] = useState<boolean>(false);
 
+  // --- FETCH THE STOCKMOVEMENT'S DATA FROM BACKEND ---
   useEffect(() => {
     const fetchStockMovement = async () => {
       if (stockMovementId) {
         try {
           const data = await getStockMovementById(+stockMovementId);
-          if (data.productId)
-            data.product = await getProductById(data.productId);
-          if (data.warehouseId)
-            data.warehouse = await getWarehouseById(data.warehouseId);
-          if (data.companyId)
-            data.company = await getCompanyById(data.companyId);
+          if (data.productId) data.product = await getProductById(data.productId);
+          if (data.warehouseId) data.warehouse = await getWarehouseById(data.warehouseId);
+          if (data.companyId) data.company = await getCompanyById(data.companyId);
           setStockMovement(data);
         } catch (err: any) {
-          const msg =
-            err.response?.data?.message || "Couldn't load stockmovement";
+          const msg = err.response?.data?.message || "Couldn't load stockmovement";
           setError(msg);
         }
       } else {
@@ -57,23 +63,26 @@ function StockMovementsDetails() {
     fetchStockMovement();
   }, []);
 
+  // --- CLOSE POPUPWINDOW FUNCTION ---
   function closeTab(): void {
     setShowPopUpWindow(false);
   }
 
+  // --- DELETE STOCKMOVEMENT FUNCTION ---
   const onDelete = async () => {
-      if (stockMovementId) {
-        await deleteStockMovement(+stockMovementId);
-      }
-      navigate(`/stockmovements`);
-    };
+    if (stockMovementId) {
+      await deleteStockMovement(+stockMovementId);
+    }
+    navigate(`/stockmovements`);
+  };
 
+  // --- MODIFY STOCKMOVEMENT FUNCTION ---
   function modifyStockMovement(id: number): void {
     navigate(`/stockmovements/modify/${stockMovement.id}`);
   }
 
   return (
-    // Stckmovement details
+    // Stockmovement details
     <div className="stockMovementDetails">
       {/* Name */}
       <h2 className="stockMovementDetails__name">
@@ -104,11 +113,10 @@ function StockMovementsDetails() {
           {stockMovement.quantity} {stockMovement.product?.quantityType}
         </p>
       </div>
+      {/* Movement Type */}
       <div className="stockMovementDetails__movementType">
         <ArrowLeftRight className="stockMovementDetails__movementType__icon" />
-        <p className="stockMovementDetails__movementType__key">
-          Movement type:
-        </p>
+        <p className="stockMovementDetails__movementType__key">Movement type:</p>
         <p className="stockMovementDetails__movementType__value">
           {stockMovement.movementType}
         </p>
@@ -117,9 +125,7 @@ function StockMovementsDetails() {
       <div className="stockMovementDetails__warehouse">
         <div className="stockMovementDetails__warehouse__key">
           <Warehouse className="stockMovementDetails__warehouse__key__icon" />
-          <p className="stockMovementDetails__warehouse__key__text">
-            Warehouse:
-          </p>
+          <p className="stockMovementDetails__warehouse__key__text">Warehouse:</p>
         </div>
         <div className="stockMovementDetails__warehouse__value">
           <Link
@@ -149,7 +155,7 @@ function StockMovementsDetails() {
           </Link>
         </div>
       </div>
-      {/* Date */}
+      {/* Creation time */}
       <div className="stockMovementDetails__time">
         <CalendarDays className="stockMovementDetails__time__icon" />
         <p className="stockMovementDetails__time__key">Date: </p>
@@ -157,7 +163,7 @@ function StockMovementsDetails() {
           {new Date(stockMovement.createdAt).toLocaleDateString()}
         </p>
       </div>
-      {/* Options - delete and modify buttons */}
+      {/* Options */}
       {user?.role === Role.ADMIN && (
         <div className="stockMovementDetails__optionsContainer">
           <button
@@ -174,6 +180,7 @@ function StockMovementsDetails() {
           </button>
         </div>
       )}
+      {/* Backdrop and popup window */}
       {showPopUpWindow && <Backdrop closePopUpWindow={closeTab} />}
       {showPopUpWindow && (
         <PopUpWindow

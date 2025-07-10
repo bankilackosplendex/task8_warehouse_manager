@@ -1,9 +1,11 @@
 @import "../../style/variables";
 @import "../../style/mixins";
 
+// --- STATISTICS LIST ---
 .statisticsList {
   @include listBase;
 
+  // --- RECORDS ---
   &__item {
     @include itemBase;
     @include iconContainer;

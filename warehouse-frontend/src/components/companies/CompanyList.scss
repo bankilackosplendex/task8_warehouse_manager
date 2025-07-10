@@ -1,9 +1,11 @@
 @import "../../style/variables";
 @import "../../style/mixins";
 
+// --- COMPANY LIST ---
 .companyList {
   @include listBase;
 
+  // --- RECORDS ---
   &__item {
     @include itemBase;
     @include iconContainer;
@@ -14,6 +16,7 @@
     }
   }
 
+  // --- BUTTON ---
   &__addButton {
     @include buttonBase;
     @include flexboxRow;

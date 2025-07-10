@@ -2,61 +2,27 @@
 @import "../../style/mixins";
 @import "../../style/maps";
 
+// --- REPORT DETAILS ---
 .reportDetails {
   @include detailsBase;
 
+  // --- NAME ---
   &__name {
     font-size: map-get($font-sizes, "medium");
   }
 
-  &__movements {
-    @include flexboxColumn;
-    gap: 1rem;
-
-    &__key {
-      @include detailsKeyBase;
-    }
-
-    &__value {
-      @include detailsValueBase;
-      @include itemBase;
-      @include flexboxRow;
-      justify-content: space-between;
-
-      &__info {
-        @include flexboxRow;
-        align-items: center;
-        gap: 2rem;
-      }
-
-      &:hover {
-        @include itemHoverBase;
-      }
-    }
-  }
-
+  // --- BUTTONS ---
   &__optionsContainer {
     @include flexboxRow;
     gap: 1rem;
     margin-top: 2rem;
 
-    &__deleteButton,
-    &__modifyButton,
     &__downloadButton {
       @include buttonBase;
       margin: 0rem;
       width: 2.8rem;
       height: 2.8rem;
       padding-top: 0.3rem;
-    }
-
-    &__deleteButton {
-      background-color: $error-color;
-
-      &:hover {
-        color: $error-color;
-        border-color: $error-color;
-      }
     }
   }
 }

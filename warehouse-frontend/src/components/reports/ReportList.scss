@@ -1,9 +1,11 @@
 @import "../../style/variables";
 @import "../../style/mixins";
 
+// --- REPORT LIST ---
 .reportList {
   @include listBase;
 
+  // --- RECORDS ---
   &__item {
     @include itemBase;
     position: relative;
@@ -17,6 +19,7 @@
       @include iconContainer;
     }
 
+    // --- BUTTONS ---
     &__optionsContainer {
       &__downloadButton {
         @include buttonBase;

@@ -25,17 +25,30 @@ import { Role } from "../../enums/UserRoleEnum.tsx";
 import { useAuth } from "../../hooks/useAuth.tsx";
 
 function ProductDetails() {
+  // --- USER INFO ---
   const { user } = useAuth();
+
+  // --- PRODUCT ID URL PARAMETER ---
   const { productId } = useParams();
+
+  // --- NAVIGATION ---
   const navigate = useNavigate();
 
+  // --- PRODUCT ENTITY ---
   const [product, setProduct] = useState<Product>([]);
+
+  // --- WAREHOUSES OF THE PRODUCT ---
   const [warehouseProducts, setWarehouseProducts] = useState<
     WarehouseProduct[]
   >([]);
+
+  // --- ERROR ---
   const [error, setError] = useState("");
+
+  // --- SHOW POPUP WINDOW VARIABLE ---
   const [showPopUpWindow, setShowPopUpWindow] = useState<boolean>(false);
 
+  // --- FETCH THE PRODUCT'S DATA FROM BACKEND ---
   useEffect(() => {
     const fetchProduct = async () => {
       if (productId) {
@@ -62,29 +75,36 @@ function ProductDetails() {
     fetchProduct();
   }, []);
 
+  // --- CLOSE POPUPWINDOW FUNCTION ---
   function closeTab(): void {
     setShowPopUpWindow(false);
   }
 
+  // --- DELETE PRODUCT FUNCTION ---
   const onDelete = async () => {
-      if (productId) {
-        await deleteProduct(+productId);
-      }
-      navigate(`/products`);
-    };
+    if (productId) {
+      await deleteProduct(+productId);
+    }
+    navigate(`/products`);
+  };
 
+  // --- MODIFY PRODUCT FUNCTION ---
   function modifyProduct(id: number): void {
     navigate(`/products/modify/${product.id}`);
   }
 
   return (
+    // Product details
     <div className="productDetails">
+      {/* Name */}
       <h2 className="productDetails__name">{product.name}</h2>
+      {/* Article number */}
       <div className="productDetails__number">
         <FileDigit className="productDetails__number__icon" />
         <p className="productDetails__number__key">Article number: </p>
         <p className="productDetails__number__value">{product.number}</p>
       </div>
+      {/* Quantity type */}
       <div className="productDetails__quantityType">
         <Ruler className="productDetails__quantityType__icon" />
         <p className="productDetails__quantityType__key">Quantity type: </p>
@@ -92,6 +112,7 @@ function ProductDetails() {
           {product.quantityType}
         </p>
       </div>
+      {/* Creation time */}
       <div className="productDetails__time">
         <CalendarDays className="productDetails__time__icon" />
         <p className="productDetails__time__key">Created at: </p>
@@ -99,7 +120,7 @@ function ProductDetails() {
           {new Date(product.createdAt).toLocaleDateString()}
         </p>
       </div>
-
+      {/* Warehouses */}
       {warehouseProducts.length > 0 ? (
         <div className="productDetails__warehouses">
           <div className="productDetails__warehouses__key">
@@ -107,6 +128,7 @@ function ProductDetails() {
             <p className="productDetails__warehouses__key__text">Warehouses:</p>
           </div>
           <div className="productDetails__warehouses__value">
+            {/* Header */}
             <div className="productDetails__warehouses__value__header">
               <p className="productDetails__warehouses__value__header__name">
                 <Tag />
@@ -121,6 +143,7 @@ function ProductDetails() {
                 Registered
               </p>
             </div>
+            {/* Records */}
             {warehouseProducts.map((warehouseproduct) => (
               <Link
                 className="productDetails__warehouses__value__item"
@@ -152,14 +175,17 @@ function ProductDetails() {
           </p>
         </div>
       )}
+      {/* Options */}
       {user?.role === Role.ADMIN && (
         <div className="productDetails__optionsContainer">
+          {/* Delete button */}
           <button
             className="productDetails__optionsContainer__deleteButton"
             onClick={() => setShowPopUpWindow(true)}
           >
             <Trash2 />
           </button>
+          {/* Modify button */}
           <button
             className="productDetails__optionsContainer__modifyButton"
             onClick={() => modifyProduct(product.id)}
@@ -168,6 +194,7 @@ function ProductDetails() {
           </button>
         </div>
       )}
+      {/* Backdrop and popup window */}
       {showPopUpWindow && <Backdrop closePopUpWindow={closeTab} />}
       {showPopUpWindow && (
         <PopUpWindow

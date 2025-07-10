@@ -1,8 +1,10 @@
 @import "../../style/mixins.scss";
 
+// --- USERS PAGE ---
 .usersPage {
   @include pageContainer;
 
+  // --- HEADER ---
   &__header {
     width: 80%;
 

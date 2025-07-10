@@ -1,16 +1,19 @@
 @import "../../style/mixins.scss";
 @import "../../style/maps.scss";
 
+// --- HOME PAGE ---
 .homePage {
   @include pageContainer;
   width: 100%;
 
+  // --- TITLE ---
   &__title {
     @include pageTitle;
     font-size: map-get($font-sizes, "large");
     color: $primary-color;
   }
 
+  // --- LINK CARDS ---
   &__linkCardContainer {
     @include flexboxRow;
     flex-wrap: wrap;
@@ -67,6 +70,7 @@
   }
 }
 
+// --- MEDIA QUERIES ---
 @media (min-width: 72rem) {
   .homePage {
     &__title {

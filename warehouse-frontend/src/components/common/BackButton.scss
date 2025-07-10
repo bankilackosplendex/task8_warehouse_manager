@@ -1,6 +1,7 @@
 @import "../../style/mixins.scss";
 @import "../../style/variables.scss";
 
+// --- BACK BUTTON ---
 .backButton {
   @include buttonBase;
   @include flexboxCenter;

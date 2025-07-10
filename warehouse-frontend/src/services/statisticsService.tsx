@@ -1,6 +1,7 @@
 import api from "./api.tsx";
 import { getAccessToken } from "./authService.tsx";
 
+// --- GET ALL STATISTICS ---
 export const getStatisticByType = async (type: string) => {
   const token = getAccessToken();
 
@@ -13,6 +14,7 @@ export const getStatisticByType = async (type: string) => {
   return res.data;
 };
 
+// --- GET A COMPANY'S NAME BY ID ---
 export async function getCompanyNameById(id: number) {
   const token = getAccessToken();
 
@@ -24,6 +26,7 @@ export async function getCompanyNameById(id: number) {
   return response.data.name;
 }
 
+// --- GET A PRODUCT'S NAME BY ID ---
 export async function getProductNameById(id: number) {
   const token = getAccessToken();
 

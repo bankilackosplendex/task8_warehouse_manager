@@ -1,9 +1,11 @@
 @import "../../style/variables";
 @import "../../style/mixins";
 
+// --- USER LIST ---
 .userList {
   @include listBase;
 
+  // --- RECORDS ---
   &__item {
     @include itemBase;
     @include flexboxRow;

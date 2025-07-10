@@ -1,8 +1,10 @@
 @import "../../style/mixins.scss";
 
+// --- WAREHOUSE PAGE ---
 .warehousesPage {
   @include pageContainer;
 
+  // --- HEADERS ---
   &__listHeader ,
   &__detailsHeader {
     width: 80%;

@@ -9,12 +9,20 @@ import { useNavigate } from "react-router-dom";
 import { KeyRound, LogIn, Mail } from "lucide-react";
 
 function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  // --- USER CONTEXT ---
   const { setUser } = useContext(AuthContext);
+
+  // --- NAVIGATION ---
   const navigate = useNavigate();
 
+  // --- USER DATA ---
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  // --- ERROR VARIABLE ---
+  const [error, setError] = useState("");
+
+  // Login
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -43,7 +51,9 @@ function LoginForm() {
   };
 
   return (
+    // Login form
     <form className="loginForm" onSubmit={handleSubmit}>
+      {/* Email */}
       <label className="loginForm__emailLabel" htmlFor="email">
         <Mail className="loginForm__emailLabel__icon" />
         Email
@@ -56,6 +66,7 @@ function LoginForm() {
         onChange={(e) => setEmail(e.target.value)}
         required
       />
+      {/* Password */}
       <label className="loginForm__passwordLabel" htmlFor="password">
         <KeyRound className="loginForm__passwordLabel__icon"/>
         Password
@@ -68,9 +79,7 @@ function LoginForm() {
         onChange={(e) => setPassword(e.target.value)}
         required
       />
-
-      {error && <div className="loginForm__error">{error}</div>}
-
+      {/* Login button */}
       <button className="loginForm__button" type="submit">
         <LogIn />
         Login

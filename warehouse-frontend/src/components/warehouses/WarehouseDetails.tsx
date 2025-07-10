@@ -26,17 +26,30 @@ import { useAuth } from "../../hooks/useAuth.tsx";
 import { Role } from "../../enums/UserRoleEnum.tsx";
 
 function WarehouseDetails() {
+  // --- USER INFO ---
   const { user } = useAuth();
+
+  // --- WAREHOUSE ID URL PARAMETER ---
   const { warehouseId } = useParams();
+
+  // --- NAVIGATION ---
   const navigate = useNavigate();
 
+  // --- WAREHOUSE ENTITY ---
   const [warehouse, setWarehouse] = useState<Warehouse>([]);
+
+  // --- PRODUCTS OF THE WAREHOUSE ---
   const [warehouseProducts, setWarehouseProducts] = useState<
     WarehouseProduct[]
   >([]);
+
+  // --- ERROR ---
   const [error, setError] = useState("");
+
+  // --- SHOW POPUP WINDOW VARIABLE ---
   const [showPopUpWindow, setShowPopUpWindow] = useState<boolean>(false);
 
+  // --- FETCH THE WAREHOUSE'S DATA FROM BACKEND ---
   useEffect(() => {
     const fetchWarehouse = async () => {
       if (warehouseId) {
@@ -57,10 +70,12 @@ function WarehouseDetails() {
     fetchWarehouse();
   }, [warehouseId]);
 
+  // --- CLOSE POPUPWINDOW FUNCTION ---
   function closeTab(): void {
     setShowPopUpWindow(false);
   }
 
+  // --- DELETE WAREHOUSE FUNCTION ---
   const onDelete = async () => {
     if (warehouseId) {
       await deleteWarehouse(+warehouseId);
@@ -68,18 +83,23 @@ function WarehouseDetails() {
     navigate(`/warehouses`);
   };
 
+  // --- MODIFY WAREHOUSE FUNCTION ---
   function modifyWarehouse(id: number): void {
     navigate(`/warehouses/modify/${warehouse.id}`);
   }
 
   return (
+    // Warehouse details
     <div className="warehouseDetails">
+      {/* Name */}
       <h2 className="warehouseDetails__name">{warehouse?.name}</h2>
+      {/* Address */}
       <div className="warehouseDetails__address">
         <MapPin className="warehouseDetails__address__icon" />
         <p className="warehouseDetails__address__key">Address: </p>
         <p className="warehouseDetails__address__value">{warehouse?.address}</p>
       </div>
+      {/* Description */}
       <div className="warehouseDetails__description">
         <TextIcon className="warehouseDetails__description__icon" />
         <p className="warehouseDetails__description__key">Description: </p>
@@ -87,6 +107,7 @@ function WarehouseDetails() {
           {warehouse?.description}
         </p>
       </div>
+      {/* Products */}
       {warehouseProducts.length > 0 ? (
         <div className="warehouseDetails__products">
           <div className="warehouseDetails__products__key">
@@ -94,6 +115,7 @@ function WarehouseDetails() {
             <p className="warehouseDetails__products__key__text">Products:</p>
           </div>
           <div className="warehouseDetails__products__value">
+            {/* Header */}
             <div className="warehouseDetails__products__value__header">
               <p className="warehouseDetails__products__value__header__name">
                 <Tag />
@@ -108,6 +130,7 @@ function WarehouseDetails() {
                 Registered
               </p>
             </div>
+            {/* Records */}
             {warehouseProducts.map((warehouseproduct) => (
               <Link
                 className="warehouseDetails__products__value__item"
@@ -139,12 +162,14 @@ function WarehouseDetails() {
           </p>
         </div>
       )}
+      {/* Movements */}
       {warehouse.movements && warehouse.movements.length > 0 ? (
         <div className="warehouseDetails__movements">
           <div className="warehouseDetails__movements__key">
             <Truck className="warehouseDetails__movements__key__icon" />
             <p className="warehouseDetails__movements__key__text">Movements:</p>
           </div>
+          {/* Header */}
           <div className="warehouseDetails__movements__value">
             <div className="warehouseDetails__movements__value__header">
               <p className="warehouseDetails__movements__value__header__product">
@@ -164,6 +189,7 @@ function WarehouseDetails() {
                 Date
               </p>
             </div>
+            {/* Records */}
             {warehouse.movements.map((movement) => (
               <Link
                 to={`/stockmovements/${movement.id}`}
@@ -199,14 +225,17 @@ function WarehouseDetails() {
           </div>
         </div>
       )}
+      {/* Options */}
       {user?.role === Role.ADMIN && (
         <div className="warehouseDetails__optionsContainer">
+          {/* Delete button */}
           <button
             className="warehouseDetails__optionsContainer__deleteButton"
             onClick={() => setShowPopUpWindow(true)}
           >
             <Trash2 />
           </button>
+          {/* Modify button */}
           <button
             className="warehouseDetails__optionsContainer__modifyButton"
             onClick={() => modifyWarehouse(warehouse.id)}
@@ -215,6 +244,7 @@ function WarehouseDetails() {
           </button>
         </div>
       )}
+      {/* Backdrop and popup window */}
       {showPopUpWindow && <Backdrop closePopUpWindow={closeTab} />}
       {showPopUpWindow && (
         <PopUpWindow

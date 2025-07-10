@@ -1,7 +1,8 @@
-import { StockMovement } from "../types/StockMovementType.tsx";
 import api from "./api.tsx";
+import { StockMovement } from "../types/StockMovementType.tsx";
 import { getAccessToken } from "./authService.tsx";
 
+// --- GET ALL MOVEMENTS ---
 export const getStockMovements = async () => {
   const token = getAccessToken();
   const res = await api.get("/stockmovements", {
@@ -12,6 +13,7 @@ export const getStockMovements = async () => {
   return res.data;
 };
 
+// --- GET A SPECIFIC MOVEMENT BY ID ---
 export const getStockMovementById = async (id: number) => {
   const token = getAccessToken();
   const res = await api.get(`/stockmovements/${id}`, {
@@ -22,6 +24,7 @@ export const getStockMovementById = async (id: number) => {
   return res.data;
 };
 
+// --- CREATE A NEW MOVEMENT ---
 export const createStockMovement = async (data: StockMovement) => {
   const token = getAccessToken();
   const res = await api.post("/stockmovements", data, {
@@ -32,6 +35,7 @@ export const createStockMovement = async (data: StockMovement) => {
   return res.data;
 };
 
+// --- UPDATE A MOVEMENT BY ID ---
 export const updateStockMovement = async (id: number, data: StockMovement) => {
   const token = getAccessToken();
   const res = await api.patch(`/stockmovements/${id}`, data, {
@@ -42,6 +46,7 @@ export const updateStockMovement = async (id: number, data: StockMovement) => {
   return res.data;
 };
 
+// --- DELETE A MOVEMENT BY ID ---
 export const deleteStockMovement = async (id: number) => {
   const token = getAccessToken();
   const res = await api.delete(`/stockmovements/${id}`, {

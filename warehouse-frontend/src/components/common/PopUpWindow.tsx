@@ -10,6 +10,7 @@ function PopUpWindow({
   deleteItem: () => void;
 }) {
   return (
+    // Popup window
     <div className="popUpWindow">
       {/* PopUpWindow text */}
       <p className="popUpWindow__text">

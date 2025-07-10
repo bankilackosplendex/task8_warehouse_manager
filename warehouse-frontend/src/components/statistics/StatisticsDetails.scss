@@ -2,13 +2,16 @@
 @import "../../style/mixins";
 @import "../../style/maps";
 
+// --- STATISTICS DETAILS ---
 .statisticsDetails {
   @include detailsBase;
 
+  // --- TITLE ---
   &__title {
     @include pageTitle;
   }
 
+  // --- DIAGRAM ---
   &__stats {
     @include detailsBase;
     position: relative;

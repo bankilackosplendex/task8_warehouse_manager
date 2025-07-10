@@ -9,9 +9,11 @@ function ErrorWindow({
   text: string;
   statusCode: number;
 }) {
+  // --- NAVIGATION ---
   const navigate = useNavigate();
 
   return (
+    // Error window 
     <div className="errorWindow">
       {/* ErrorWindow text */}
       <p className="errorWindow__text">{text}</p>

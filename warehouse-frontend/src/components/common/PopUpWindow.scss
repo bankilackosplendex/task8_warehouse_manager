@@ -1,6 +1,7 @@
 @import "../../Style/variables";
 @import "../../Style/mixins";
 
+// --- POP UP WINDOW ---
 .popUpWindow {
   border-radius: $border-radius;
   background-color: $third-color;
@@ -12,12 +13,14 @@
   top: 18rem;
   left: calc(50% - 16rem);
 
+  // --- POP UP WINDOW TEXT ---
   &__text {
     text-align: center;
     font-size: map-get($font-sizes , "small");
     color: $primary-color;
   }
 
+  // --- BUTTONS ---
   &__buttonContainer {
     @include flexboxRow;
     justify-content: center;

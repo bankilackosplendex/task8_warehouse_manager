@@ -1,8 +1,10 @@
 @import "../../style/mixins.scss";
 
+// --- PRODUCTS PAGE ---
 .productsPage {
   @include pageContainer;
 
+  // --- HEADERS ---
   &__listHeader ,
   &__detailsHeader {
     width: 80%;

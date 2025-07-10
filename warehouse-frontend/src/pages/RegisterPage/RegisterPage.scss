@@ -1,8 +1,10 @@
 @import "../../style/mixins.scss";
 
+// --- REGISTER PAGE ---
 .registerPage {
   @include pageContainer;
 
+  // --- HEADER ---
   &__header {
     width: 90%;
     max-width: 30rem;

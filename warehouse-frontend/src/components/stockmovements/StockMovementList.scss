@@ -1,9 +1,11 @@
 @import "../../style/variables";
 @import "../../style/mixins";
 
+// --- STOCKMOVEMENT LIST ---
 .stockmovementList {
   @include listBase;
 
+  // --- HEADER ---
   &__header {
     @include flexboxRow;
     align-items: center;
@@ -42,6 +44,7 @@
     }
   }
 
+  // --- RECORDS ---
   &__item {
     @include itemBase;
     height: fit-content;
@@ -79,6 +82,7 @@
     }
   }
 
+  // --- BUTTON ---
   &__addButton {
     @include buttonBase;
     @include flexboxRow;
@@ -90,6 +94,7 @@
   }
 }
 
+// --- MEDIA QUERIES ---
 @media (min-width: 55rem) {
   .stockmovementList {
     &__item {

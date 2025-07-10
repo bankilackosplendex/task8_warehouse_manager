@@ -12,11 +12,19 @@ import {
 } from "../../services/companyService.tsx";
 
 function CompanyForm({ type }: { type: FormType }) {
+  // --- COMPANY ID URL PARAMETER ---
   const { companyId } = useParams();
+
+  // --- NAVIGATION ---
   const navigate = useNavigate();
+
+  // --- COMPANY ENTITY ---
   const [company, setCompany] = useState<Company>([]);
+
+  // --- ERROR ---
   const [error, setError] = useState("");
 
+  // --- FETCH THE COMPANY'S DATA FROM BACKEND ---
   useEffect(() => {
     const fetchCompany = async () => {
       if (companyId) {
@@ -38,6 +46,7 @@ function CompanyForm({ type }: { type: FormType }) {
     fetchCompany();
   }, []);
 
+  // --- CREATE/MODIFY COMPANY ---
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -65,6 +74,7 @@ function CompanyForm({ type }: { type: FormType }) {
     }
   };
 
+  // --- SET NAME WITH THE INPUT VALUE FUNCTION ---
   function setName(name: string): void {
     setCompany((prev) => ({ ...prev, name: name }));
   }
@@ -85,14 +95,15 @@ function CompanyForm({ type }: { type: FormType }) {
         onChange={(e) => setName(e.target.value)}
         required
       />
-      {/* Add button */}
       <button className="companyForm__button" type="submit">
+        {/* Add button */}
         {type == FormType.CREATE && (
           <>
             <SquarePlus />
             Add
           </>
         )}
+        {/* Save button */}
         {type == FormType.MODIFY && (
           <>
             <Save />

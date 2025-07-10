@@ -1,5 +1,5 @@
-import { Link, useNavigate } from "react-router-dom";
 import "./CompanyList.scss";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Company } from "../../types/CompanyType.tsx";
 import { getCompanies } from "../../services/companyService.tsx";
@@ -8,11 +8,19 @@ import { useAuth } from "../../hooks/useAuth.tsx";
 import { Role } from "../../enums/UserRoleEnum.tsx";
 
 function CompanyList() {
+  // --- USER INFO ---
   const { user } = useAuth();
+
+  // --- NAVIGATION ---
   const navigate = useNavigate();
+
+  // --- COMPANIY ENTITIES ---
   const [companies, setCompanies] = useState<Company[]>([]);
+
+  // --- ERROR --
   const [error, setError] = useState("");
 
+  // --- FETCH THE COMPANIES DATA FROM BACKEND ---
   useEffect(() => {
     const fetchCompanies = async () => {
       try {
@@ -27,12 +35,15 @@ function CompanyList() {
     fetchCompanies();
   }, []);
 
+  // --- ADD COMPANY FUNCTION ---
   function onAddButtonClick() {
     navigate("/companies/add");
   }
 
   return (
+    // Company List
     <div className="companyList">
+      {/* Company records */}
       {companies.map((company) => (
         <Link
           to={`/companies/${company.id}`}
@@ -44,6 +55,7 @@ function CompanyList() {
         </Link>
       ))}
       {user?.role === Role.ADMIN && (
+        // Add button
         <button
           className="companyList__addButton"
           onClick={() => onAddButtonClick()}

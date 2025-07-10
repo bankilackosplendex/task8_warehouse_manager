@@ -10,7 +10,6 @@ export const AuthContext = createContext<{
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
@@ -23,10 +22,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setUser(null);
       }
     }
-    setLoading(false);
   }, []);
-
-  if (loading) return <div>Loading...</div>;
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>

@@ -1,8 +1,10 @@
 @import "../../style/mixins.scss";
 
+// --- STOCKMOVEMENTS PAGE ---
 .stockmovementsPage {
   @include pageContainer;
 
+  // --- HEADERS ---
   &__listHeader ,
   &__detailsHeader {
     width: 80%;

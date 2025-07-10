@@ -16,37 +16,48 @@ import {
   Legend,
 } from "chart.js";
 
+// --- REGISTER CHART.JS COMPONENTS ---
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 function StatisticsDetails() {
+  // --- URL PARAMETER ---
   const { statId } = useParams();
+
+  // --- CHART DATA STATE ---
   const [data, setData] = useState([]);
+
+  // --- ERROR STATE ---
   const [error, setError] = useState("");
 
+  // --- TITLE MAPPING FOR CHARTS ---
   const statTitleMap: any = {
     topsuppliers: "Top suppliers",
     topcostumers: "Top customers",
     mostmovedproducts: "Most moved products",
   };
 
+  // --- MAPPING: WHICH FIELD TO USE FOR Y-VALUES ---
   const valueFieldMap: Record<string, string> = {
     topsuppliers: "count",
     topcostumers: "count",
     mostmovedproducts: "quantity",
   };
 
+  // --- MAPPING: WHICH ID FIELD TO USE FOR LOOKUPS ---
   const idFieldMap: Record<string, string> = {
     topsuppliers: "companyId",
     topcostumers: "companyId",
     mostmovedproducts: "productId",
   };
 
+  // --- MAPPING: Y-AXIS LABEL ---
   const yAxisLabelMap: Record<string, string> = {
     topsuppliers: "EXPORT",
     topcostumers: "IMPORT",
     mostmovedproducts: "DB / KG",
   };
 
+  // --- FETCH STATISTICS DATA ON COMPONENT MOUNT ---
   useEffect(() => {
     async function fetchData() {
       if (!statId) return;
@@ -65,7 +76,6 @@ function StatisticsDetails() {
             } else {
               name = await getCompanyNameById(id);
             }
-            console.log(name);
 
             return {
               name,
@@ -89,6 +99,7 @@ function StatisticsDetails() {
     fetchData();
   }, [statId]);
 
+  // --- CHART DATA STRUCTURE ---
   const chartData = {
     labels: data.map((item) => item.name),
     datasets: [
@@ -103,6 +114,7 @@ function StatisticsDetails() {
     ],
   };
 
+  // --- CHART OPTIONS CONFIG ---
   const chartOptions = {
     responsive: true,
     maintainAspectRatio: false,
@@ -130,10 +142,12 @@ function StatisticsDetails() {
 
   return (
     <div className="statisticsDetails">
+      {/* Title */}
       <h2 className="statisticsDetails__title">
         {statTitleMap[statId || ""] || "Statistics"}
       </h2>
-      {error && <p>{error}</p>}
+
+      {/* Chart */}
       <div className="statisticsDetails__stats">
         {data.length > 0 ? (
           <Bar data={chartData} options={chartOptions} />

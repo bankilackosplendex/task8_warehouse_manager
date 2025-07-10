@@ -2,13 +2,16 @@
 @import "../../style/mixins";
 @import "../../style/maps";
 
+// --- PRODUCT DETAILS ---
 .productDetails {
   @include detailsBase;
 
+  // --- NAME ---
   &__name {
     font-size: map-get($font-sizes, "medium");
   }
 
+  // --- DETAILS FIELDS ---
   &__number,
   &__quantityType,
   &__time {
@@ -24,13 +27,15 @@
     }
   }
 
+  // --- WAREHOUSES ---
   &__warehouses {
     @include flexboxColumn;
 
+    // --- KEY TITLE ---
     &__key {
       @include iconContainer;
 
-      &__icon{
+      &__icon {
         min-width: 1.5rem;
         min-height: 1.5rem;
       }
@@ -40,9 +45,11 @@
       }
     }
 
+    // --- WAREHOUSE LIST ---
     &__value {
       @include flexboxColumn;
 
+      // --- HEADER ---
       &__header {
         @include flexboxRow;
         align-items: center;
@@ -56,21 +63,22 @@
           @include iconContainer;
         }
 
-        &__name{
+        &__name {
           flex: 1.2;
         }
 
-        &__quantity{
+        &__quantity {
           flex: 1;
           justify-content: center;
         }
 
-        &__date{
+        &__date {
           flex: 1;
           justify-content: flex-end;
         }
       }
 
+      // --- RECORDS ---
       &__item {
         @include itemBase;
         @include flexboxRow;
@@ -84,7 +92,7 @@
           @include itemHoverBase;
         }
 
-        &__name{
+        &__name {
           flex: 1.2;
         }
 
@@ -95,18 +103,20 @@
           gap: 0.3rem;
         }
 
-        &__date{
+        &__date {
           flex: 1;
         }
       }
     }
   }
 
-  &__empty{
+  // --- EMPTY PROPERTY ---
+  &__empty {
     @include flexboxRow;
     gap: 1rem;
   }
 
+  // --- BUTTONS ---
   &__optionsContainer {
     @include flexboxRow;
     gap: 1rem;
@@ -124,7 +134,7 @@
     &__deleteButton {
       background-color: $error-color;
 
-      &:hover{
+      &:hover {
         color: $error-color;
         border-color: $error-color;
       }

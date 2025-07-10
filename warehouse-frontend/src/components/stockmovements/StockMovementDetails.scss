@@ -2,13 +2,16 @@
 @import "../../style/mixins";
 @import "../../style/maps";
 
+// --- COMPANY DETAILS ---
 .stockMovementDetails {
   @include detailsBase;
 
+  // --- NAME ---
   &__name {
     font-size: map-get($font-sizes, "medium");
   }
 
+  // --- DETAILS FIELDS ---
   &__quantity,
   &__movementType,
   &__time {
@@ -58,6 +61,7 @@
     }
   }
 
+  // --- BUTTONS ---
   &__optionsContainer {
     @include flexboxRow;
     gap: 1rem;

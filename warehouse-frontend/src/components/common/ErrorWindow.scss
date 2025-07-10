@@ -1,6 +1,7 @@
 @import "../../style/mixins.scss";
 @import "../../style/variables.scss";
 
+// --- ERROR WINDOW --
 .errorWindow {
   @include flexboxColumn;
   align-items: center;
@@ -12,6 +13,7 @@
   margin: 3rem auto;
   border: 0.2rem solid $error-color;
 
+  // --- ERROR TEXT ---
   &__text {
     font-size: map-get($font-sizes, "large");
     font-family: $font-family;
@@ -19,12 +21,14 @@
     margin-top: 2rem;
   }
 
+  // --- ERROR ICON ---
   &__icon {
     color: $error-color;
     width: 8rem;
     height: 8rem;
   }
 
+  // --- BUTTONS ---
   &__buttonContainer {
     @include flexboxRow;
     justify-content: center;

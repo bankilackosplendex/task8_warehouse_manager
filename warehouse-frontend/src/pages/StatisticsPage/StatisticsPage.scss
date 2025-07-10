@@ -1,8 +1,10 @@
 @import "../../style/mixins.scss";
 
+// --- STATISTICS PAGE ---
 .statisticsPage {
   @include pageContainer;
 
+  // --- HEADER ---
   &__header {
     width: 80%;
 

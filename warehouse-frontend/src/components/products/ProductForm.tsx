@@ -1,9 +1,8 @@
 import { FileDigit, PackagePlus, Ruler, Save, Tag } from "lucide-react";
 import "./ProductForm.scss";
 import { FormType } from "../../enums/FormTypeEnum.tsx";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Product } from "../../types/ProductType.tsx";
-import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   createProduct,
@@ -13,15 +12,23 @@ import {
 import { QuantityType } from "../../enums/QuantityTypeEnum.tsx";
 
 function ProductForm({ type }: { type: FormType }) {
+  // --- PRODUCT ID URL PARAMETER ---
   const { productId } = useParams();
+
+  // --- NAVIGATION ---
   const navigate = useNavigate();
+
+  // --- PRODUCT ENTITY ---
   const [product, setProduct] = useState<Product>({
     name: "",
     number: 0,
     quantityType: QuantityType.DB,
   });
+
+  // --- ERROR ---
   const [error, setError] = useState("");
 
+  // --- FETCH THE PRODUCT'S DATA FROM BACKEND ---
   useEffect(() => {
     const fetchProduct = async () => {
       if (productId) {
@@ -32,18 +39,13 @@ function ProductForm({ type }: { type: FormType }) {
           const msg = err.response?.data?.message || "Couldn't load product";
           setError(msg);
         }
-      } else {
-        const data = {
-          name: "",
-          number: null,
-          quantityType: QuantityType.DB,
-        };
       }
     };
 
     fetchProduct();
   }, []);
 
+  // --- CREATE/MODIFY PRODUCT ---
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -69,14 +71,17 @@ function ProductForm({ type }: { type: FormType }) {
     }
   };
 
+  // --- SET NAME WITH THE INPUT VALUE FUNCTION ---
   function setName(name: string): void {
     setProduct((prev) => ({ ...prev, name }));
   }
 
+  // --- SET ARTICLE NUMBER WITH THE INPUT VALUE FUNCTION ---
   function setNumber(number: number): void {
     setProduct((prev) => ({ ...prev, number }));
   }
 
+  // --- SET QUANTITY TYPE WITH THE SELECTED VALUE FUNCTION ---
   function setQuantityType(qT: string): void {
     const qt = qT === "KG" ? QuantityType.KG : QuantityType.DB;
     setProduct((prev) => ({ ...prev, quantityType: qt }));
@@ -129,14 +134,15 @@ function ProductForm({ type }: { type: FormType }) {
         <option value="DB">DB</option>
         <option value="KG">KG</option>
       </select>
-      {/* Add button */}
       <button className="productForm__button" type="submit">
+        {/* Add button */}
         {type == FormType.CREATE && (
           <>
             <PackagePlus />
             Add
           </>
         )}
+        {/* Save button */}
         {type == FormType.MODIFY && (
           <>
             <Save />

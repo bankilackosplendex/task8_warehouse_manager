@@ -1,9 +1,11 @@
 @import "../../style/variables.scss";
 @import "../../style/mixins.scss";
 
+// --- FORM ---
 .registerForm {
   @include formBase;
 
+  // --- LABELS ---
   &__emailLabel,
   &__nameLabel,
   &__passwordLabel {
@@ -11,12 +13,14 @@
     @include iconContainer;
   }
 
+  // --- FIELDS ---
   &__emailField,
   &__nameField,
   &__passwordField {
     @include inputFieldBase;
   }
 
+  // --- BUTTON --
   &__button {
     @include buttonBase;
     @include iconContainer;

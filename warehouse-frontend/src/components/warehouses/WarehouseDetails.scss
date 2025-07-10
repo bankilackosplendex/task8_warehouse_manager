@@ -2,14 +2,17 @@
 @import "../../style/mixins";
 @import "../../style/maps";
 
+// --- WAREHOUSE DETAILS ---
 .warehouseDetails {
   @include detailsBase;
 
+  // --- NAME ---
   &__name {
     font-size: map-get($font-sizes, "medium");
     @include flexboxRow;
   }
 
+  // --- DETAILS FIELDS ---
   &__address,
   &__description{
     @include flexboxRow;
@@ -24,9 +27,11 @@
     }
   }
 
+  // --- PRODUCTS ---
   &__products {
     @include flexboxColumn;
 
+    // --- KEY TITLE ---
     &__key {
       @include iconContainer;
 
@@ -40,9 +45,11 @@
       }
     }
 
+    // --- PRODUCTS LIST ---
     &__value {
       @include flexboxColumn;
 
+      // --- HEADER ---
       &__header {
         @include flexboxRow;
         align-items: center;
@@ -71,6 +78,7 @@
         }
       }
 
+      // --- RECORDS ---
       &__item {
         @include itemBase;
         @include flexboxRow;
@@ -102,9 +110,11 @@
     }
   }
 
+  // --- MOVEMENTS ---
   &__movements {
     @include flexboxColumn;
 
+    // --- KEY TITLE ---
     &__key {
       @include iconContainer;
 
@@ -118,9 +128,11 @@
       }
     }
 
+    // --- MOVEMENT LIST ---
     &__value {
       @include flexboxColumn;
 
+      // --- HEADER ---
       &__header {
         @include flexboxRow;
         align-items: center;
@@ -154,6 +166,7 @@
         }
       }
 
+      // --- RECORDS ---
       &__item {
         @include itemBase;
         @include flexboxRow;
@@ -193,12 +206,14 @@
     }
   }
 
+  // --- EMPTY PROPERTY ---
   &__empty {
     @include flexboxRow;
     align-items: center;
     gap: 1rem;
   }
 
+  // --- BUTTONS ---
   &__optionsContainer {
     @include flexboxRow;
     gap: 1rem;

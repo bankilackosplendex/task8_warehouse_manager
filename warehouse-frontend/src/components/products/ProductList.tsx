@@ -1,5 +1,5 @@
-import { Link, useNavigate } from "react-router-dom";
 import "./ProductList.scss";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getProducts } from "../../services/productService.tsx";
 import { Product } from "../../types/ProductType.tsx";
@@ -8,11 +8,19 @@ import { useAuth } from "../../hooks/useAuth.tsx";
 import { Role } from "../../enums/UserRoleEnum.tsx";
 
 function ProductList() {
+  // --- USER INFO ---
   const { user } = useAuth();
+
+  // --- NAVIGATION ---
   const navigate = useNavigate();
+
+  // --- PRODUCT ENTITIES ---
   const [products, setProducts] = useState<Product[]>([]);
+
+  // --- ERROR ---
   const [error, setError] = useState("");
 
+  // --- FETCH THE PRODUCTS DATA FROM BACKEND ---
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -27,12 +35,15 @@ function ProductList() {
     fetchProducts();
   }, []);
 
+  // --- ADD PRODUCT FUNCTION ---
   function onAddButtonClick() {
     navigate("/products/add");
   }
 
   return (
+    // Product list
     <div className="productList">
+      {/* Product records */}
       {products.map((product) => (
         <Link
           to={`/products/${product.id}`}
@@ -43,6 +54,7 @@ function ProductList() {
           {product.name}
         </Link>
       ))}
+      {/* Add button */}
       {user?.role === Role.ADMIN && (
         <button
           className="productList__addButton"

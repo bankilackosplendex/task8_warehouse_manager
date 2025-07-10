@@ -5,11 +5,17 @@ import { useNavigate } from "react-router-dom";
 import { register } from "../../services/authService.tsx";
 
 function RegisterForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  // --- NAVIGATION ---
   const navigate = useNavigate();
 
+  // --- USER DATA ---
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  // --- ERROR VARIABLE ---
+  const [error, setError] = useState("");
+
+  // Registartion
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -58,6 +64,7 @@ function RegisterForm() {
         onChange={(e) => setPassword(e.target.value)}
         required
       />
+      {/* Register button */}
       <button className="registerForm__button" type="submit">
         <UserPlus />
         Register

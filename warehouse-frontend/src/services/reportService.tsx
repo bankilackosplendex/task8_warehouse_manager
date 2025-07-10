@@ -1,6 +1,7 @@
 import api from "./api.tsx";
 import { getAccessToken } from "./authService.tsx";
 
+// --- DOWNLOAD A WAREHOUSE REPORT BY ID ---
 export const downloadWarehouseReportById = async (warehouseId: number) => {
   const token = getAccessToken();
   const res = await api.get(`/reports/warehouse/${warehouseId}`, {
@@ -22,6 +23,7 @@ export const downloadWarehouseReportById = async (warehouseId: number) => {
   return res.data;
 };
 
+// --- GET A WAREHOUSE REPORT BY ID ---
 export const getWarehouseReportById = async (warehouseId: number) => {
   const token = getAccessToken();
   const res = await api.get(`/reports/warehouse/${warehouseId}`, {

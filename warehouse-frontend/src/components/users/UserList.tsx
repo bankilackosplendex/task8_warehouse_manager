@@ -5,9 +5,13 @@ import { useState, useEffect } from "react";
 import { Role } from "../../enums/UserRoleEnum.tsx";
 
 function UserList() {
+  // --- USER ENTITIES ---
   const [users, setUsers] = useState([]);
+
+  // --- ERROR ---
   const [error, setError] = useState("");
 
+  // --- FETCH THE USERS DATA FROM BACKEND ---
   useEffect(() => {
     const fetchCompanies = async () => {
       try {
@@ -23,7 +27,9 @@ function UserList() {
   }, []);
 
   return (
+    // User list
     <div className="userList">
+      {/* User records */}
       {users.map((user) => (
         <div key={user.id} className="userList__item">
           <p className="userList__item__email">
