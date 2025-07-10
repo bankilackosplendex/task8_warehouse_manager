@@ -4,8 +4,11 @@ import { useEffect, useState } from "react";
 import { getProducts } from "../../services/productService.tsx";
 import { Product } from "../../types/ProductType.tsx";
 import { Package, PackagePlus } from "lucide-react";
+import { useAuth } from "../../hooks/useAuth.tsx";
+import { Role } from "../../enums/UserRoleEnum.tsx";
 
 function ProductList() {
+  const { user } = useAuth();
   const navigate = useNavigate();
   const [products, setProducts] = useState<Product[]>([]);
   const [error, setError] = useState("");
@@ -40,13 +43,15 @@ function ProductList() {
           {product.name}
         </Link>
       ))}
-      <button
-        className="productList__addButton"
-        onClick={() => onAddButtonClick()}
-      >
-        <PackagePlus />
-        Add new product
-      </button>
+      {user?.role === Role.ADMIN && (
+        <button
+          className="productList__addButton"
+          onClick={() => onAddButtonClick()}
+        >
+          <PackagePlus />
+          Add new product
+        </button>
+      )}
     </div>
   );
 }

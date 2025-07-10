@@ -6,7 +6,6 @@ import { Company } from "../../types/CompanyType";
 import {
   ArrowLeftRight,
   CalendarDays,
-  Container,
   Package,
   Pencil,
   Trash2,
@@ -15,10 +14,11 @@ import {
 } from "lucide-react";
 import Backdrop from "../common/Backdrop.tsx";
 import PopUpWindow from "../common/PopUpWindow.tsx";
-import { getWarehouseById } from "../../services/warehouseService.tsx";
-import { getProductById } from "../../services/productService.tsx";
+import { useAuth } from "../../hooks/useAuth.tsx";
+import { Role } from "../../enums/UserRoleEnum.tsx";
 
 function CompanyDetails() {
+  const { user } = useAuth();
   const { companyId } = useParams();
   const navigate = useNavigate();
 
@@ -114,20 +114,22 @@ function CompanyDetails() {
           </p>
         </div>
       )}
-      <div className="companyDetails__optionsContainer">
-        <button
-          className="companyDetails__optionsContainer__deleteButton"
-          onClick={() => setShowPopUpWindow(true)}
-        >
-          <Trash2 />
-        </button>
-        <button
-          className="companyDetails__optionsContainer__modifyButton"
-          onClick={() => modifyCompany(company.id)}
-        >
-          <Pencil />
-        </button>
-      </div>
+      {user?.role === Role.ADMIN && (
+        <div className="companyDetails__optionsContainer">
+          <button
+            className="companyDetails__optionsContainer__deleteButton"
+            onClick={() => setShowPopUpWindow(true)}
+          >
+            <Trash2 />
+          </button>
+          <button
+            className="companyDetails__optionsContainer__modifyButton"
+            onClick={() => modifyCompany(company.id)}
+          >
+            <Pencil />
+          </button>
+        </div>
+      )}
       {showPopUpWindow && <Backdrop closePopUpWindow={closeTab} />}
       {showPopUpWindow && (
         <PopUpWindow

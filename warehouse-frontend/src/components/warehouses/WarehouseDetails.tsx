@@ -21,8 +21,11 @@ import {
 import Backdrop from "../common/Backdrop.tsx";
 import PopUpWindow from "../common/PopUpWindow.tsx";
 import { WarehouseProduct } from "../../types/WarehouseProductType.tsx";
+import { useAuth } from "../../hooks/useAuth.tsx";
+import { Role } from "../../enums/UserRoleEnum.tsx";
 
 function WarehouseDetails() {
+  const { user } = useAuth();
   const { warehouseId } = useParams();
   const navigate = useNavigate();
 
@@ -51,7 +54,7 @@ function WarehouseDetails() {
     };
 
     fetchWarehouse();
-  }, []);
+  }, [warehouseId]);
 
   function closeTab(): void {
     setShowPopUpWindow(false);
@@ -186,20 +189,22 @@ function WarehouseDetails() {
           </p>
         </div>
       )}
-      <div className="warehouseDetails__optionsContainer">
-        <button
-          className="warehouseDetails__optionsContainer__deleteButton"
-          onClick={() => setShowPopUpWindow(true)}
-        >
-          <Trash2 />
-        </button>
-        <button
-          className="warehouseDetails__optionsContainer__modifyButton"
-          onClick={() => modifyWarehouse(warehouse.id)}
-        >
-          <Pencil />
-        </button>
-      </div>
+      {user?.role === Role.ADMIN && (
+        <div className="warehouseDetails__optionsContainer">
+          <button
+            className="warehouseDetails__optionsContainer__deleteButton"
+            onClick={() => setShowPopUpWindow(true)}
+          >
+            <Trash2 />
+          </button>
+          <button
+            className="warehouseDetails__optionsContainer__modifyButton"
+            onClick={() => modifyWarehouse(warehouse.id)}
+          >
+            <Pencil />
+          </button>
+        </div>
+      )}
       {showPopUpWindow && <Backdrop closePopUpWindow={closeTab} />}
       {showPopUpWindow && (
         <PopUpWindow

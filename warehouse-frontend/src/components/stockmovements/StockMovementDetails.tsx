@@ -19,8 +19,11 @@ import PopUpWindow from "../common/PopUpWindow.tsx";
 import { getWarehouseById } from "../../services/warehouseService.tsx";
 import { getProductById } from "../../services/productService.tsx";
 import { getCompanyById } from "../../services/companyService.tsx";
+import { useAuth } from "../../hooks/useAuth.tsx";
+import { Role } from "../../enums/UserRoleEnum.tsx";
 
 function StockMovementsDetails() {
+  const { user } = useAuth();
   const { stockMovementId } = useParams();
   const navigate = useNavigate();
 
@@ -150,20 +153,22 @@ function StockMovementsDetails() {
         </p>
       </div>
       {/* Options - delete and modify buttons */}
-      <div className="stockMovementDetails__optionsContainer">
-        <button
-          className="stockMovementDetails__optionsContainer__deleteButton"
-          onClick={() => setShowPopUpWindow(true)}
-        >
-          <Trash2 />
-        </button>
-        <button
-          className="stockMovementDetails__optionsContainer__modifyButton"
-          onClick={() => modifyStockMovement(stockMovement.id)}
-        >
-          <Pencil />
-        </button>
-      </div>
+      {user?.role === Role.ADMIN && (
+        <div className="stockMovementDetails__optionsContainer">
+          <button
+            className="stockMovementDetails__optionsContainer__deleteButton"
+            onClick={() => setShowPopUpWindow(true)}
+          >
+            <Trash2 />
+          </button>
+          <button
+            className="stockMovementDetails__optionsContainer__modifyButton"
+            onClick={() => modifyStockMovement(stockMovement.id)}
+          >
+            <Pencil />
+          </button>
+        </div>
+      )}
       {showPopUpWindow && <Backdrop closePopUpWindow={closeTab} />}
       {showPopUpWindow && (
         <PopUpWindow

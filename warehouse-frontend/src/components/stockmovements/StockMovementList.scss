@@ -4,6 +4,43 @@
 .stockmovementList {
   @include listBase;
 
+  &__header {
+    @include flexboxRow;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: $spacing-md;
+    padding-right: $spacing-md;
+    color: $text-color;
+    font-family: $font-family;
+    font-size: map-get($font-sizes, "small");
+
+    &__warehouse {
+      @include iconContainer;
+      flex: 1.2;
+      align-items: center;
+      margin-left: 3rem;
+    }
+
+    &__product {
+      @include iconContainer;
+      flex: 1;
+      justify-content: center;
+      margin-right: 5rem;
+    }
+
+    &__movementType {
+      @include iconContainer;
+      flex: 1;
+      justify-content: center;
+    }
+
+    &__date {
+      @include iconContainer;
+      flex: 1;
+      justify-content: flex-end;
+    }
+  }
+
   &__item {
     @include itemBase;
     height: fit-content;
@@ -14,20 +51,29 @@
       @include itemHoverBase;
     }
 
-    &__id {
-      @include flexboxRow;
-      flex-wrap: wrap;
+    &__warehouse {
+      @include iconContainer;
+      flex: 1.2;
       align-items: center;
-      gap: 2rem;
-      margin-left: 1rem;
+      gap: 1rem;
     }
 
-    &__info {
+    &__product {
       @include flexboxRow;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 2rem;
-      margin-left: 4.3rem;
+      flex: 1;
+      justify-content: center;
+    }
+
+    &__movementType {
+      @include flexboxRow;
+      flex: 1;
+      justify-content: center;
+    }
+
+    &__date {
+      @include flexboxRow;
+      flex: 1;
+      justify-content: flex-end;
     }
   }
 

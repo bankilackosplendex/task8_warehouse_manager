@@ -1,14 +1,17 @@
-import { Link, useNavigate } from "react-router-dom";
 import "./StockMovementList.scss";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { StockMovement } from "../../types/StockMovementType";
 import { getStockMovements } from "../../services/stockMovementService.tsx";
 import { getProductById } from "../../services/productService.tsx";
 import { getWarehouseById } from "../../services/warehouseService.tsx";
 import { getCompanyById } from "../../services/companyService.tsx";
-import { SquarePlus, Truck } from "lucide-react";
+import { ArrowLeftRight, CalendarDays, Package, SquarePlus, Truck, Warehouse } from "lucide-react";
+import { Role } from "../../enums/UserRoleEnum.tsx";
+import { useAuth } from "../../hooks/useAuth.tsx";
 
 function StockMovementsList() {
+  const { user } = useAuth();
   const navigate = useNavigate();
   const [stockMovements, setStockMovements] = useState<StockMovement[]>([]);
   const [error, setError] = useState("");
@@ -85,30 +88,54 @@ function StockMovementsList() {
 
   return (
     <div className="stockmovementList">
+      <div className="stockmovementList__header">
+        <div className="stockmovementList__header__warehouse">
+            <Warehouse />
+            Warehouse
+          </div>
+          <div className="stockmovementList__header__product">
+            <Package />
+            Product
+          </div>
+          <div className="stockmovementList__header__movementType">
+            <ArrowLeftRight />
+            Movement type
+          </div>
+          <div className="stockmovementList__header__date">
+            <CalendarDays />
+            Date
+          </div>
+      </div>
       {stockMovements.map((stockmovement) => (
         <Link
           to={`/stockmovements/${stockmovement.id}`}
           key={stockmovement.id}
           className="stockmovementList__item"
         >
-          <div className="stockmovementList__item__id">
+          <div className="stockmovementList__item__warehouse">
             <Truck />
-            <p>{stockmovement.warehouse.name}</p>
-            <p>{stockmovement.product.name}</p>
+            {stockmovement.warehouse.name}
           </div>
-          <div className="stockmovementList__item__info">
-            <p>{stockmovement.movementType}</p>
-            <p>{new Date(stockmovement.createdAt).toLocaleDateString()}</p>
+          <div className="stockmovementList__item__product">
+            {stockmovement.product.name}
+          </div>
+          <div className="stockmovementList__item__movementType">
+            {stockmovement.movementType}
+          </div>
+          <div className="stockmovementList__item__date">
+            {new Date(stockmovement.createdAt).toLocaleDateString()}
           </div>
         </Link>
       ))}
-      <button
-        className="stockmovementList__addButton"
-        onClick={() => onAddButtonClick()}
-      >
-        <SquarePlus />
-        Add new stockmovement
-      </button>
+      {user?.role === Role.ADMIN && (
+        <button
+          className="stockmovementList__addButton"
+          onClick={() => onAddButtonClick()}
+        >
+          <SquarePlus />
+          Add new stockmovement
+        </button>
+      )}
     </div>
   );
 }

@@ -4,8 +4,11 @@ import { useEffect, useState } from "react";
 import { Company } from "../../types/CompanyType.tsx";
 import { getCompanies } from "../../services/companyService.tsx";
 import { Briefcase, SquarePlus } from "lucide-react";
+import { useAuth } from "../../hooks/useAuth.tsx";
+import { Role } from "../../enums/UserRoleEnum.tsx";
 
 function CompanyList() {
+  const { user } = useAuth();
   const navigate = useNavigate();
   const [companies, setCompanies] = useState<Company[]>([]);
   const [error, setError] = useState("");
@@ -40,13 +43,15 @@ function CompanyList() {
           {company.name}
         </Link>
       ))}
-      <button
-        className="companyList__addButton"
-        onClick={() => onAddButtonClick()}
-      >
-        <SquarePlus />
-        Add new company
-      </button>
+      {user?.role === Role.ADMIN && (
+        <button
+          className="companyList__addButton"
+          onClick={() => onAddButtonClick()}
+        >
+          <SquarePlus />
+          Add new company
+        </button>
+      )}
     </div>
   );
 }
