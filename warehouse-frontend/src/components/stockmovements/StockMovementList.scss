@@ -25,13 +25,14 @@
       @include iconContainer;
       flex: 1;
       justify-content: center;
-      margin-right: 5rem;
+      margin-right: 3rem;
     }
 
     &__movementType {
       @include iconContainer;
       flex: 1;
       justify-content: center;
+      margin-right: 4rem;
     }
 
     &__date {
@@ -68,6 +69,7 @@
       @include flexboxRow;
       flex: 1;
       justify-content: center;
+      
     }
 
     &__date {

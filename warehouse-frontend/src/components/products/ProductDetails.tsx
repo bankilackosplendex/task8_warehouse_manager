@@ -3,13 +3,13 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Product } from "../../types/ProductType";
 import {
+  deleteProduct,
   getProductById,
   getProductWarehousesById,
 } from "../../services/productService.tsx";
 import {
   CalendarDays,
   Container,
-  Divide,
   FileDigit,
   Pencil,
   Ruler,
@@ -66,7 +66,12 @@ function ProductDetails() {
     setShowPopUpWindow(false);
   }
 
-  function deleteProduct(): void {}
+  const onDelete = async () => {
+      if (productId) {
+        await deleteProduct(+productId);
+      }
+      navigate(`/products`);
+    };
 
   function modifyProduct(id: number): void {
     navigate(`/products/modify/${product.id}`);
@@ -168,7 +173,7 @@ function ProductDetails() {
         <PopUpWindow
           text={"Are you sure you want to delete product " + product.name + "?"}
           closePopUpWindow={closeTab}
-          deleteItem={deleteProduct}
+          deleteItem={onDelete}
         />
       )}
     </div>

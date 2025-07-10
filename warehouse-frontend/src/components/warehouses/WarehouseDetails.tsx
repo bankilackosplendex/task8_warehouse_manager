@@ -2,6 +2,7 @@ import "./WarehouseDetails.scss";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {
+  deleteWarehouse,
   getWarehouseById,
   getWarehouseProductsById,
 } from "../../services/warehouseService.tsx";
@@ -60,7 +61,12 @@ function WarehouseDetails() {
     setShowPopUpWindow(false);
   }
 
-  function deleteWarehouse(): void {}
+  const onDelete = async () => {
+    if (warehouseId) {
+      await deleteWarehouse(+warehouseId);
+    }
+    navigate(`/warehouses`);
+  };
 
   function modifyWarehouse(id: number): void {
     navigate(`/warehouses/modify/${warehouse.id}`);
@@ -133,7 +139,7 @@ function WarehouseDetails() {
           </p>
         </div>
       )}
-      {warehouse.movements ? (
+      {warehouse.movements && warehouse.movements.length > 0 ? (
         <div className="warehouseDetails__movements">
           <div className="warehouseDetails__movements__key">
             <Truck className="warehouseDetails__movements__key__icon" />
@@ -182,11 +188,15 @@ function WarehouseDetails() {
         </div>
       ) : (
         <div className="warehouseDetails__movements warehouseDetails__empty">
-          <Truck className="warehouseDetails__movements__icon" />
-          <p className="warehouseDetails__movements__key">Movements: </p>
-          <p className="warehouseDetails__movements__value">
+          <div className="warehouseDetails__movements__key">
+            <Truck className="warehouseDetails__movements__key__icon" />
+            <p className="warehouseDetails__movements__key__text">
+              Movements:
+            </p>
+          </div>
+          <div className="warehouseDetails__movements__value">
             This warehouse has no movements
-          </p>
+          </div>
         </div>
       )}
       {user?.role === Role.ADMIN && (
@@ -212,7 +222,7 @@ function WarehouseDetails() {
             "Are you sure you want to delete warahouse " + warehouse.name + "?"
           }
           closePopUpWindow={closeTab}
-          deleteItem={deleteWarehouse}
+          deleteItem={onDelete}
         />
       )}
     </div>

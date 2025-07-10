@@ -1,7 +1,10 @@
 import "./CompanyDetails.scss";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getCompanyById } from "../../services/companyService.tsx";
+import {
+  deleteCompany,
+  getCompanyById,
+} from "../../services/companyService.tsx";
 import { Company } from "../../types/CompanyType";
 import {
   ArrowLeftRight,
@@ -46,7 +49,12 @@ function CompanyDetails() {
     setShowPopUpWindow(false);
   }
 
-  function deleteCompany(): void {}
+  const onDelete = async () => {
+    if (companyId) {
+      await deleteCompany(+companyId);
+    }
+    navigate(`/companies`);
+  };
 
   function modifyCompany(id: number): void {
     navigate(`/companies/modify/${id}`);
@@ -55,13 +63,12 @@ function CompanyDetails() {
   return (
     <div className="companyDetails">
       <h2 className="companyDetails__name">{company.name}</h2>
-
-      {company.movements ? (
+      {company.movements && company.movements.length > 0 ? (
         <div className="companyDetails__movements">
-          <p className="companyDetails__movements__key">
+          <div className="companyDetails__movements__key">
             <Truck className="companyDetails__movements__key__icon" />
             <p className="companyDetails__movements__key__text">Movements: </p>
-          </p>
+          </div>
           <div className="companyDetails__movements__value">
             <div className="companyDetails__movements__value__header">
               <p className="companyDetails__movements__value__header__warehouse">
@@ -135,7 +142,7 @@ function CompanyDetails() {
         <PopUpWindow
           text={"Are you sure you want to delete company " + company.name + "?"}
           closePopUpWindow={closeTab}
-          deleteItem={deleteCompany}
+          deleteItem={onDelete}
         />
       )}
     </div>

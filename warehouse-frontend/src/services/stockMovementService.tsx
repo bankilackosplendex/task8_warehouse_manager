@@ -34,7 +34,7 @@ export const createStockMovement = async (data: StockMovement) => {
 
 export const updateStockMovement = async (id: number, data: StockMovement) => {
   const token = getAccessToken();
-  const res = await api.put(`/stockmovements/${id}`, data, {
+  const res = await api.patch(`/stockmovements/${id}`, data, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

@@ -1,14 +1,28 @@
-import { Building2, Earth, MapPin, Save, SquarePlus, Tag, MapPinHouse } from "lucide-react";
 import "./WarehouseForm.scss";
+import {
+  Building2,
+  Earth,
+  MapPin,
+  Save,
+  SquarePlus,
+  Tag,
+  MapPinHouse,
+  TextIcon,
+} from "lucide-react";
 import { FormType } from "../../enums/FormTypeEnum.tsx";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { getWarehouseById } from "../../services/warehouseService.tsx";
+import {
+  createWarehouse,
+  getWarehouseById,
+  updateWarehouse,
+} from "../../services/warehouseService.tsx";
 import { useState } from "react";
 import { Warehouse } from "../../types/WarehouseType.tsx";
 
 function WarehouseForm({ type }: { type: FormType }) {
   const { warehouseId } = useParams();
+  const navigate = useNavigate();
   const [warehouse, setWarehouse] = useState<Warehouse>([]);
   const [error, setError] = useState("");
 
@@ -17,8 +31,6 @@ function WarehouseForm({ type }: { type: FormType }) {
       if (warehouseId) {
         try {
           const data = await getWarehouseById(+warehouseId);
-          if (!data.products) data.products = "-";
-          if (!data.movements) data.movements = "-";
           setWarehouse(data);
         } catch (err: any) {
           const msg = err.response?.data?.message || "Couldn't load warehouse";
@@ -37,7 +49,7 @@ function WarehouseForm({ type }: { type: FormType }) {
   }, []);
 
   function getAddressFields(address: string): string[] {
-    if (!address) return ["","",""];
+    if (!address) return ["", "", ""];
     const [rawMainPart, countryRaw] = address.split(",");
     const country = countryRaw?.trim() || "";
 
@@ -48,12 +60,65 @@ function WarehouseForm({ type }: { type: FormType }) {
     return [country, city, streetAddress];
   }
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    try {
+      if (type == FormType.CREATE) {
+        await createWarehouse(warehouse);
+      } else if (type == FormType.MODIFY && warehouseId) {
+        const cleanWarehouse = { ...warehouse };
+        delete cleanWarehouse.movements;
+        await updateWarehouse(+warehouseId, cleanWarehouse);
+      }
+
+      navigate("/warehouses");
+    } catch (err: any) {
+      console.error("Warehouse operation failed", err);
+      if (err.response && err.response.data && err.response.data.message) {
+        const msg = Array.isArray(err.response.data.message)
+          ? err.response.data.message.join(", ")
+          : err.response.data.message;
+        setError(msg);
+      } else {
+        setError("Unknown error");
+      }
+    }
+  };
+
+  function setName(name: string): void {
+    setWarehouse((prev) => ({ ...prev, name }));
+  }
+
+  function setDescription(d: string): void {
+    setWarehouse((prev) => ({ ...prev, description: d }));
+  }
+
+  function setCountry(country: string): void {
+    const [_, city, street] = getAddressFields(warehouse.address || "");
+    const newAddress = `${city} ${street}, ${country}`;
+    setWarehouse((prev) => ({ ...prev, address: newAddress }));
+  }
+
+  function setCity(city: string): void {
+    const [country, _, street] = getAddressFields(warehouse.address || "");
+    const newAddress = `${city} ${street}, ${country}`;
+    setWarehouse((prev) => ({ ...prev, address: newAddress }));
+  }
+
+  function setStreetAddress(street: string): void {
+    const [country, city, _] = getAddressFields(warehouse.address || "");
+    const newAddress = `${city} ${street}, ${country}`;
+    setWarehouse((prev) => ({ ...prev, address: newAddress }));
+  }
+
   return (
     // Warehouse form
-    <form className="warehouseForm" method="post">
+    <form className="warehouseForm" onSubmit={handleSubmit}>
       {/* Name */}
       <label className="warehouseForm__nameLabel" htmlFor="name">
-        <Tag className="warehouseForm__nameLabel__icon"/>
+        <Tag className="warehouseForm__nameLabel__icon" />
         Name
       </label>
       <input
@@ -61,12 +126,26 @@ function WarehouseForm({ type }: { type: FormType }) {
         type="text"
         name="name"
         defaultValue={warehouse.name ? warehouse.name : ""}
+        onChange={(e) => setName(e.target.value)}
+        required
+      />
+      {/* Description */}
+      <label className="warehouseForm__descriptionLabel" htmlFor="description">
+        <TextIcon className="warehouseForm__descriptionLabel__icon" />
+        Description
+      </label>
+      <textarea
+        className="warehouseForm__descriptionField"
+        name="description"
+        defaultValue={warehouse.description ? warehouse.description : ""}
+        onChange={(e) => setDescription(e.target.value)}
         required
       />
       {/* Address */}
       <label className="warehouseForm__locationLabel">
-        <MapPin className="warehouseForm__locationLabel__icon"/>
-        Location</label>
+        <MapPin className="warehouseForm__locationLabel__icon" />
+        Location
+      </label>
       <div className="warehouseForm__location">
         {/* Country */}
         <div className="warehouseForm__location__country">
@@ -74,14 +153,17 @@ function WarehouseForm({ type }: { type: FormType }) {
             className="warehouseForm__location__country__countryLabel"
             htmlFor="country"
           >
-            <Earth className="warehouseForm__location__country__countryLabel__icon"/>
+            <Earth className="warehouseForm__location__country__countryLabel__icon" />
             Country
           </label>
           <input
             className="warehouseForm__location__country__countryField"
             type="text"
             name="country"
-            defaultValue={warehouse.address ? getAddressFields(warehouse.address)[0] : ""}
+            defaultValue={
+              warehouse.address ? getAddressFields(warehouse.address)[0] : ""
+            }
+            onChange={(e) => setCountry(e.target.value)}
             required
           />
         </div>
@@ -91,14 +173,17 @@ function WarehouseForm({ type }: { type: FormType }) {
             className="warehouseForm__location__city__cityLabel"
             htmlFor="city"
           >
-            <Building2 className="warehouseForm__location__city__cityLabel__icon"/>
+            <Building2 className="warehouseForm__location__city__cityLabel__icon" />
             City
           </label>
           <input
             className="warehouseForm__location__city__cityField"
             type="text"
             name="city"
-            defaultValue={warehouse.address ? getAddressFields(warehouse.address)[1] : ""}
+            defaultValue={
+              warehouse.address ? getAddressFields(warehouse.address)[1] : ""
+            }
+            onChange={(e) => setCity(e.target.value)}
             required
           />
         </div>
@@ -108,14 +193,17 @@ function WarehouseForm({ type }: { type: FormType }) {
             className="warehouseForm__location__address__addressLabel"
             htmlFor="address"
           >
-            <MapPinHouse className="warehouseForm__location__address__addressLabel__icon"/>
+            <MapPinHouse className="warehouseForm__location__address__addressLabel__icon" />
             Address
           </label>
           <input
             className="warehouseForm__location__address__addressField"
             type="text"
             name="address"
-            defaultValue={warehouse.address ? getAddressFields(warehouse.address)[2] : ""}
+            defaultValue={
+              warehouse.address ? getAddressFields(warehouse.address)[2] : ""
+            }
+            onChange={(e) => setStreetAddress(e.target.value)}
             required
           />
         </div>

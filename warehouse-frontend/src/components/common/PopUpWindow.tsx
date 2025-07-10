@@ -27,7 +27,7 @@ function PopUpWindow({
         {/* Delete button */}
         <button
           className="popUpWindow__buttonContainer__deleteButton"
-          onClick={() => closePopUpWindow()}
+          onClick={() => deleteItem()}
         >
           Delete
         </button>

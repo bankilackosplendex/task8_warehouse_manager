@@ -34,7 +34,7 @@ export const createCompany = async (data: Company) => {
 
 export const updateCompany = async (id: number, data: Company) => {
   const token = getAccessToken();
-  const res = await api.put(`/companies/${id}`, data, {
+  const res = await api.patch(`/companies/${id}`, data, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

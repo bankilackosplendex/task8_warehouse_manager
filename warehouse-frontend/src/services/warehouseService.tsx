@@ -34,7 +34,7 @@ export const createWarehouse = async (data: Warehouse) => {
 
 export const updateWarehouse = async (id: number, data: Warehouse) => {
   const token = getAccessToken();
-  const response = await api.put(`/warehouses/${id}`, data, {
+  const response = await api.patch(`/warehouses/${id}`, data, {
     headers: {
       Authorization: `Bearer ${token}`,
     }

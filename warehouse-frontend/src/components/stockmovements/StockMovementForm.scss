@@ -11,6 +11,7 @@
   &__dateLabel,
   &__movementTypeLabel,
   &__productLabel,
+  &__quantityLabel,
   &__warehouseLabel,
   &__companyLabel {
     @include inputLabelBase;
@@ -20,6 +21,7 @@
   &__dateField,
   &__movementTypeField,
   &__productField,
+  &__quantityField,
   &__warehouseField,
   &__companyField {
     @include inputFieldBase;

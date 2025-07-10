@@ -34,7 +34,7 @@ export const createProduct = async (data: Product) => {
 
 export const updateProduct = async (id: number, data: Product) => {
   const token = getAccessToken();
-  const res = await api.put(`/products/${id}`, data, {
+  const res = await api.patch(`/products/${id}`, data, {
     headers: {
       Authorization: `Bearer ${token}`,
     }

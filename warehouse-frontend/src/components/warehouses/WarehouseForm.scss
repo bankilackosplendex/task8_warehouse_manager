@@ -8,13 +8,20 @@
     @include pageTitle;
   }
 
-  &__nameLabel {
+  &__nameLabel,
+  &__descriptionLabel {
     @include inputLabelBase;
     @include iconContainer;
   }
 
-  &__nameField {
+  &__nameField{
     @include inputFieldBase;
+  }
+
+  &__descriptionField {
+    @include inputFieldBase;
+    height: 6rem;
+    padding-top: 1rem;
   }
 
   &__locationLabel {

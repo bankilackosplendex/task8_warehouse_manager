@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { StockMovement } from "../../types/StockMovementType.tsx";
-import { getStockMovementById } from "../../services/stockMovementService.tsx";
+import { deleteStockMovement, getStockMovementById } from "../../services/stockMovementService.tsx";
 import {
   CalendarDays,
   Warehouse,
@@ -61,7 +61,12 @@ function StockMovementsDetails() {
     setShowPopUpWindow(false);
   }
 
-  function deleteStockMovement(): void {}
+  const onDelete = async () => {
+      if (stockMovementId) {
+        await deleteStockMovement(+stockMovementId);
+      }
+      navigate(`/stockmovements`);
+    };
 
   function modifyStockMovement(id: number): void {
     navigate(`/stockmovements/modify/${stockMovement.id}`);
@@ -178,7 +183,7 @@ function StockMovementsDetails() {
             "?"
           }
           closePopUpWindow={closeTab}
-          deleteItem={deleteStockMovement}
+          deleteItem={onDelete}
         />
       )}
     </div>

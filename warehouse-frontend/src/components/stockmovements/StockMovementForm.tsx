@@ -1,13 +1,14 @@
+import "./StockMovementForm.scss";
 import {
   ArrowRightLeft,
   Briefcase,
   CalendarDays,
+  Container,
   Package,
   Save,
   SquarePlus,
   WarehouseIcon,
 } from "lucide-react";
-import "./StockMovementForm.scss";
 import { FormType } from "../../enums/FormTypeEnum.tsx";
 import { useEffect } from "react";
 import {
@@ -15,12 +16,16 @@ import {
   getCompanyById,
 } from "../../services/companyService.tsx";
 import { getProductById, getProducts } from "../../services/productService.tsx";
-import { getStockMovementById } from "../../services/stockMovementService.tsx";
+import {
+  createStockMovement,
+  getStockMovementById,
+  updateStockMovement,
+} from "../../services/stockMovementService.tsx";
 import {
   getWarehouseById,
   getWarehouses,
 } from "../../services/warehouseService.tsx";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { StockMovement } from "../../types/StockMovementType.tsx";
 import { Warehouse } from "../../types/WarehouseType.tsx";
@@ -29,6 +34,7 @@ import { Company } from "../../types/CompanyType.tsx";
 
 function StockMovementsForm({ type }: { type: FormType }) {
   const { stockMovementId } = useParams();
+  const navigate = useNavigate();
 
   const [stockMovement, setStockMovement] = useState<StockMovement>([]);
   const [warehouses, setWarehouses] = useState<Warehouse>([]);
@@ -67,6 +73,37 @@ function StockMovementsForm({ type }: { type: FormType }) {
     fetchStockMovement();
   }, []);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    try {
+      if (type == FormType.CREATE) {
+        await createStockMovement(stockMovement);
+      } else if (type == FormType.MODIFY && stockMovementId) {
+        const cleanedStockMovement = { ...stockMovement };
+        delete cleanedStockMovement.id;
+        delete cleanedStockMovement.product;
+        delete cleanedStockMovement.warehouse;
+        delete cleanedStockMovement.company;
+
+        await updateStockMovement(+stockMovementId, cleanedStockMovement);
+      }
+
+      navigate("/stockmovements");
+    } catch (err: any) {
+      console.error("Stockmovement operation failed", err);
+      if (err.response && err.response.data && err.response.data.message) {
+        const msg = Array.isArray(err.response.data.message)
+          ? err.response.data.message.join(", ")
+          : err.response.data.message;
+        setError(msg);
+      } else {
+        setError("Unknown error");
+      }
+    }
+  };
+
   function formatDateForInput(dateStr: string) {
     const date = new Date(dateStr);
     const pad = (n: number) => n.toString().padStart(2, "0");
@@ -80,9 +117,34 @@ function StockMovementsForm({ type }: { type: FormType }) {
     return `${year}-${month}-${day}T${hours}:${minutes}`;
   }
 
+  function setProduct(productId: string): void {
+    setStockMovement((prev) => ({ ...prev, productId: +productId }));
+  }
+
+  function setQuantity(q: string): void {
+    setStockMovement((prev) => ({ ...prev, quantity: +q }));
+  }
+
+  function setWarehouse(warehouseId: string): void {
+    setStockMovement((prev) => ({ ...prev, warehouseId: +warehouseId }));
+  }
+
+  function setCompany(companyId: string): void {
+    setStockMovement((prev) => ({ ...prev, companyId: +companyId }));
+  }
+
+  function setMovementType(movementType: string): void {
+    setStockMovement((prev) => ({ ...prev, movementType }));
+  }
+
+  function setDate(dateStr: string): void {
+    const isoDate = new Date(dateStr).toISOString();
+    setStockMovement((prev) => ({ ...prev, createdAt: isoDate }));
+  }
+
   return (
     // StockMovements form
-    <form className="stockMovementsForm" method="post">
+    <form className="stockMovementsForm" onSubmit={handleSubmit}>
       {/* Product */}
       <label className="stockMovementsForm__productLabel" htmlFor="product">
         <Package className="stockMovementsForm__productLabel__icon" />
@@ -94,6 +156,7 @@ function StockMovementsForm({ type }: { type: FormType }) {
         defaultValue={
           stockMovement.product?.id ? stockMovement.product?.id : ""
         }
+        onChange={(e) => setProduct(e.target.value)}
         required
       >
         {products.map((product) => (
@@ -102,6 +165,19 @@ function StockMovementsForm({ type }: { type: FormType }) {
           </option>
         ))}
       </select>
+      {/* Quantity */}
+      <label className="stockMovementsForm__quantityLabel" htmlFor="quantrity">
+        <Container className="stockMovementsForm__quantityLabel__icon" />
+        Quantity {stockMovement.product?.quantityType}
+      </label>
+      <input
+        className="stockMovementsForm__quantityField"
+        type="text"
+        name="quantity"
+        defaultValue={stockMovement?.quantity ? stockMovement.quantity : ""}
+        onChange={(e) => setQuantity(e.target.value)}
+        required
+      />
       {/* Movement type */}
       <label
         className="stockMovementsForm__movementTypeLabel"
@@ -116,6 +192,7 @@ function StockMovementsForm({ type }: { type: FormType }) {
         defaultValue={
           stockMovement.movementType ? stockMovement.movementType : "IMPORT"
         }
+        onChange={(e) => setMovementType(e.target.value)}
         required
       >
         <option value="IMPORT">IMPORT</option>
@@ -132,6 +209,7 @@ function StockMovementsForm({ type }: { type: FormType }) {
         defaultValue={
           stockMovement.warehouse?.id ? stockMovement.warehouse?.id : ""
         }
+        onChange={(e) => setWarehouse(e.target.value)}
         required
       >
         {warehouses.map((warehouse) => (
@@ -151,6 +229,7 @@ function StockMovementsForm({ type }: { type: FormType }) {
         defaultValue={
           stockMovement.company?.id ? stockMovement.company?.id : ""
         }
+        onChange={(e) => setCompany(e.target.value)}
         required
       >
         {companies.map((company) => (
@@ -173,7 +252,7 @@ function StockMovementsForm({ type }: { type: FormType }) {
             ? formatDateForInput(stockMovement.createdAt)
             : ""
         }
-        required
+        onChange={(e) => setDate(e.target.value)}
       />
       {/* Add button */}
       <button className="stockMovementsForm__button" type="submit">

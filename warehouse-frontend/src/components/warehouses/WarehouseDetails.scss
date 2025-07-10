@@ -195,6 +195,7 @@
 
   &__empty {
     @include flexboxRow;
+    align-items: center;
     gap: 1rem;
   }
 

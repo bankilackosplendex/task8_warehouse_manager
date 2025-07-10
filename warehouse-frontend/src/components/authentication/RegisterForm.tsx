@@ -15,7 +15,7 @@ function RegisterForm() {
     setError("");
 
     try {
-      const response = await register({ email, password });
+      await register({ email, password });
 
       navigate("/login");
     } catch (err: any) {
