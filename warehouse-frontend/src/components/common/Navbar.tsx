@@ -50,7 +50,11 @@ function Navbar() {
       <ul className={`navbar__links ${menuOpen ? "navbar__links--open" : ""}`}>
         {/* Home */}
         <li>
-          <Link className="navbar__links__item" to="/">
+          <Link
+            className="navbar__links__item"
+            to="/"
+            onClick={() => toggleMenu()}
+          >
             <Home className="navbar__links__item__icon" />
             <div>Home</div>
           </Link>
@@ -59,35 +63,55 @@ function Navbar() {
           <>
             {/* Warehouses */}
             <li>
-              <Link className="navbar__links__item" to="/warehouses">
+              <Link
+                className="navbar__links__item"
+                to="/warehouses"
+                onClick={() => toggleMenu()}
+              >
                 <Warehouse className="navbar__links__item__icon" />
                 <div>Warehouses</div>
               </Link>
             </li>
             {/* Products */}
             <li>
-              <Link className="navbar__links__item" to="/products">
+              <Link
+                className="navbar__links__item"
+                to="/products"
+                onClick={() => toggleMenu()}
+              >
                 <Package className="navbar__links__item__icon" />
                 <div>Products</div>
               </Link>
             </li>
             {/* Companies */}
             <li>
-              <Link className="navbar__links__item" to="/companies">
+              <Link
+                className="navbar__links__item"
+                to="/companies"
+                onClick={() => toggleMenu()}
+              >
                 <Briefcase />
                 Companies
               </Link>
             </li>
             {/* Movements */}
             <li>
-              <Link className="navbar__links__item" to="/stockmovements">
+              <Link
+                className="navbar__links__item"
+                to="/stockmovements"
+                onClick={() => toggleMenu()}
+              >
                 <Truck className="navbar__links__item__icon" />
                 <div>Movements</div>
               </Link>
             </li>
             {/* Reports */}
             <li>
-              <Link className="navbar__links__item" to="/reports">
+              <Link
+                className="navbar__links__item"
+                to="/reports"
+                onClick={() => toggleMenu()}
+              >
                 <FileText className="navbar__links__item__icon" />
                 <div>Reports</div>
               </Link>
@@ -100,14 +124,22 @@ function Navbar() {
           <>
             {/* Statistics */}
             <li>
-              <Link className="navbar__links__item" to="/statistics">
+              <Link
+                className="navbar__links__item"
+                to="/statistics"
+                onClick={() => toggleMenu()}
+              >
                 <BarChart3 className="navbar__links__item__icon" />
                 <div>Statistics</div>
               </Link>
             </li>
             {/* Users */}
             <li>
-              <Link className="navbar__links__item" to="/users">
+              <Link
+                className="navbar__links__item"
+                to="/users"
+                onClick={() => toggleMenu()}
+              >
                 <Users className="navbar__links__item__icon" />
                 <div>Users</div>
               </Link>
@@ -118,7 +150,11 @@ function Navbar() {
           <>
             {/* Logout */}
             <li onClick={logout}>
-              <Link className="navbar__links__item" to="/">
+              <Link
+                className="navbar__links__item"
+                to="/"
+                onClick={() => toggleMenu()}
+              >
                 <LogOut className="navbar__links__item__icon" />
                 <div>Log out</div>
               </Link>
@@ -128,14 +164,22 @@ function Navbar() {
           <>
             {/* Login */}
             <li>
-              <Link className="navbar__links__item" to="/login">
+              <Link
+                className="navbar__links__item"
+                to="/login"
+                onClick={() => toggleMenu()}
+              >
                 <LogInIcon className="navbar__links__item__icon" />
                 <div>Login</div>
               </Link>
             </li>
             {/* Registration */}
             <li>
-              <Link className="navbar__links__item" to="/registration">
+              <Link
+                className="navbar__links__item"
+                to="/registration"
+                onClick={() => toggleMenu()}
+              >
                 <UserPlus className="navbar__links__item__icon" />
                 <div>Registration</div>
               </Link>
