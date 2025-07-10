@@ -14,9 +14,16 @@
 
   // --- DETAILS FIELDS ---
   &__address,
-  &__description{
+  &__description {
     @include flexboxRow;
     @include iconContainer;
+    align-items: flex-start;
+
+    &__icon {
+      margin-top: 1rem;
+      min-height: 1.5rem;
+      min-width: 1.5rem;
+    }
 
     &__key {
       @include detailsKeyBase;
@@ -35,7 +42,7 @@
     &__key {
       @include iconContainer;
 
-      &__icon{
+      &__icon {
         min-height: 1.5rem;
         min-width: 1.5rem;
       }
@@ -56,6 +63,7 @@
         justify-content: space-between;
         padding-left: $spacing-md;
         padding-right: $spacing-md;
+        display: none;
 
         &__name,
         &__quantity,
@@ -63,16 +71,16 @@
           @include iconContainer;
         }
 
-        &__name{
+        &__name {
           flex: 1.2;
         }
 
-        &__quantity{
+        &__quantity {
           flex: 1;
           justify-content: center;
         }
 
-        &__date{
+        &__date {
           flex: 1;
           justify-content: flex-end;
         }
@@ -92,7 +100,7 @@
           @include itemHoverBase;
         }
 
-        &__name{
+        &__name {
           flex: 1.2;
         }
 
@@ -103,7 +111,7 @@
           gap: 0.3rem;
         }
 
-        &__date{
+        &__date {
           flex: 1;
         }
       }
@@ -118,7 +126,7 @@
     &__key {
       @include iconContainer;
 
-      &__icon{
+      &__icon {
         min-height: 1.5rem;
         min-width: 1.5rem;
       }
@@ -139,6 +147,7 @@
         justify-content: space-between;
         padding-left: $spacing-md;
         padding-right: $spacing-md;
+        display: none;
 
         &__product,
         &__quantity,
@@ -147,20 +156,20 @@
           @include iconContainer;
         }
 
-        &__product{
+        &__product {
           flex: 1.2;
         }
 
-        &__quantity{
+        &__quantity {
           flex: 1;
         }
 
-        &__movementType{
+        &__movementType {
           flex: 1;
           justify-content: center;
         }
 
-        &__date{
+        &__date {
           flex: 1;
           justify-content: flex-end;
         }
@@ -180,7 +189,7 @@
           @include itemHoverBase;
         }
 
-        &__product{
+        &__product {
           flex: 1.2;
         }
 
@@ -189,15 +198,17 @@
           flex: 1;
           align-items: center;
           gap: 0.3rem;
+          display: none;
         }
 
-        &__movementType{
+        &__movementType {
           flex: 1;
           @include flexboxRow;
           justify-content: center;
-        }  
+          display: none;
+        }
 
-        &__date{
+        &__date {
           flex: 1;
           @include flexboxRow;
           justify-content: flex-end;
@@ -234,6 +245,31 @@
       &:hover {
         color: $error-color;
         border-color: $error-color;
+      }
+    }
+  }
+}
+
+// --- MEDIA QUERIES ---
+@media (min-width: 45rem) {
+  .warehouseDetails {
+    &__products,
+    &__movements {
+      &__value {
+        &__header {
+          display: flex;
+        }
+      }
+    }
+
+    &__movements {
+      &__value {
+        &__item{
+          &__quantity,
+          &__movementType{
+            display: flex;
+          }
+        }
       }
     }
   }

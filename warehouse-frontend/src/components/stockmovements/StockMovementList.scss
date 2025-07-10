@@ -15,6 +15,7 @@
     color: $text-color;
     font-family: $font-family;
     font-size: map-get($font-sizes, "small");
+    display: none;
 
     &__warehouse {
       @include iconContainer;
@@ -32,7 +33,7 @@
 
     &__movementType {
       @include iconContainer;
-      flex: 1;
+      flex: 1.2;
       justify-content: center;
       margin-right: 4rem;
     }
@@ -49,6 +50,7 @@
     @include itemBase;
     height: fit-content;
     @include flexboxColumn;
+    gap: 1rem;
     justify-content: space-between;
 
     &:hover {
@@ -65,20 +67,19 @@
     &__product {
       @include flexboxRow;
       flex: 1;
-      justify-content: center;
+      margin-left: 2.5rem;
     }
 
     &__movementType {
       @include flexboxRow;
-      flex: 1;
-      justify-content: center;
-      
+      flex: 1.2;
+      margin-left: 2.5rem;
     }
 
     &__date {
       @include flexboxRow;
       flex: 1;
-      justify-content: flex-end;
+      margin-left: 2.5rem;
     }
   }
 
@@ -95,23 +96,42 @@
 }
 
 // --- MEDIA QUERIES ---
-@media (min-width: 55rem) {
+@media (min-width: 45rem) {
   .stockmovementList {
+    &__header {
+      display: flex;
+    }
+
     &__item {
       @include flexboxRow;
-      @include itemBase;
-      @include flexboxRow;
       align-items: center;
-      gap: 1rem;
 
-      &__id {
-        margin-left: 0rem;
-        flex-wrap: nowrap;
+      &__warehouse {
+        @include iconContainer;
+        flex: 1.2;
+        align-items: center;
+        gap: 1rem;
       }
 
-      &__info {
+      &__product {
+        @include flexboxRow;
+        flex: 1;
+        justify-content: center;
         margin-left: 0rem;
-        flex-wrap: nowrap;
+      }
+
+      &__movementType {
+        @include flexboxRow;
+        flex: 1.2;
+        justify-content: center;
+        margin-left: 0rem;
+      }
+
+      &__date {
+        @include flexboxRow;
+        flex: 1;
+        justify-content: flex-end;
+        margin-left: 0rem;
       }
     }
   }

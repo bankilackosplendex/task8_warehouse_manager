@@ -182,7 +182,7 @@ function WarehouseDetails() {
               </p>
               <p className="warehouseDetails__movements__value__header__movementType">
                 <ArrowLeftRight />
-                Movement type
+                Direction
               </p>
               <p className="warehouseDetails__movements__value__header__date">
                 <CalendarDays />

@@ -113,7 +113,7 @@ function StockMovementsList() {
           </div>
           <div className="stockmovementList__header__movementType">
             <ArrowLeftRight />
-            Movement type
+            Direction
           </div>
           <div className="stockmovementList__header__date">
             <CalendarDays />

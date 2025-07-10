@@ -40,6 +40,7 @@
         justify-content: space-between;
         padding-left: $spacing-md;
         padding-right: $spacing-md;
+        display: none;
 
         &__warehouse,
         &__product,
@@ -90,12 +91,14 @@
           flex: 1;
           align-items: center;
           gap: 0.3rem;
+          display: none;
         }
 
         &__movementType {
           flex: 1;
           @include flexboxRow;
           justify-content: center;
+          display: none;
         }
 
         &__date {
@@ -134,6 +137,26 @@
       &:hover {
         color: $error-color;
         border-color: $error-color;
+      }
+    }
+  }
+}
+
+// --- MEDIA QUERIES ---
+@media (min-width: 45rem) {
+  .companyDetails {
+    &__movements {
+      &__value {
+        &__header {
+          display: flex;
+        }
+
+        &__item {
+          &__product,
+          &__movementType {
+            display: flex;
+          }
+        }
       }
     }
   }

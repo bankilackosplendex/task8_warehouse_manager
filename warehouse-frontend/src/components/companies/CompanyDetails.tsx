@@ -99,7 +99,7 @@ function CompanyDetails() {
               </p>
               <p className="companyDetails__movements__value__header__movementType">
                 <ArrowLeftRight />
-                Movement type
+                Direction
               </p>
               <p className="companyDetails__movements__value__header__date">
                 <CalendarDays />
