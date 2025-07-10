@@ -7,6 +7,8 @@ import { FormType } from "../../enums/FormTypeEnum.tsx";
 import { Route, Routes } from "react-router-dom";
 import { ClipboardList, LayoutList, Pencil, SquarePlus } from "lucide-react";
 import ErrorWindow from "../../components/common/ErrorWindow.tsx";
+import ProtectedRoute from "../../components/authorization/ProtectedRoute.tsx";
+import { Role } from "../../enums/UserRoleEnum.tsx";
 
 function WarehousePage() {
   return (
@@ -56,7 +58,7 @@ function WarehousePage() {
         <Route
           path="/add"
           element={
-            <>
+            <ProtectedRoute allowedRoles={[Role.ADMIN]}>
               {/* Page header */}
               <div className="warehousesPage__formHeader">
                 <BackButton />
@@ -68,14 +70,14 @@ function WarehousePage() {
               </div>
               {/* Form component */}
               <WarehouseForm type={FormType.CREATE} />
-            </>
+            </ProtectedRoute>
           }
         />
         {/* Warehouse update from */}
         <Route
           path="modify/:warehouseId"
           element={
-            <>
+            <ProtectedRoute allowedRoles={[Role.ADMIN]}>
               {/* Page header */}
               <div className="warehousesPage__formHeader">
                 <BackButton />
@@ -87,7 +89,7 @@ function WarehousePage() {
               </div>
               {/* Form component */}
               <WarehouseForm type={FormType.MODIFY} />
-            </>
+            </ProtectedRoute>
           }
         />
         {/* NOT FOUND PAGE */}

@@ -4,6 +4,8 @@ import { LayoutList } from "lucide-react";
 import { Routes, Route } from "react-router-dom";
 import UserList from "../../components/users/UserList.tsx";
 import ErrorWindow from "../../components/common/ErrorWindow.tsx";
+import ProtectedRoute from "../../components/authorization/ProtectedRoute.tsx";
+import { Role } from "../../enums/UserRoleEnum.tsx";
 
 function UsersPage() {
   return (
@@ -14,7 +16,7 @@ function UsersPage() {
         <Route
           path="/"
           element={
-            <>
+            <ProtectedRoute allowedRoles={[Role.ADMIN]}>
               {/* Page header */}
               <div className="usersPage__header">
                 <BackButton />
@@ -26,7 +28,7 @@ function UsersPage() {
               </div>
               {/* List component */}
               <UserList />
-            </>
+            </ProtectedRoute>
           }
         />
         {/* NOT FOUND PAGE */}

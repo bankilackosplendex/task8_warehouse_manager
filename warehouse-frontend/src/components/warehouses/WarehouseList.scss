@@ -6,11 +6,39 @@
 
   &__item {
     @include itemBase;
-    @include iconContainer;
-    gap: 1rem;
+    position: relative;
+    padding-right: 5rem;
 
     &:hover {
       @include itemHoverBase;
+    }
+
+    &__name {
+      @include iconContainer;
+      gap: 1rem;
+    }
+
+    &__optionsContainer {
+      &__reportButton {
+        @include buttonBase;
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        margin: 0;
+        z-index: 1;
+        background-color: $primary-color;
+        color: $third-color;
+        border: 0.15rem solid $primary-color;
+        border-radius: $border-radius;
+        padding-top: 0.3rem;
+
+        &:hover {
+          color: $primary-color;
+          border: 0.15rem solid $third-color;
+          border-radius: $border-radius;
+        }
+      }
     }
   }
 

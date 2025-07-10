@@ -3,16 +3,17 @@ import ProductList from "../../components/products/ProductList.tsx";
 import BackButton from "../../components/common/BackButton.tsx";
 import ProductForm from "../../components/products/ProductForm.tsx";
 import ProductDetails from "../../components/products/ProductDetails.tsx";
-import { Link, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { FormType } from "../../enums/FormTypeEnum.tsx";
 import {
   ClipboardList,
   LayoutList,
-  PackagePlus,
   Pencil,
   SquarePlus,
 } from "lucide-react";
 import ErrorWindow from "../../components/common/ErrorWindow.tsx";
+import ProtectedRoute from "../../components/authorization/ProtectedRoute.tsx";
+import { Role } from "../../enums/UserRoleEnum.tsx";
 
 function ProductsPage() {
   return (
@@ -62,7 +63,7 @@ function ProductsPage() {
         <Route
           path="add"
           element={
-            <>
+            <ProtectedRoute allowedRoles={[Role.ADMIN]}>
               {/* Page header */}
               <div className="productsPage__formHeader">
                 <BackButton />
@@ -74,14 +75,14 @@ function ProductsPage() {
               </div>
               {/* Form component */}
               <ProductForm type={FormType.CREATE} />
-            </>
+            </ProtectedRoute>
           }
         />
         {/* Product upadte form */}
         <Route
           path="modify/:productId"
           element={
-            <>
+            <ProtectedRoute allowedRoles={[Role.ADMIN]}>
               {/* Page header */}
               <div className="productsPage__formHeader">
                 <BackButton />
@@ -93,7 +94,7 @@ function ProductsPage() {
               </div>
               {/* Form component */}
               <ProductForm type={FormType.MODIFY} />
-            </>
+            </ProtectedRoute>
           }
         />
         {/* NOT FOUND PAGE */}

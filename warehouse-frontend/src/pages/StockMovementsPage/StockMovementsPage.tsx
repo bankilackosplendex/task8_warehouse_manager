@@ -7,6 +7,8 @@ import StockMovementDetails from "../../components/stockmovements/StockMovementD
 import StockMovementsForm from "../../components/stockmovements/StockMovementForm.tsx";
 import { FormType } from "../../enums/FormTypeEnum.tsx";
 import ErrorWindow from "../../components/common/ErrorWindow.tsx";
+import ProtectedRoute from "../../components/authorization/ProtectedRoute.tsx";
+import { Role } from "../../enums/UserRoleEnum.tsx";
 
 function StockMovementsPage() {
   return (
@@ -56,7 +58,7 @@ function StockMovementsPage() {
         <Route
           path="/add"
           element={
-            <>
+            <ProtectedRoute allowedRoles={[Role.ADMIN]}>
               {/* Page header */}
               <div className="stockmovementsPage__formHeader">
                 <BackButton />
@@ -68,14 +70,14 @@ function StockMovementsPage() {
               </div>
               {/* Form component */}
               <StockMovementsForm type={FormType.CREATE} />
-            </>
+            </ProtectedRoute>
           }
         />
         {/* Stockmovement update form */}
         <Route
           path="/modify/:stockMovementId"
           element={
-            <>
+            <ProtectedRoute allowedRoles={[Role.ADMIN]}>
               {/* Page header */}
               <div className="stockmovementsPage__formHeader">
                 <BackButton />
@@ -87,7 +89,7 @@ function StockMovementsPage() {
               </div>
               {/* Form component */}
               <StockMovementsForm type={FormType.MODIFY} />
-            </>
+            </ProtectedRoute>
           }
         />
         {/* NOT FOUND PAGE */}

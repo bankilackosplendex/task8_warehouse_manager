@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import "./WarehouseList.scss";
 import { getWarehouses } from "../../services/warehouseService.tsx";
 import { Warehouse } from "../../types/WarehouseType.tsx";
-import { SquarePlus, WarehouseIcon } from "lucide-react";
+import { FileText, SquarePlus, WarehouseIcon } from "lucide-react";
 import { useAuth } from "../../hooks/useAuth.tsx";
 import { Role } from "../../enums/UserRoleEnum.tsx";
 
@@ -39,8 +39,21 @@ function WarehouseList() {
           key={warehouse.id}
           className="warehouseList__item"
         >
-          <WarehouseIcon />
-          {warehouse.name}
+          <div className="warehouseList__item__name">
+            <WarehouseIcon />
+            {warehouse.name}
+          </div>
+          <div className="warehouseList__item__optionsContainer">
+            <button
+              className="warehouseList__item__optionsContainer__reportButton"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate(`/reports/${warehouse.id}`);
+              }}
+            >
+              <FileText />
+            </button>
+          </div>
         </Link>
       ))}
       {user?.role === Role.ADMIN && (
