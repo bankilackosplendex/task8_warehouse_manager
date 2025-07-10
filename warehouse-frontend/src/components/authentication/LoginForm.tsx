@@ -28,17 +28,16 @@ function LoginForm() {
       const decoded = jwtDecode<DecodedAccessToken>(response.accessToken);
       setUser({ email: decoded.sub, role: decoded.role });
 
-      console.log("Sikeres bejelentkezés:", response);
       navigate("/");
     } catch (err: any) {
-      console.error("Hiba a bejelentkezés során:", err);
+      console.error("Login failed", err);
       if (err.response && err.response.data && err.response.data.message) {
         const msg = Array.isArray(err.response.data.message)
           ? err.response.data.message.join(", ")
           : err.response.data.message;
         setError(msg);
       } else {
-        setError("Ismeretlen hiba történt.");
+        setError("Unknown error");
       }
     }
   };
