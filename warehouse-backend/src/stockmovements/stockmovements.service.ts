@@ -13,12 +13,23 @@ export class StockmovementsService {
   }
 
   findAll() {
-    return this.prisma.stockMovement.findMany();
+    return this.prisma.stockMovement.findMany({
+      include: {
+        product: true,
+        warehouse: true,
+        company: true,
+      },
+    });
   }
 
   async findOne(id: number) {
     const stockMovement = await this.prisma.stockMovement.findUnique({
       where: { id },
+      include: {
+        product: true,
+        warehouse: true,
+        company: true,
+      },
     });
     if (!stockMovement)
       throw new NotFoundException(`Stock movement with id ${id} not found`);

@@ -14,8 +14,6 @@ export class RefreshTokenIdsStorage
   private redisClient: Redis;
 
   onApplicationBootstrap() {
-    // TODO: Ideally, we should move this to the dedicated "RedisModule"
-    // instead of initiating the connection here.
     this.redisClient = new Redis({
       host: 'localhost',
       port: 6379,
