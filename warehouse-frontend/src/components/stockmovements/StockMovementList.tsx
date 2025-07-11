@@ -29,24 +29,7 @@ function StockMovementsList() {
       try {
         const data = await getStockMovements();
 
-        const enrichedData = await Promise.all(
-          data.map(async (stockMov) => {
-            const [product, warehouse, company] = await Promise.all([
-              getProduct(stockMov.productId),
-              getWarehouse(stockMov.warehouseId),
-              getCompany(stockMov.companyId),
-            ]);
-
-            return {
-              ...stockMov,
-              product,
-              warehouse,
-              company,
-            };
-          })
-        );
-
-        setStockMovements(enrichedData);
+        setStockMovements(data);
       } catch (err: any) {
         const msg =
           err.response?.data?.message || "Couldn't load stock movements";
@@ -56,42 +39,6 @@ function StockMovementsList() {
 
     fetchStockMovement();
   }, []);
-
-  // --- FETCH THE PRODUCT DATA FROM BACKEND ---
-  const getProduct = async (id: number) => {
-    if (!id) return null;
-    try {
-      const product = await getProductById(id);
-      return product;
-    } catch (err: any) {
-      const msg = err.response?.data?.message || "Couldn't load product";
-      setError(msg);
-    }
-  };
-
-  // --- FETCH THE WAREHOUSE DATA FROM BACKEND ---
-  const getWarehouse = async (id: number) => {
-    if (!id) return null;
-    try {
-      const warehouse = await getWarehouseById(id);
-      return warehouse;
-    } catch (err: any) {
-      const msg = err.response?.data?.message || "Couldn't load warehouse";
-      setError(msg);
-    }
-  };
-
-  // --- FETCH THE COMPANY DATA FROM BACKEND ---
-  const getCompany = async (id: number) => {
-    if (!id) return null;
-    try {
-      const company = await getCompanyById(id);
-      return company;
-    } catch (err: any) {
-      const msg = err.response?.data?.message || "Couldn't load company";
-      setError(msg);
-    }
-  };
 
   // --- ADD MOVEMENT FUNCTION ---
   function onAddButtonClick() {

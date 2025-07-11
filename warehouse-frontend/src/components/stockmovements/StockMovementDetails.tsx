@@ -46,17 +46,11 @@ function StockMovementsDetails() {
       if (stockMovementId) {
         try {
           const data = await getStockMovementById(+stockMovementId);
-          if (data.productId) data.product = await getProductById(data.productId);
-          if (data.warehouseId) data.warehouse = await getWarehouseById(data.warehouseId);
-          if (data.companyId) data.company = await getCompanyById(data.companyId);
           setStockMovement(data);
         } catch (err: any) {
           const msg = err.response?.data?.message || "Couldn't load stockmovement";
           setError(msg);
         }
-      } else {
-        const data = {};
-        setStockMovement(data);
       }
     };
 

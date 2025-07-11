@@ -11,20 +11,14 @@ import {
 } from "lucide-react";
 import { FormType } from "../../enums/FormTypeEnum.tsx";
 import { useEffect } from "react";
-import {
-  getCompanies,
-  getCompanyById,
-} from "../../services/companyService.tsx";
-import { getProductById, getProducts } from "../../services/productService.tsx";
+import { getCompanies } from "../../services/companyService.tsx";
+import { getProducts } from "../../services/productService.tsx";
 import {
   createStockMovement,
   getStockMovementById,
   updateStockMovement,
 } from "../../services/stockMovementService.tsx";
-import {
-  getWarehouseById,
-  getWarehouses,
-} from "../../services/warehouseService.tsx";
+import { getWarehouses } from "../../services/warehouseService.tsx";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { StockMovement } from "../../types/StockMovementType.tsx";
@@ -47,12 +41,6 @@ function StockMovementsForm({ type }: { type: FormType }) {
       try {
         if (stockMovementId) {
           const data = await getStockMovementById(+stockMovementId);
-          if (data.productId)
-            data.product = await getProductById(data.productId);
-          if (data.warehouseId)
-            data.warehouse = await getWarehouseById(data.warehouseId);
-          if (data.companyId)
-            data.company = await getCompanyById(data.companyId);
           setStockMovement(data);
         }
         const productsData = await getProducts();
