@@ -21,11 +21,19 @@ import { useState } from "react";
 import { Warehouse } from "../../types/WarehouseType.tsx";
 
 function WarehouseForm({ type }: { type: FormType }) {
+  // --- WAREHOUSE ID URL PARAMETER ---
   const { warehouseId } = useParams();
+
+  // --- NAVIGATION ---
   const navigate = useNavigate();
+
+  // --- WAREHOUSE ENTITY ---
   const [warehouse, setWarehouse] = useState<Warehouse>([]);
+
+  // --- ERROR ---
   const [error, setError] = useState("");
 
+  // --- FETCH THE WAREHOUSE'S DATA FROM BACKEND ---
   useEffect(() => {
     const fetchWarehouse = async () => {
       if (warehouseId) {
@@ -48,6 +56,7 @@ function WarehouseForm({ type }: { type: FormType }) {
     fetchWarehouse();
   }, []);
 
+  // --- EXTRAXT COUNTRY, CITY AND STREET ADDRESS VALUES FUNCTION ---
   function getAddressFields(address: string): string[] {
     if (!address) return ["", "", ""];
     const [rawMainPart, countryRaw] = address.split(",");
@@ -60,6 +69,7 @@ function WarehouseForm({ type }: { type: FormType }) {
     return [country, city, streetAddress];
   }
 
+  // --- CREATE/MODIFY WAREHOUSE ---
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -87,26 +97,31 @@ function WarehouseForm({ type }: { type: FormType }) {
     }
   };
 
+  // --- SET NAME WITH THE INPUT VALUE FUNCTION ---
   function setName(name: string): void {
     setWarehouse((prev) => ({ ...prev, name }));
   }
 
+  // --- SET DESCRIPTION WITH THE INPUT VALUE FUNCTION ---
   function setDescription(d: string): void {
     setWarehouse((prev) => ({ ...prev, description: d }));
   }
 
+  // --- SET COUNTRY WITH THE INPUT VALUE FUNCTION ---
   function setCountry(country: string): void {
     const [_, city, street] = getAddressFields(warehouse.address || "");
     const newAddress = `${city} ${street}, ${country}`;
     setWarehouse((prev) => ({ ...prev, address: newAddress }));
   }
 
+  // --- SET CITY WITH THE INPUT VALUE FUNCTION ---
   function setCity(city: string): void {
     const [country, _, street] = getAddressFields(warehouse.address || "");
     const newAddress = `${city} ${street}, ${country}`;
     setWarehouse((prev) => ({ ...prev, address: newAddress }));
   }
 
+  // --- SET STREET ADDRESS WITH THE INPUT VALUE FUNCTION ---
   function setStreetAddress(street: string): void {
     const [country, city, _] = getAddressFields(warehouse.address || "");
     const newAddress = `${city} ${street}, ${country}`;
@@ -208,14 +223,15 @@ function WarehouseForm({ type }: { type: FormType }) {
           />
         </div>
       </div>
-      {/* Add button */}
       <button className="warehouseForm__button" type="submit">
+        {/* Add button */}
         {type == FormType.CREATE && (
           <>
             <SquarePlus />
             Add
           </>
         )}
+        {/* Save button */}
         {type == FormType.MODIFY && (
           <>
             <Save />

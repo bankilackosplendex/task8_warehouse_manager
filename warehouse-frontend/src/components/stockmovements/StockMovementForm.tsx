@@ -27,15 +27,28 @@ import { Product } from "../../types/ProductType.tsx";
 import { Company } from "../../types/CompanyType.tsx";
 
 function StockMovementsForm({ type }: { type: FormType }) {
+  // --- MOVEMENT ID URL PARAMETER ---
   const { stockMovementId } = useParams();
+
+  // --- NAVIGATION ---
   const navigate = useNavigate();
 
+  // --- MOVEMENT ENTITY ---
   const [stockMovement, setStockMovement] = useState<StockMovement>([]);
+
+  // --- LIST OF WAREHOUSES ---
   const [warehouses, setWarehouses] = useState<Warehouse>([]);
+
+  // --- LIST OF PRODUCTS ---
   const [products, setProducts] = useState<Product>([]);
+
+  // --- LIST OF COMPANIES ---
   const [companies, setCompanies] = useState<Company>([]);
+
+  // --- ERROR ---
   const [error, setError] = useState("");
 
+  // --- FETCH THE MOVEMENT'S DATA FROM BACKEND ---
   useEffect(() => {
     const fetchStockMovement = async () => {
       try {
@@ -61,6 +74,7 @@ function StockMovementsForm({ type }: { type: FormType }) {
     fetchStockMovement();
   }, []);
 
+  // --- CREATE/MODIFY MOVEMENT ---
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -92,6 +106,7 @@ function StockMovementsForm({ type }: { type: FormType }) {
     }
   };
 
+  // --- FORMAT DATE FUNCTION ---
   function formatDateForInput(dateStr: string) {
     const date = new Date(dateStr);
     const pad = (n: number) => n.toString().padStart(2, "0");
@@ -105,26 +120,32 @@ function StockMovementsForm({ type }: { type: FormType }) {
     return `${year}-${month}-${day}T${hours}:${minutes}`;
   }
 
+  // --- SET PRODUCT WITH THE INPUT VALUE FUNCTION ---
   function setProduct(productId: string): void {
     setStockMovement((prev) => ({ ...prev, productId: +productId }));
   }
 
+  // --- SET QUANTITY WITH THE SELECTED VALUE FUNCTION ---
   function setQuantity(q: string): void {
     setStockMovement((prev) => ({ ...prev, quantity: +q }));
   }
 
+  // --- SET WAREHOUSE WITH THE SELECTED VALUE FUNCTION ---
   function setWarehouse(warehouseId: string): void {
     setStockMovement((prev) => ({ ...prev, warehouseId: +warehouseId }));
   }
 
+  // --- SET COMPANY WITH THE SELECTED VALUE FUNCTION ---
   function setCompany(companyId: string): void {
     setStockMovement((prev) => ({ ...prev, companyId: +companyId }));
   }
 
+  // --- SET MOVEMENT TYPE WITH THE SELECTED VALUE FUNCTION ---
   function setMovementType(movementType: string): void {
     setStockMovement((prev) => ({ ...prev, movementType }));
   }
 
+  // --- SET DATE WITH THE SELECTED VALUE FUNCTION ---
   function setDate(dateStr: string): void {
     const isoDate = new Date(dateStr).toISOString();
     setStockMovement((prev) => ({ ...prev, createdAt: isoDate }));
@@ -242,14 +263,15 @@ function StockMovementsForm({ type }: { type: FormType }) {
         }
         onChange={(e) => setDate(e.target.value)}
       />
-      {/* Add button */}
       <button className="stockMovementsForm__button" type="submit">
+        {/* Add button */}
         {type == FormType.CREATE && (
           <>
             <SquarePlus />
             Add
           </>
         )}
+        {/* Save button */}
         {type == FormType.MODIFY && (
           <>
             <Save />
