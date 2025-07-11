@@ -1,7 +1,9 @@
 import React, { createContext, useState, useEffect } from "react";
 import { User } from "../types/UserType";
 import { jwtDecode } from "jwt-decode";
-import { DecodedAccessToken } from "../types/DecodedAccessTokenType";
+import { DecodedAccessToken } from "../types/DecodedAccessTokenType.tsx";
+import { refreshAccessToken } from "../services/authService.tsx";
+import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext<{
   user: User | null;
@@ -14,15 +16,31 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
+
     if (token) {
       try {
         const decoded = jwtDecode<DecodedAccessToken>(token);
-        setUser({ id: +decoded.sub, role: decoded.role });
+        if (Date.now() >= decoded.exp * 1000) {
+          refreshAccessToken()
+            .then((newToken) => {
+              const decoded = jwtDecode<DecodedAccessToken>(newToken);
+              setUser({ id: +decoded.sub, role: decoded.role });
+            })
+            .catch(() => {
+              setUser(null);
+              localStorage.removeItem("accessToken");
+              localStorage.removeItem("refreshToken");
+              window.location.href = "/login";
+            });
+        } else {
+          setUser({ id: +decoded.sub, role: decoded.role });
+        }
       } catch (e) {
-        console.error("Invalid token:", e);
+        console.error("Token error:", e);
         setUser(null);
       }
     }
+
     setLoading(false);
   }, []);
 

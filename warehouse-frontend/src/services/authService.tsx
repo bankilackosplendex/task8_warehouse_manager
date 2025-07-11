@@ -28,3 +28,19 @@ export function getAccessToken (): string | null {
 export function getRefreshToken (): string | null {
   return localStorage.getItem("refreshToken");
 }
+
+// --- REFRESH ACCESS TOKEN ---
+export const refreshAccessToken = async () => {
+  const refreshToken = getRefreshToken();
+  console.log("refreshtoken: " + refreshToken);
+  if (!refreshToken) throw new Error("Missing refresh token");
+
+  const response = await api.post("/authentication/refresh-tokens", {
+    refreshToken,
+  });
+
+  localStorage.setItem("accessToken", response.data.accessToken);
+  localStorage.setItem("refreshToken", response.data.refreshToken);
+  return response.data.accessToken;
+};
+
