@@ -7,6 +7,7 @@ import {
 import { useState, useEffect } from "react";
 import { getWarehouses } from "../../services/warehouseService.tsx";
 import { Warehouse } from "../../types/WarehouseType.tsx";
+import ErrorWindow from "../common/ErrorWindow.tsx";
 
 function ReportList() {
   // --- NAVIGATION ---
@@ -17,6 +18,7 @@ function ReportList() {
 
   // --- ERROR ---
   const [error, setError] = useState("");
+  const [statusCode, setSatusCode] = useState<number>();
 
   // --- FETCH THE REPORTS DATA FROM BACKEND ---
   useEffect(() => {
@@ -27,11 +29,18 @@ function ReportList() {
       } catch (err: any) {
         const msg = err.response?.data?.message || "Couldn't load warehouses";
         setError(msg);
+        setSatusCode(503);
       }
     };
 
     fetchWarehouses();
   }, []);
+
+  if (error)
+    return (
+      // Error window
+      <ErrorWindow text={error} statusCode={statusCode} onClose={() => setError("")} />
+    );
 
   return (
     // Report list

@@ -6,6 +6,7 @@ import { Warehouse } from "../../types/WarehouseType.tsx";
 import { FileText, SquarePlus, WarehouseIcon } from "lucide-react";
 import { useAuth } from "../../hooks/useAuth.tsx";
 import { Role } from "../../enums/UserRoleEnum.tsx";
+import ErrorWindow from "../common/ErrorWindow.tsx";
 
 function WarehouseList() {
   // --- USER INFO ---
@@ -19,6 +20,7 @@ function WarehouseList() {
 
   // --- ERROR ---
   const [error, setError] = useState("");
+  const [statusCode, setSatusCode] = useState<number>();
 
   // --- FETCH THE WAREHOUSE DATA FROM BACKEND ---
   useEffect(() => {
@@ -29,6 +31,7 @@ function WarehouseList() {
       } catch (err: any) {
         const msg = err.response?.data?.message || "Couldn't load warehouses";
         setError(msg);
+        setSatusCode(503);
       }
     };
 
@@ -39,6 +42,12 @@ function WarehouseList() {
   function onAddButtonClick() {
     navigate("/warehouses/add");
   }
+
+  if (error)
+    return (
+      // Error window
+      <ErrorWindow text={error} statusCode={statusCode} onClose={() => setError("")} />
+    );
 
   return (
     // Warehouse list

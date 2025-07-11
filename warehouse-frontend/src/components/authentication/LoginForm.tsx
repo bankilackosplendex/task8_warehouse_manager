@@ -7,6 +7,8 @@ import { jwtDecode } from "jwt-decode";
 import { DecodedAccessToken } from "../../types/DecodedAccessTokenType.tsx";
 import { useNavigate } from "react-router-dom";
 import { KeyRound, LogIn, Mail } from "lucide-react";
+import ErrorWindow from "../common/ErrorWindow.tsx";
+import { useEffect } from "react";
 
 function LoginForm() {
   // --- USER CONTEXT ---
@@ -21,8 +23,9 @@ function LoginForm() {
 
   // --- ERROR VARIABLE ---
   const [error, setError] = useState("");
+  const [statusCode, setSatusCode] = useState<number>();
 
-  // Login
+  // --- LOGIN ---
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -38,17 +41,24 @@ function LoginForm() {
 
       navigate("/");
     } catch (err: any) {
-      console.error("Login failed", err);
       if (err.response && err.response.data && err.response.data.message) {
         const msg = Array.isArray(err.response.data.message)
           ? err.response.data.message.join(", ")
           : err.response.data.message;
         setError(msg);
+        setSatusCode(400);
       } else {
-        setError("Unknown error");
+        setError("Service unavailable");
+        setSatusCode(503);
       }
     }
   };
+
+  if (error)
+    return (
+      // Error window
+      <ErrorWindow text={error} statusCode={statusCode} onClose={() => setError("")} />
+    );
 
   return (
     // Login form
@@ -68,7 +78,7 @@ function LoginForm() {
       />
       {/* Password */}
       <label className="loginForm__passwordLabel" htmlFor="password">
-        <KeyRound className="loginForm__passwordLabel__icon"/>
+        <KeyRound className="loginForm__passwordLabel__icon" />
         Password
       </label>
       <input
@@ -77,6 +87,7 @@ function LoginForm() {
         name="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        minLength={10}
         required
       />
       {/* Login button */}

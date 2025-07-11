@@ -10,6 +10,7 @@ import {
   updateProduct,
 } from "../../services/productService.tsx";
 import { QuantityType } from "../../enums/QuantityTypeEnum.tsx";
+import ErrorWindow from "../common/ErrorWindow.tsx";
 
 function ProductForm({ type }: { type: FormType }) {
   // --- PRODUCT ID URL PARAMETER ---
@@ -27,6 +28,7 @@ function ProductForm({ type }: { type: FormType }) {
 
   // --- ERROR ---
   const [error, setError] = useState("");
+  const [statusCode, setSatusCode] = useState<number>();
 
   // --- FETCH THE PRODUCT'S DATA FROM BACKEND ---
   useEffect(() => {
@@ -38,6 +40,7 @@ function ProductForm({ type }: { type: FormType }) {
         } catch (err: any) {
           const msg = err.response?.data?.message || "Couldn't load product";
           setError(msg);
+          setSatusCode(503);
         }
       }
     };
@@ -86,6 +89,12 @@ function ProductForm({ type }: { type: FormType }) {
     const qt = qT === "KG" ? QuantityType.KG : QuantityType.DB;
     setProduct((prev) => ({ ...prev, quantityType: qt }));
   }
+
+  if (error)
+    return (
+      // Error window
+      <ErrorWindow text={error} statusCode={statusCode} onClose={() => setError("")} />
+    );
 
   return (
     // Product form

@@ -48,7 +48,16 @@ function App() {
         {/* --- USERS PAGE --- */}
         <Route path="/users" element={<UsersPage />} />
         {/* NOT FOUND PAGE */}
-        <Route path="/*" element={<ErrorWindow text={"404 Not found"} statusCode={404}/>} />
+        <Route
+          path="/*"
+          element={
+            <ErrorWindow
+              text={"404 Not found"}
+              statusCode={404}
+              onClose={function () {}}
+            />
+          }
+        />
       </Routes>
     </div>
   );

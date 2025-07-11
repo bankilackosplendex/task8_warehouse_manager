@@ -8,6 +8,7 @@ import {
 } from "../../services/reportService.tsx";
 import { Report } from "../../types/ReportType.tsx";
 import { getWarehouseById } from "../../services/warehouseService.tsx";
+import ErrorWindow from "../common/ErrorWindow.tsx";
 
 function ReportDetails() {
   // --- REPORT ID URL PARAMETER ---
@@ -21,6 +22,7 @@ function ReportDetails() {
 
   // --- ERROR STATE ---
   const [error, setError] = useState("");
+  const [statusCode, setSatusCode] = useState<number>();
 
   // --- FETCH REPORT PDF AND WAREHOUSE NAME ---
   useEffect(() => {
@@ -35,6 +37,8 @@ function ReportDetails() {
           setPdfUrl(url);
         } catch (err) {
           console.error("Failed to fetch PDF", err);
+          setError("Failed to fetch PDF");
+          setSatusCode(503);
         }
       }
     };
@@ -50,6 +54,12 @@ function ReportDetails() {
   function downloadReport() {
     if (reportId) downloadWarehouseReportById(+reportId);
   }
+
+  if (error)
+    return (
+      // Error window
+      <ErrorWindow text={error} statusCode={statusCode} onClose={() => setError("")} />
+    );
 
   return (
     // Report details

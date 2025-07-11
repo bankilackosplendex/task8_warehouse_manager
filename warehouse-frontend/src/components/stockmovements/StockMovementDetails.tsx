@@ -20,6 +20,7 @@ import { getProductById } from "../../services/productService.tsx";
 import { getCompanyById } from "../../services/companyService.tsx";
 import { useAuth } from "../../hooks/useAuth.tsx";
 import { Role } from "../../enums/UserRoleEnum.tsx";
+import ErrorWindow from "../common/ErrorWindow.tsx";
 
 function StockMovementsDetails() {
   // --- USER INFO ---
@@ -36,6 +37,7 @@ function StockMovementsDetails() {
 
   // --- ERROR ---
   const [error, setError] = useState("");
+  const [statusCode, setSatusCode] = useState<number>();
 
   // --- SHOW POPUP WINDOW VARIABLE ---
   const [showPopUpWindow, setShowPopUpWindow] = useState<boolean>(false);
@@ -50,6 +52,7 @@ function StockMovementsDetails() {
         } catch (err: any) {
           const msg = err.response?.data?.message || "Couldn't load stockmovement";
           setError(msg);
+          setSatusCode(503);
         }
       }
     };
@@ -74,6 +77,12 @@ function StockMovementsDetails() {
   function modifyStockMovement(id: number): void {
     navigate(`/stockmovements/modify/${stockMovement.id}`);
   }
+
+  if (error)
+    return (
+      // Error window
+      <ErrorWindow text={error} statusCode={statusCode} onClose={() => setError("")} />
+    );
 
   return (
     // Stockmovement details

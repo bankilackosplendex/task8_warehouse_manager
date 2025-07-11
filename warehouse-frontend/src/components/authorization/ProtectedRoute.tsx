@@ -13,7 +13,7 @@ const RequireAuth = ({ allowedRoles, children }) => {
 
   // NO ADMIN ROLE -> display access denied error message
   if (!allowedRoles.includes(user.role)) {
-    return <ErrorWindow text="Access Denied" statusCode={401}/>;
+    return <ErrorWindow text="Access Denied" statusCode={401} onClose={function() {}}/>;
   }
 
   // ADMIN -> display childrem component

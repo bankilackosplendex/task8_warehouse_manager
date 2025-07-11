@@ -10,6 +10,7 @@ import {
   getCompanyById,
   updateCompany,
 } from "../../services/companyService.tsx";
+import ErrorWindow from "../common/ErrorWindow.tsx";
 
 function CompanyForm({ type }: { type: FormType }) {
   // --- COMPANY ID URL PARAMETER ---
@@ -23,6 +24,7 @@ function CompanyForm({ type }: { type: FormType }) {
 
   // --- ERROR ---
   const [error, setError] = useState("");
+  const [statusCode, setSatusCode] = useState<number>();
 
   // --- FETCH THE COMPANY'S DATA FROM BACKEND ---
   useEffect(() => {
@@ -34,6 +36,7 @@ function CompanyForm({ type }: { type: FormType }) {
         } catch (err: any) {
           const msg = err.response?.data?.message || "Couldn't load company";
           setError(msg);
+          setSatusCode(503);
         }
       } else {
         const data = {
@@ -78,6 +81,12 @@ function CompanyForm({ type }: { type: FormType }) {
   function setName(name: string): void {
     setCompany((prev) => ({ ...prev, name: name }));
   }
+
+  if (error)
+    return (
+      // Error window
+      <ErrorWindow text={error} statusCode={statusCode} onClose={() => setError("")} />
+    );
 
   return (
     // Company form

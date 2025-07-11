@@ -19,6 +19,7 @@
     font-family: $font-family;
     color: $error-color;
     margin-top: 2rem;
+    text-align: center;
   }
 
   // --- ERROR ICON ---
@@ -36,7 +37,8 @@
 
     &__backButton,
     &__homeButton,
-    &__loginButton {
+    &__loginButton,
+    &__refreshButton {
       @include buttonBase;
       background-color: $error-color;
       padding-top: 0.4rem;

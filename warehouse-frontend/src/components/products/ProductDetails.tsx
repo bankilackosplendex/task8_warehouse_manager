@@ -23,6 +23,7 @@ import { QuantityType } from "../../enums/QuantityTypeEnum.tsx";
 import { WarehouseProduct } from "../../types/WarehouseProductType.tsx";
 import { Role } from "../../enums/UserRoleEnum.tsx";
 import { useAuth } from "../../hooks/useAuth.tsx";
+import ErrorWindow from "../common/ErrorWindow.tsx";
 
 function ProductDetails() {
   // --- USER INFO ---
@@ -44,6 +45,7 @@ function ProductDetails() {
 
   // --- ERROR ---
   const [error, setError] = useState("");
+  const [statusCode, setSatusCode] = useState<number>();
 
   // --- SHOW POPUP WINDOW VARIABLE ---
   const [showPopUpWindow, setShowPopUpWindow] = useState<boolean>(false);
@@ -61,6 +63,7 @@ function ProductDetails() {
         } catch (err: any) {
           const msg = err.response?.data?.message || "Couldn't load product";
           setError(msg);
+          setSatusCode(503);
         }
       } else {
         const data = {
@@ -92,6 +95,12 @@ function ProductDetails() {
   function modifyProduct(id: number): void {
     navigate(`/products/modify/${product.id}`);
   }
+
+  if (error)
+    return (
+      // Error window
+      <ErrorWindow text={error} statusCode={statusCode} onClose={() => setError("")} />
+    );
 
   return (
     // Product details

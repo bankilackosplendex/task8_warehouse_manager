@@ -15,6 +15,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import ErrorWindow from "../common/ErrorWindow.tsx";
 
 // --- REGISTER CHART.JS COMPONENTS ---
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
@@ -28,6 +29,7 @@ function StatisticsDetails() {
 
   // --- ERROR STATE ---
   const [error, setError] = useState("");
+  const [statusCode, setSatusCode] = useState<number>();
 
   // --- TITLE MAPPING FOR CHARTS ---
   const statTitleMap: any = {
@@ -93,6 +95,7 @@ function StatisticsDetails() {
         setData(enrichedData);
       } catch (err) {
         setError("Couldn't load statistics");
+        setSatusCode(503);
       }
     }
 
@@ -139,6 +142,12 @@ function StatisticsDetails() {
       },
     },
   };
+
+  if (error)
+    return (
+      // Error window
+      <ErrorWindow text={error} statusCode={statusCode} onClose={() => setError("")} />
+    );
 
   return (
     <div className="statisticsDetails">

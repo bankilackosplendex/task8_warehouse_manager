@@ -19,6 +19,7 @@ import Backdrop from "../common/Backdrop.tsx";
 import PopUpWindow from "../common/PopUpWindow.tsx";
 import { useAuth } from "../../hooks/useAuth.tsx";
 import { Role } from "../../enums/UserRoleEnum.tsx";
+import ErrorWindow from "../common/ErrorWindow.tsx";
 
 function CompanyDetails() {
   // --- USER INFO ---
@@ -35,6 +36,7 @@ function CompanyDetails() {
 
   // --- ERROR ---
   const [error, setError] = useState("");
+  const [statusCode, setSatusCode] = useState<number>();
 
   // --- SHOW POPUP WINDOW VARIABLE ---
   const [showPopUpWindow, setShowPopUpWindow] = useState<boolean>(false);
@@ -49,6 +51,7 @@ function CompanyDetails() {
         } catch (err: any) {
           const msg = err.response?.data?.message || "Couldn't load company";
           setError(msg);
+          setSatusCode(503);
         }
       }
     };
@@ -73,6 +76,12 @@ function CompanyDetails() {
   function modifyCompany(id: number): void {
     navigate(`/companies/modify/${id}`);
   }
+
+  if (error)
+    return (
+      // Error window
+      <ErrorWindow text={error} statusCode={statusCode} onClose={() => setError("")} />
+    );
 
   return (
     // Company details

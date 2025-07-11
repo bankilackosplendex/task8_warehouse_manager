@@ -25,6 +25,7 @@ import { StockMovement } from "../../types/StockMovementType.tsx";
 import { Warehouse } from "../../types/WarehouseType.tsx";
 import { Product } from "../../types/ProductType.tsx";
 import { Company } from "../../types/CompanyType.tsx";
+import ErrorWindow from "../common/ErrorWindow.tsx";
 
 function StockMovementsForm({ type }: { type: FormType }) {
   // --- MOVEMENT ID URL PARAMETER ---
@@ -47,6 +48,7 @@ function StockMovementsForm({ type }: { type: FormType }) {
 
   // --- ERROR ---
   const [error, setError] = useState("");
+  const [statusCode, setSatusCode] = useState<number>();
 
   // --- FETCH THE MOVEMENT'S DATA FROM BACKEND ---
   useEffect(() => {
@@ -68,6 +70,7 @@ function StockMovementsForm({ type }: { type: FormType }) {
         const msg =
           err.response?.data?.message || "Couldn't load stockmovement";
         setError(msg);
+        setSatusCode(503);
       }
     };
 
@@ -150,6 +153,12 @@ function StockMovementsForm({ type }: { type: FormType }) {
     const isoDate = new Date(dateStr).toISOString();
     setStockMovement((prev) => ({ ...prev, createdAt: isoDate }));
   }
+
+  if (error)
+    return (
+      // Error window
+      <ErrorWindow text={error} statusCode={statusCode} onClose={() => setError("")} />
+    );
 
   return (
     // StockMovements form

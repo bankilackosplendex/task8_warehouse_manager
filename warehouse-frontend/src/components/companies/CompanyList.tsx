@@ -6,6 +6,7 @@ import { getCompanies } from "../../services/companyService.tsx";
 import { Briefcase, SquarePlus } from "lucide-react";
 import { useAuth } from "../../hooks/useAuth.tsx";
 import { Role } from "../../enums/UserRoleEnum.tsx";
+import ErrorWindow from "../common/ErrorWindow.tsx";
 
 function CompanyList() {
   // --- USER INFO ---
@@ -19,6 +20,7 @@ function CompanyList() {
 
   // --- ERROR --
   const [error, setError] = useState("");
+  const [statusCode, setSatusCode] = useState<number>();
 
   // --- FETCH THE COMPANIES DATA FROM BACKEND ---
   useEffect(() => {
@@ -29,6 +31,7 @@ function CompanyList() {
       } catch (err: any) {
         const msg = err.response?.data?.message || "Couldn't load companies";
         setError(msg);
+        setSatusCode(503);
       }
     };
 
@@ -39,6 +42,12 @@ function CompanyList() {
   function onAddButtonClick() {
     navigate("/companies/add");
   }
+
+  if (error)
+    return (
+      // Error window
+      <ErrorWindow text={error} statusCode={statusCode} onClose={() => setError("")} />
+    );
 
   return (
     // Company List

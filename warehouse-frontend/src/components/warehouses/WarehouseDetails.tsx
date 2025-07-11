@@ -24,6 +24,7 @@ import PopUpWindow from "../common/PopUpWindow.tsx";
 import { WarehouseProduct } from "../../types/WarehouseProductType.tsx";
 import { useAuth } from "../../hooks/useAuth.tsx";
 import { Role } from "../../enums/UserRoleEnum.tsx";
+import ErrorWindow from "../common/ErrorWindow.tsx";
 
 function WarehouseDetails() {
   // --- USER INFO ---
@@ -45,6 +46,7 @@ function WarehouseDetails() {
 
   // --- ERROR ---
   const [error, setError] = useState("");
+  const [statusCode, setSatusCode] = useState<number>();
 
   // --- SHOW POPUP WINDOW VARIABLE ---
   const [showPopUpWindow, setShowPopUpWindow] = useState<boolean>(false);
@@ -63,6 +65,7 @@ function WarehouseDetails() {
         } catch (err: any) {
           const msg = err.response?.data?.message || "Couldn't load warehouse";
           setError(msg);
+          setSatusCode(503);
         }
       }
     };
@@ -87,6 +90,12 @@ function WarehouseDetails() {
   function modifyWarehouse(id: number): void {
     navigate(`/warehouses/modify/${warehouse.id}`);
   }
+
+  if (error)
+    return (
+      // Error window
+      <ErrorWindow text={error} statusCode={statusCode} onClose={() => setError("")} />
+    );
 
   return (
     // Warehouse details

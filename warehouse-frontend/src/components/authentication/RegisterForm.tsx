@@ -3,6 +3,7 @@ import { KeyRound, Mail, UserPlus } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { register } from "../../services/authService.tsx";
+import ErrorWindow from "../common/ErrorWindow.tsx";
 
 function RegisterForm() {
   // --- NAVIGATION ---
@@ -13,9 +14,10 @@ function RegisterForm() {
   const [password, setPassword] = useState("");
 
   // --- ERROR VARIABLE ---
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string>("");
+  const [statusCode, setSatusCode] = useState<number>();
 
-  // Registartion
+  // --- REGISTARTION ---
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -25,17 +27,24 @@ function RegisterForm() {
 
       navigate("/login");
     } catch (err: any) {
-      console.error("Registration failed", err);
       if (err.response && err.response.data && err.response.data.message) {
         const msg = Array.isArray(err.response.data.message)
           ? err.response.data.message.join(", ")
           : err.response.data.message;
         setError(msg);
+        setSatusCode(400);
       } else {
-        setError("Unknown error");
+        setError("Service unavailable");
+        setSatusCode(503);
       }
     }
   };
+
+  if (error)
+    return (
+      // Error window
+      <ErrorWindow text={error} statusCode={statusCode} onClose={() => setError("")} />
+    );
 
   return (
     // Registration form

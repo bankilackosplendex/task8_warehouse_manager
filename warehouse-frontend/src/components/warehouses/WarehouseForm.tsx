@@ -19,6 +19,7 @@ import {
 } from "../../services/warehouseService.tsx";
 import { useState } from "react";
 import { Warehouse } from "../../types/WarehouseType.tsx";
+import ErrorWindow from "../common/ErrorWindow.tsx";
 
 function WarehouseForm({ type }: { type: FormType }) {
   // --- WAREHOUSE ID URL PARAMETER ---
@@ -32,6 +33,7 @@ function WarehouseForm({ type }: { type: FormType }) {
 
   // --- ERROR ---
   const [error, setError] = useState("");
+  const [statusCode, setSatusCode] = useState<number>();
 
   // --- FETCH THE WAREHOUSE'S DATA FROM BACKEND ---
   useEffect(() => {
@@ -43,6 +45,7 @@ function WarehouseForm({ type }: { type: FormType }) {
         } catch (err: any) {
           const msg = err.response?.data?.message || "Couldn't load warehouse";
           setError(msg);
+          setSatusCode(503);
         }
       } else {
         const data = {
@@ -127,6 +130,12 @@ function WarehouseForm({ type }: { type: FormType }) {
     const newAddress = `${city} ${street}, ${country}`;
     setWarehouse((prev) => ({ ...prev, address: newAddress }));
   }
+
+  if (error)
+    return (
+      // Error window
+      <ErrorWindow text={error} statusCode={statusCode} onClose={() => setError("")} />
+    );
 
   return (
     // Warehouse form

@@ -3,6 +3,7 @@ import { ShieldUser, User } from "lucide-react";
 import { getUsers } from "../../services/userService.tsx";
 import { useState, useEffect } from "react";
 import { Role } from "../../enums/UserRoleEnum.tsx";
+import ErrorWindow from "../common/ErrorWindow.tsx";
 
 function UserList() {
   // --- USER ENTITIES ---
@@ -10,6 +11,7 @@ function UserList() {
 
   // --- ERROR ---
   const [error, setError] = useState("");
+  const [statusCode, setSatusCode] = useState<number>();
 
   // --- FETCH THE USERS DATA FROM BACKEND ---
   useEffect(() => {
@@ -20,11 +22,18 @@ function UserList() {
       } catch (err: any) {
         const msg = err.response?.data?.message || "Couldn't load users";
         setError(msg);
+        setSatusCode(503);
       }
     };
 
     fetchCompanies();
   }, []);
+
+  if (error)
+    return (
+      // Error window
+      <ErrorWindow text={error} statusCode={statusCode} onClose={() => setError("")} />
+    );
 
   return (
     // User list

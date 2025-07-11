@@ -6,6 +6,7 @@ import { Product } from "../../types/ProductType.tsx";
 import { Package, PackagePlus } from "lucide-react";
 import { useAuth } from "../../hooks/useAuth.tsx";
 import { Role } from "../../enums/UserRoleEnum.tsx";
+import ErrorWindow from "../common/ErrorWindow.tsx";
 
 function ProductList() {
   // --- USER INFO ---
@@ -19,6 +20,7 @@ function ProductList() {
 
   // --- ERROR ---
   const [error, setError] = useState("");
+  const [statusCode, setSatusCode] = useState<number>();
 
   // --- FETCH THE PRODUCTS DATA FROM BACKEND ---
   useEffect(() => {
@@ -29,6 +31,7 @@ function ProductList() {
       } catch (err: any) {
         const msg = err.response?.data?.message || "Couldn't load products";
         setError(msg);
+        setSatusCode(503);
       }
     };
 
@@ -39,6 +42,12 @@ function ProductList() {
   function onAddButtonClick() {
     navigate("/products/add");
   }
+
+  if (error)
+    return (
+      // Error window
+      <ErrorWindow text={error} statusCode={statusCode} onClose={() => setError("")} />
+    );
 
   return (
     // Product list

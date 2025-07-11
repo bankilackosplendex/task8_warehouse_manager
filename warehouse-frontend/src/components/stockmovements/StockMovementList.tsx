@@ -9,6 +9,7 @@ import { getCompanyById } from "../../services/companyService.tsx";
 import { ArrowLeftRight, CalendarDays, Package, SquarePlus, Truck, Warehouse } from "lucide-react";
 import { Role } from "../../enums/UserRoleEnum.tsx";
 import { useAuth } from "../../hooks/useAuth.tsx";
+import ErrorWindow from "../common/ErrorWindow.tsx";
 
 function StockMovementsList() {
   // --- USER INFO ---
@@ -22,6 +23,7 @@ function StockMovementsList() {
 
   // --- ERROR ---
   const [error, setError] = useState("");
+  const [statusCode, setSatusCode] = useState<number>();
 
   // --- FETCH THE MOVEMENTS DATA FROM BACKEND ---
   useEffect(() => {
@@ -34,6 +36,7 @@ function StockMovementsList() {
         const msg =
           err.response?.data?.message || "Couldn't load stock movements";
         setError(msg);
+        setSatusCode(503);
       }
     };
 
@@ -44,6 +47,11 @@ function StockMovementsList() {
   function onAddButtonClick() {
     navigate("/stockmovements/add");
   }
+  if (error)
+    return (
+      // Error window
+      <ErrorWindow text={error} statusCode={statusCode} onClose={() => setError("")} />
+    );
 
   return (
     // Movement List
