@@ -7,19 +7,22 @@ import { Role } from 'generated/prisma';
 export class StatisticsController {
   constructor(private statisticsService: StatisticsService) {}
 
-  @Roles(Role.ADMIN)
+  // --- GET TOP SUPPLIERS STATISTICS ---
+  @Roles(Role.ADMIN) // -> only with ADMIN role
   @Get('/topsuppliers')
   getTopSuppliers() {
     return this.statisticsService.topSuppliers();
   }
 
-  @Roles(Role.ADMIN)
+  // --- GET TOP COSTUMERS STATISTICS ---
+  @Roles(Role.ADMIN) // -> only with ADMIN role
   @Get('/topcostumers')
   getTopCostumers() {
     return this.statisticsService.topCustomers();
   }
 
-  @Roles(Role.ADMIN)
+  // --- GET MOST MOVED PRODUCTS STATISTICS ---
+  @Roles(Role.ADMIN) // -> only with ADMIN role
   @Get('/mostmovedproducts')
   getMostMovedProducts() {
     return this.statisticsService.mostMovedProducts();

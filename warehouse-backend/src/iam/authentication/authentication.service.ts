@@ -31,6 +31,7 @@ export class AuthenticationService {
     private readonly refreshTokenIdsStorage: RefreshTokenIdsStorage,
   ) {}
 
+  // --- SIGN UP ---
   async signUp(signUpDto: SignUpDto) {
     try {
       const user = new User();
@@ -49,6 +50,7 @@ export class AuthenticationService {
     }
   }
 
+  // --- SIGN IN ---
   async signIn(signInDto: SignInDto) {
     const user = await this.prisma.user.findUnique({
       where: {
@@ -68,6 +70,7 @@ export class AuthenticationService {
     return await this.generateTokens(user);
   }
 
+  // --- GENERATE JWT FUNCTION ---
   async generateTokens(user: User) {
     const refreshTokenId = randomUUID();
     const [accessToken, refreshToken] = await Promise.all([
@@ -87,6 +90,7 @@ export class AuthenticationService {
     };
   }
 
+  // --- REFRESH JWT FUNCTION ---
   async refreshTokens(refreshTokenDto: RefreshTokenDto) {
     try {
       const { sub, refreshTokenId } = await this.jwtService.verifyAsync<
@@ -126,6 +130,7 @@ export class AuthenticationService {
     }
   }
 
+  // --- SIGN JWT FUNCTION ---
   private async signToken<T>(userId: number, expiresIn: number, payload?: T) {
     return await this.jwtService.signAsync(
       {

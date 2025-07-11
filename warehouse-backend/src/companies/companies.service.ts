@@ -6,16 +6,19 @@ import { DatabaseService } from 'src/database/database.service';
 export class CompaniesService {
   constructor(private prisma: DatabaseService) {}
 
+  // --- CREATE A NEW COMPANY ---
   create(createCompanyDto: Prisma.CompanyCreateInput) {
     return this.prisma.company.create({
       data: createCompanyDto,
     });
   }
 
+  // --- GET ALL COMPANIES ---
   findAll() {
     return this.prisma.company.findMany();
   }
 
+  // --- GET ONE SPECIFIC COMPANY BY ID ---
   async findOne(id: number) {
     const company = await this.prisma.company.findUnique({
       where: { id },
@@ -33,6 +36,7 @@ export class CompaniesService {
     return company;
   }
 
+  // --- UPDATE ONE SPECIFIC COMPANY BY ID ---
   async update(id: number, updateCompanyDto: Prisma.CompanyUpdateInput) {
     await this.findOne(id);
     return this.prisma.company.update({
@@ -41,6 +45,7 @@ export class CompaniesService {
     });
   }
 
+  // --- DELETE ONE SPECIFIC COMPANY BY ID ---
   async remove(id: number) {
     await this.findOne(id);
     return this.prisma.company.delete({ where: { id } });

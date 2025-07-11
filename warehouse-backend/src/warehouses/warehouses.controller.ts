@@ -16,23 +16,27 @@ import { Roles } from 'src/iam/authorization/decorators/roles.decorator';
 export class WarehousesController {
   constructor(private readonly warehousesService: WarehousesService) {}
 
-  @Roles(Role.ADMIN)
+  // --- CREATE A NEW WAREHOUSE ---
+  @Roles(Role.ADMIN) // -> only with ADMIN role
   @Post()
   create(@Body() createCoffeeDto: Prisma.WarehouseCreateInput) {
     return this.warehousesService.create(createCoffeeDto);
   }
 
+  // --- GET ALL WAREHOUSES ---
   @Get()
   findAll() {
     return this.warehousesService.findAll();
   }
 
+  // --- GET ONE SPECIFIC WWAREHOUSE BY ID ---
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.warehousesService.findOne(id);
   }
 
-  @Roles(Role.ADMIN)
+  // --- UPDATE ONE SPECIFIC WAREHOUSE BY ID ---
+  @Roles(Role.ADMIN) // -> only with ADMIN role
   @Patch(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
@@ -41,12 +45,14 @@ export class WarehousesController {
     return this.warehousesService.update(+id, updateCoffeeDto);
   }
 
-  @Roles(Role.ADMIN)
+  // --- DELETE ONE SPECIFIC WAREHOUSE BY ID ---
+  @Roles(Role.ADMIN) // -> only with ADMIN role
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.warehousesService.remove(+id);
   }
 
+  // --- GET ONE SPECIFIC WAREHOUSE'S PRODUCTS ---
   @Get(':id/products')
   getProductsByWarehouse(@Param('id', ParseIntPipe) id: number) {
     return this.warehousesService.getWarehouseProducts(id);

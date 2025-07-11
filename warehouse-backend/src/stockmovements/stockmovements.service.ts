@@ -6,12 +6,14 @@ import { DatabaseService } from 'src/database/database.service';
 export class StockmovementsService {
   constructor(private prisma: DatabaseService) {}
 
+  // --- CREATE A NEW MOVEMENT ---
   create(createStockmovementDto: Prisma.StockMovementCreateInput) {
     return this.prisma.stockMovement.create({
       data: createStockmovementDto,
     });
   }
 
+  // --- GET ALL MOVEMENTS ---
   findAll() {
     return this.prisma.stockMovement.findMany({
       include: {
@@ -22,6 +24,7 @@ export class StockmovementsService {
     });
   }
 
+  // --- GET ONE SPECIFIC MOVEMENT BY ID ---
   async findOne(id: number) {
     const stockMovement = await this.prisma.stockMovement.findUnique({
       where: { id },
@@ -36,6 +39,7 @@ export class StockmovementsService {
     return stockMovement;
   }
 
+  // --- UPDATE ONE SPECIFIC MOVEMENT BY ID ---
   async update(
     id: number,
     updateStockmovementDto: Prisma.StockMovementUpdateInput,
@@ -47,6 +51,7 @@ export class StockmovementsService {
     });
   }
 
+  // --- DELETE ONE SPECIFIC MOVEMENT BY ID ---
   async remove(id: number) {
     await this.findOne(id);
     return this.prisma.stockMovement.delete({ where: { id } });

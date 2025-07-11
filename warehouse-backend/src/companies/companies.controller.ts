@@ -16,23 +16,27 @@ import { Roles } from 'src/iam/authorization/decorators/roles.decorator';
 export class CompaniesController {
   constructor(private readonly companiesService: CompaniesService) {}
 
-  @Roles(Role.ADMIN)
+  // --- CREATE A NEW COMPANY ---
+  @Roles(Role.ADMIN) // -> only with ADMIN role
   @Post()
   create(@Body() createCompanyDto: Prisma.CompanyCreateInput) {
     return this.companiesService.create(createCompanyDto);
   }
 
+  // --- GET ALL COMPANIES ---
   @Get()
   findAll() {
     return this.companiesService.findAll();
   }
 
+  // --- GET ONE SPECIFIC COMPANY BY ID ---
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.companiesService.findOne(id);
   }
 
-  @Roles(Role.ADMIN)
+  // --- UPDATE ONE SPECIFIC COMPANY BY ID ---
+  @Roles(Role.ADMIN) // -> only with ADMIN role
   @Patch(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
@@ -41,7 +45,8 @@ export class CompaniesController {
     return this.companiesService.update(id, updateCompanyDto);
   }
 
-  @Roles(Role.ADMIN)
+  // --- DELETE ONE SPECIFIC COMPANY BY ID ---
+  @Roles(Role.ADMIN) // -> only with ADMIN role
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.companiesService.remove(id);

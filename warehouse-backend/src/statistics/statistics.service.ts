@@ -5,6 +5,7 @@ import { DatabaseService } from 'src/database/database.service';
 export class StatisticsService {
   constructor(private prisma: DatabaseService) {}
 
+  // --- GET TOP 5 COMPANIES WITH THE MOST EXPORTS ---
   async topSuppliers() {
     return this.prisma.stockMovement.groupBy({
       by: ['companyId'],
@@ -15,6 +16,7 @@ export class StatisticsService {
     });
   }
 
+  // --- GET TOP 5 COMPANIES WITH THE MOST IMPORTS ---
   async topCustomers() {
     return this.prisma.stockMovement.groupBy({
       by: ['companyId'],
@@ -25,6 +27,7 @@ export class StatisticsService {
     });
   }
 
+  // --- GET TOP 5 PRODUCTS WITH THE MOST MOVEMENTS ---
   async mostMovedProducts() {
     return this.prisma.stockMovement.groupBy({
       by: ['productId'],

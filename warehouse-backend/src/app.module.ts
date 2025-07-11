@@ -8,7 +8,6 @@ import { UsersModule } from './users/users.module';
 import { CompaniesModule } from './companies/companies.module';
 import { StockmovementsModule } from './stockmovements/stockmovements.module';
 import { IamModule } from './iam/iam.module';
-import { WarehouseproductModule } from './warehouseproduct/warehouseproduct.module';
 import { ReportsModule } from './reports/reports.module';
 import { StatisticsModule } from './statistics/statistics.module';
 
@@ -21,7 +20,6 @@ import { StatisticsModule } from './statistics/statistics.module';
     CompaniesModule,
     StockmovementsModule,
     IamModule,
-    WarehouseproductModule,
     ReportsModule,
     StatisticsModule,
   ],

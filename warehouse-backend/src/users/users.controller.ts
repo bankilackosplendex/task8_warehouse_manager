@@ -16,23 +16,27 @@ import { Roles } from 'src/iam/authorization/decorators/roles.decorator';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Roles(Role.ADMIN)
+  // --- CREATE A NEW USER ---
+  @Roles(Role.ADMIN) // -> only with ADMIN role
   @Post()
   create(@Body() createUserDto: Prisma.UserCreateInput) {
     return this.usersService.create(createUserDto);
   }
 
+  // --- GET ALL USRES ---
   @Get()
   findAll() {
     return this.usersService.findAll();
   }
 
+  // --- GET ONE SPECIFIC USER BY ID ---
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.usersService.findOne(id);
   }
 
-  @Roles(Role.ADMIN)
+  // --- UPDATE ONE SPECIFIC USER BY ID ---
+  @Roles(Role.ADMIN) // -> only with ADMIN role
   @Patch(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
@@ -41,7 +45,8 @@ export class UsersController {
     return this.usersService.update(id, updateUserDto);
   }
 
-  @Roles(Role.ADMIN)
+  // --- DELETE ONE SPECIFIC USER BY ID ---
+  @Roles(Role.ADMIN) // -> only with ADMIN role
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.usersService.remove(id);

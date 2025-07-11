@@ -6,6 +6,7 @@ import { Response } from 'express';
 export class ReportsController {
   constructor(private reportsService: ReportsService) {}
 
+  // --- GET A SOECIFIC WAREHOUSE'S REPORT ---
   @Get('warehouse/:id')
   async getWarehouseReport(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
     return this.reportsService.generateWarehouseReport(id, res);

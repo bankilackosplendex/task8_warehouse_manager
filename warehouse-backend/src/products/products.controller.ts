@@ -16,23 +16,27 @@ import { Roles } from 'src/iam/authorization/decorators/roles.decorator';
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
-  @Roles(Role.ADMIN)
+  // --- CREATE A NEW PRODUCT ---
+  @Roles(Role.ADMIN) // -> only with ADMIN role
   @Post()
   create(@Body() createProductDto: Prisma.ProductCreateInput) {
     return this.productsService.create(createProductDto);
   }
 
+  // --- GET ALL PRODUCTS ---
   @Get()
   findAll() {
     return this.productsService.findAll();
   }
 
+  // --- GET ONE SPECIFIC PRODUCT BY ID ---
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.productsService.findOne(id);
   }
 
-  @Roles(Role.ADMIN)
+  // --- UPDATE ONE SPECIFIC PRODUCT BY ID ---
+  @Roles(Role.ADMIN) // -> only with ADMIN role
   @Patch(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
@@ -41,12 +45,14 @@ export class ProductsController {
     return this.productsService.update(id, updateProductDto);
   }
 
-  @Roles(Role.ADMIN)
+  // --- DELETE ONE SPECIFIC PRODUCT BY ID ---
+  @Roles(Role.ADMIN) // -> only with ADMIN role
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.productsService.remove(id);
   }
 
+  // --- GET ONE SPECIFIC PRODUCT'S WAREHOUSES ---
   @Get(':id/warehouses')
   getWarehousesByProduct(@Param('id', ParseIntPipe) id: number) {
     return this.productsService.getProductWarehouses(id);

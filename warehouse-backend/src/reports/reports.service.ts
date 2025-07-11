@@ -7,6 +7,7 @@ import { DatabaseService } from '../database/database.service';
 export class ReportsService {
   constructor(private prisma: DatabaseService) {}
 
+  // --- CREATE REPORT PDF FILE ---
   async generateWarehouseReport(warehouseId: number, res: Response) {
     const warehouse = await this.prisma.warehouse.findUnique({
       where: { id: warehouseId },
@@ -27,6 +28,7 @@ export class ReportsService {
 
     if (!warehouse) throw new Error('Warehouse not found');
 
+    // --- PDF REPORT FILE ---
     const doc = new PDFDocument();
     res.setHeader('Content-Type', 'application/pdf');
     res.setHeader(
@@ -35,7 +37,7 @@ export class ReportsService {
     );
     doc.pipe(res);
 
-    // Title
+    // --- TITLE ---
     doc.fontSize(20).text(`Warehouse Report`, { align: 'center' });
     doc.moveDown(0.5);
     doc.fontSize(16).text(`Warehouse: ${warehouse.name}`, { align: 'center' });
@@ -43,7 +45,7 @@ export class ReportsService {
     doc.fontSize(12).text(`Generated at: ${new Date().toLocaleString()}`, { align: 'center' });
     doc.moveDown(2);
 
-    // Products section
+    // --- PRODUCTS SECTION ---
     doc.fontSize(14).text('Products in stock', { underline: true });
     doc.moveDown(0.5);
     if (warehouse.products.length === 0) {
@@ -60,7 +62,7 @@ export class ReportsService {
 
     doc.moveDown(1.5);
 
-    // Movements section
+    // --- MOVEMENTS SECTION ---
     doc.fontSize(14).text('Stock Movements', { underline: true });
     doc.moveDown(0.5);
     if (warehouse.movements.length === 0) {
