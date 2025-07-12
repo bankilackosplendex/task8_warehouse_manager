@@ -1,5 +1,8 @@
 import axios from "axios";
-import { refreshAccessToken, getAccessToken } from "../services/authService.tsx";
+import {
+  refreshAccessToken,
+  getAccessToken,
+} from "../services/authService.tsx";
 import { jwtDecode } from "jwt-decode";
 
 // --- BACKEND BASE URL ---
@@ -7,7 +10,7 @@ const URL = "http://localhost:4000/";
 
 // --- BACKEND API  ---
 const api = axios.create({
-  baseURL: URL
+  baseURL: URL,
 });
 
 // --- CHECK IF TOKEN IS EXPIRED ---
@@ -36,7 +39,7 @@ let isRefreshing = false;
 let failedQueue: any[] = [];
 
 const processQueue = (error: any, token: string | null = null) => {
-  failedQueue.forEach(prom => {
+  failedQueue.forEach((prom) => {
     if (error) {
       prom.reject(error);
     } else {
@@ -48,11 +51,15 @@ const processQueue = (error: any, token: string | null = null) => {
 };
 
 api.interceptors.response.use(
-  res => res,
+  (res) => res,
   async (err) => {
     const originalRequest = err.config;
 
-    // If 401 error and we haven't retried yet
+    const refreshToken = localStorage.getItem("refreshToken");
+    if (!refreshToken) {
+      return;
+    }
+
     if (err.response?.status === 401 && !originalRequest._retry) {
       if (isRefreshing) {
         return new Promise(function (resolve, reject) {
@@ -83,7 +90,7 @@ api.interceptors.response.use(
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
         window.location.href = "/login";
-        return Promise.reject(refreshError);
+        return;
       } finally {
         isRefreshing = false;
       }

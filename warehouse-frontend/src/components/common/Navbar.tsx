@@ -149,11 +149,11 @@ function Navbar() {
         {user ? (
           <>
             {/* Logout */}
-            <li onClick={logout}>
+            <li>
               <Link
                 className="navbar__links__item"
                 to="/"
-                onClick={() => toggleMenu()}
+                onClick={() => (toggleMenu(), logout())}
               >
                 <LogOut className="navbar__links__item__icon" />
                 <div>Log out</div>
