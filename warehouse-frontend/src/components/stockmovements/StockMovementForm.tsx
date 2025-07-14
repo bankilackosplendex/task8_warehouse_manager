@@ -71,6 +71,13 @@ function StockMovementsForm({ type }: { type: FormType }) {
 
         const companiesData = await getCompanies();
         setCompanies(companiesData);
+
+        if (type === FormType.CREATE) {
+          setMovementType(MovementType.IMPORT);
+          setWarehouse(warehouses[0]);
+          setProduct(products[0]);
+          setCompany(companies[0]);
+        }
       } catch (err: any) {
         const msg =
           err.response?.data?.message || "Couldn't load stockmovement";
