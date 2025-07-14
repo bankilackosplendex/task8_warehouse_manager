@@ -13,15 +13,7 @@ export class WarehousesService {
     });
   }
 
-  // --- ADD A NEW PRODUCT TO THE WAREHOUSE ---
-  addProduct(
-    createWarehouseProductDto: Prisma.WarehouseProductUncheckedCreateInput,
-  ) {
-    return this.prisma.warehouseProduct.create({
-      data: createWarehouseProductDto,
-    });
-  }
-
+  // --- ADD PRODUCT QUANTITY TO THE WAREHOUSE ---
   async addOrUpdateProduct(input: Prisma.WarehouseProductUncheckedCreateInput) {
     const { warehouseId, productId, quantity } = input;
 
