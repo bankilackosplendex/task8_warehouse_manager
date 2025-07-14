@@ -66,9 +66,4 @@ export class WarehousesController {
   getProductsByWarehouse(@Param('id', ParseIntPipe) id: number) {
     return this.warehousesService.getWarehouseProducts(id);
   }
-
-  @Get(':id/wp')
-  getAllWarehouseProducts() {
-    return this.warehousesService.getAllWarehouseProducts();
-  }
 }

@@ -67,8 +67,4 @@ export class WarehousesService {
       },
     });
   }
-
-  async getAllWarehouseProducts() {
-    return this.prisma.warehouseProduct.findMany();
-  }
 }
