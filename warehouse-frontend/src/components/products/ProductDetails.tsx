@@ -13,8 +13,10 @@ import {
   FileDigit,
   Pencil,
   Ruler,
+  SquarePlus,
   Tag,
   Trash2,
+  Truck,
   Warehouse,
 } from "lucide-react";
 import Backdrop from "../common/Backdrop.tsx";
@@ -99,7 +101,11 @@ function ProductDetails() {
   if (error)
     return (
       // Error window
-      <ErrorWindow text={error} statusCode={statusCode} onClose={() => setError("")} />
+      <ErrorWindow
+        text={error}
+        statusCode={statusCode}
+        onClose={() => setError("")}
+      />
     );
 
   return (
@@ -200,6 +206,14 @@ function ProductDetails() {
             onClick={() => modifyProduct(product.id)}
           >
             <Pencil />
+          </button>
+          {/* Add movement button */}
+          <button
+            className="productDetails__optionsContainer__addMovementButton"
+            onClick={() => navigate("/stockmovements/add")}
+          >
+            <SquarePlus className="productDetails__optionsContainer__addMovementButton__icon" />
+            <Truck className="productDetails__optionsContainer__addMovementButton__icon" />
           </button>
         </div>
       )}

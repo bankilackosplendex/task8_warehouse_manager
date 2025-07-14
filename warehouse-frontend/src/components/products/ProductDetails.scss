@@ -123,7 +123,8 @@
     margin-top: 2rem;
 
     &__deleteButton,
-    &__modifyButton {
+    &__modifyButton,
+    &__addMovementButton {
       @include buttonBase;
       margin: 0rem;
       width: 2.8rem;
@@ -138,6 +139,12 @@
         color: $error-color;
         border-color: $error-color;
       }
+    }
+
+    &__addMovementButton {
+      @include iconContainer;
+      justify-content: center;
+      width: 4.8rem;
     }
   }
 }

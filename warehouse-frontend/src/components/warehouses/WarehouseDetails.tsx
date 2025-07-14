@@ -18,6 +18,7 @@ import {
   Tag,
   Container,
   ArrowLeftRight,
+  SquarePlus,
 } from "lucide-react";
 import Backdrop from "../common/Backdrop.tsx";
 import PopUpWindow from "../common/PopUpWindow.tsx";
@@ -95,7 +96,11 @@ function WarehouseDetails() {
   if (error)
     return (
       // Error window
-      <ErrorWindow text={error} statusCode={statusCode} onClose={() => setError("")} />
+      <ErrorWindow
+        text={error}
+        statusCode={statusCode}
+        onClose={() => setError("")}
+      />
     );
 
   return (
@@ -226,9 +231,7 @@ function WarehouseDetails() {
         <div className="warehouseDetails__movements warehouseDetails__empty">
           <div className="warehouseDetails__movements__key">
             <Truck className="warehouseDetails__movements__key__icon" />
-            <p className="warehouseDetails__movements__key__text">
-              Movements:
-            </p>
+            <p className="warehouseDetails__movements__key__text">Movements:</p>
           </div>
           <div className="warehouseDetails__movements__value">
             This warehouse has no movements
@@ -251,6 +254,14 @@ function WarehouseDetails() {
             onClick={() => modifyWarehouse(warehouse.id)}
           >
             <Pencil />
+          </button>
+          {/* Add movement button */}
+          <button
+            className="warehouseDetails__optionsContainer__addMovementButton"
+            onClick={() => navigate("/stockmovements/add")}
+          >
+            <SquarePlus className="warehouseDetails__optionsContainer__addMovementButton__icon" />
+            <Truck className="warehouseDetails__optionsContainer__addMovementButton__icon" />
           </button>
         </div>
       )}
