@@ -18,7 +18,10 @@ import {
   getStockMovementById,
   updateStockMovement,
 } from "../../services/stockMovementService.tsx";
-import { getWarehouses } from "../../services/warehouseService.tsx";
+import {
+  addProductToWarehouse,
+  getWarehouses,
+} from "../../services/warehouseService.tsx";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { StockMovement } from "../../types/StockMovementType.tsx";
@@ -26,6 +29,7 @@ import { Warehouse } from "../../types/WarehouseType.tsx";
 import { Product } from "../../types/ProductType.tsx";
 import { Company } from "../../types/CompanyType.tsx";
 import ErrorWindow from "../common/ErrorWindow.tsx";
+import { WarehouseProduct } from "../../types/WarehouseProductType.tsx";
 
 function StockMovementsForm({ type }: { type: FormType }) {
   // --- MOVEMENT ID URL PARAMETER ---
@@ -84,7 +88,17 @@ function StockMovementsForm({ type }: { type: FormType }) {
 
     try {
       if (type == FormType.CREATE) {
+        console.log(stockMovement);
         await createStockMovement(stockMovement);
+
+        const warehouseProduct: WarehouseProduct = {
+          quantity: stockMovement.quantity,
+          createdAt: stockMovement.createdAt,
+          warehouseId: stockMovement.warehouseId,
+          productId: stockMovement.productId,
+        };
+        console.log(warehouseProduct);
+        await addProductToWarehouse(warehouseProduct);
       } else if (type == FormType.MODIFY && stockMovementId) {
         const cleanedStockMovement = { ...stockMovement };
         delete cleanedStockMovement.id;
@@ -157,7 +171,11 @@ function StockMovementsForm({ type }: { type: FormType }) {
   if (error)
     return (
       // Error window
-      <ErrorWindow text={error} statusCode={statusCode} onClose={() => setError("")} />
+      <ErrorWindow
+        text={error}
+        statusCode={statusCode}
+        onClose={() => setError("")}
+      />
     );
 
   return (

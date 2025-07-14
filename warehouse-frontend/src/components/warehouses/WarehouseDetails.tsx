@@ -61,6 +61,7 @@ function WarehouseDetails() {
           setWarehouse(data);
 
           const productsData = await getWarehouseProductsById(+warehouseId);
+          console.log(productsData);
           setWarehouseProducts(productsData);
         } catch (err: any) {
           const msg = err.response?.data?.message || "Couldn't load warehouse";

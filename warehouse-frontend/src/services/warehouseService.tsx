@@ -1,5 +1,6 @@
 import api from "./api.tsx";
 import { Warehouse } from "../types/WarehouseType.tsx";
+import { WarehouseProduct } from "../types/WarehouseProductType.tsx";
 import { getAccessToken } from "./authService.tsx";
 
 // --- GET ALL WAREHOUSES ---
@@ -19,7 +20,7 @@ export const getWarehouseById = async (id: number) => {
   const response = await api.get(`/warehouses/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
-    }
+    },
   });
   return response.data;
 };
@@ -30,7 +31,7 @@ export const createWarehouse = async (data: Warehouse) => {
   const response = await api.post("/warehouses", data, {
     headers: {
       Authorization: `Bearer ${token}`,
-    }
+    },
   });
   return response.data;
 };
@@ -41,7 +42,7 @@ export const updateWarehouse = async (id: number, data: Warehouse) => {
   const response = await api.patch(`/warehouses/${id}`, data, {
     headers: {
       Authorization: `Bearer ${token}`,
-    }
+    },
   });
   return response.data;
 };
@@ -52,7 +53,7 @@ export const deleteWarehouse = async (id: number) => {
   const response = await api.delete(`/warehouses/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
-    }
+    },
   });
   return response.data;
 };
@@ -63,7 +64,17 @@ export const getWarehouseProductsById = async (warehouseId: number) => {
   const response = await api.get(`/warehouses/${warehouseId}/products`, {
     headers: {
       Authorization: `Bearer ${token}`,
-    }
+    },
+  });
+  return response.data;
+};
+
+export const addProductToWarehouse = async (data: WarehouseProduct) => {
+  const token = getAccessToken();
+  const response = await api.post(`/warehouses/addProduct`, data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   });
   return response.data;
 };
