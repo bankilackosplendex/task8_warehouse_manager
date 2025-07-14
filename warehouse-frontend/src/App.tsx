@@ -1,5 +1,5 @@
-import { Route, Routes } from "react-router-dom";
 import "./index.scss";
+import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/common/Navbar.tsx";
 import HomePage from "./pages/HomePage/HomePage.tsx";
 import WarehousesPage from "./pages/WarehousesPage/WarehousesPage.tsx";
@@ -10,8 +10,6 @@ import ReportsPage from "./pages/ReportsPage/ReportsPage.tsx";
 import StatisticsPage from "./pages/StatisticsPage/StatisticsPage.tsx";
 import LoginPage from "./pages/LoginPage/LoginPage.tsx";
 import RegisterPage from "./pages/RegisterPage/RegisterPage.tsx";
-import { Role } from "./enums/UserRoleEnum.tsx";
-import ProtectedRoute from "./components/authorization/ProtectedRoute.tsx";
 import UsersPage from "./pages/UsersPage/UsersPage.tsx";
 import ErrorWindow from "./components/common/ErrorWindow.tsx";
 
