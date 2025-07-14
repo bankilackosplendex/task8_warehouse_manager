@@ -9,21 +9,8 @@ import { ClipboardList, LayoutList, Pencil, SquarePlus } from "lucide-react";
 import ErrorWindow from "../../components/common/ErrorWindow.tsx";
 import ProtectedRoute from "../../components/authorization/ProtectedRoute.tsx";
 import { Role } from "../../enums/UserRoleEnum.tsx";
-import { useAuth } from "../../hooks/useAuth.tsx";
 
 function ProductsPage() {
-  // --- USER INFO ---
-  const { user } = useAuth();
-
-  if (!user)
-    return (
-      <ErrorWindow
-        text="Access Denied"
-        statusCode={401}
-        onClose={function () {}}
-      />
-    );
-
   return (
     // Proudcts page
     <div className="productsPage">
@@ -33,7 +20,7 @@ function ProductsPage() {
         <Route
           path="/"
           element={
-            <>
+            <ProtectedRoute allowedRoles={[Role.USER, Role.ADMIN]}>
               {/* Page header */}
               <div className="productsPage__listHeader">
                 <BackButton />
@@ -45,14 +32,14 @@ function ProductsPage() {
               </div>
               {/* List component */}
               <ProductList />
-            </>
+            </ProtectedRoute>
           }
         />
         {/* Product details */}
         <Route
           path=":productId"
           element={
-            <>
+            <ProtectedRoute allowedRoles={[Role.USER, Role.ADMIN]}>
               {/* Page header */}
               <div className="productsPage__detailsHeader">
                 <BackButton />
@@ -64,7 +51,7 @@ function ProductsPage() {
               </div>
               {/* Deatils component */}
               <ProductDetails />
-            </>
+            </ProtectedRoute>
           }
         />
         {/* Product create form */}

@@ -33,14 +33,7 @@ function App() {
         {/* --- REPORTS PAGE --- */}
         <Route path="/reports/*" element={<ReportsPage />} />
         {/* --- STATISTICS PAGE --- */}
-        <Route
-          path="/statistics/*"
-          element={
-            <ProtectedRoute allowedRoles={[Role.ADMIN]}>
-              <StatisticsPage />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/statistics/*" element={<StatisticsPage />} />
         {/* --- LOGIN PAGE --- */}
         <Route path="/login" element={<LoginPage />} />
         {/* --- REGISTRATION PAGE --- */}

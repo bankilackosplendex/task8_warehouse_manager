@@ -9,21 +9,8 @@ import { ClipboardList, LayoutList, Pencil, SquarePlus } from "lucide-react";
 import ErrorWindow from "../../components/common/ErrorWindow.tsx";
 import ProtectedRoute from "../../components/authorization/ProtectedRoute.tsx";
 import { Role } from "../../enums/UserRoleEnum.tsx";
-import { useAuth } from "../../hooks/useAuth.tsx";
 
 function CompaniesPage() {
-  // --- USER INFO ---
-  const { user } = useAuth();
-
-  if (!user)
-    return (
-      <ErrorWindow
-        text="Access Denied"
-        statusCode={401}
-        onClose={function () {}}
-      />
-    );
-
   return (
     // Companies page
     <div className="companiesPage">
@@ -33,7 +20,7 @@ function CompaniesPage() {
         <Route
           path="/"
           element={
-            <>
+            <ProtectedRoute allowedRoles={[Role.USER, Role.ADMIN]}>
               {/* Page header */}
               <div className="companiesPage__listHeader">
                 <BackButton />
@@ -45,14 +32,14 @@ function CompaniesPage() {
               </div>
               {/* List component */}
               <CompanyList />
-            </>
+            </ProtectedRoute>
           }
         />
         {/* Company details */}
         <Route
           path="/:companyId"
           element={
-            <>
+            <ProtectedRoute allowedRoles={[Role.USER, Role.ADMIN]}>
               {/* Page header */}
               <div className="companiesPage__detailsHeader">
                 <BackButton />
@@ -64,7 +51,7 @@ function CompaniesPage() {
               </div>
               {/* Details component */}
               <CompanyDetails />
-            </>
+            </ProtectedRoute>
           }
         />
         {/* Company create form */}

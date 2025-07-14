@@ -9,21 +9,8 @@ import { FormType } from "../../enums/FormTypeEnum.tsx";
 import ErrorWindow from "../../components/common/ErrorWindow.tsx";
 import ProtectedRoute from "../../components/authorization/ProtectedRoute.tsx";
 import { Role } from "../../enums/UserRoleEnum.tsx";
-import { useAuth } from "../../hooks/useAuth.tsx";
 
 function StockMovementsPage() {
-  // --- USER INFO ---
-  const { user } = useAuth();
-
-  if (!user)
-    return (
-      <ErrorWindow
-        text="Access Denied"
-        statusCode={401}
-        onClose={function () {}}
-      />
-    );
-
   return (
     // Stockmovements page
     <div className="stockmovementsPage">
@@ -33,7 +20,7 @@ function StockMovementsPage() {
         <Route
           path="/"
           element={
-            <>
+            <ProtectedRoute allowedRoles={[Role.USER, Role.ADMIN]}>
               {/* Page header */}
               <div className="stockmovementsPage__listHeader">
                 <BackButton />
@@ -45,14 +32,14 @@ function StockMovementsPage() {
               </div>
               {/* List component */}
               <StockMovementList />
-            </>
+            </ProtectedRoute>
           }
         />
         {/* Stockmovement details */}
         <Route
           path="/:stockMovementId"
           element={
-            <>
+            <ProtectedRoute allowedRoles={[Role.USER, Role.ADMIN]}>
               {/* Page header */}
               <div className="stockmovementsPage__detailsHeader">
                 <BackButton />
@@ -64,7 +51,7 @@ function StockMovementsPage() {
               </div>
               {/* Details component */}
               <StockMovementDetails />
-            </>
+            </ProtectedRoute>
           }
         />
         {/* Stockmovement create form */}

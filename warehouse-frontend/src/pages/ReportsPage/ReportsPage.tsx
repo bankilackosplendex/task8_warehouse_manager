@@ -5,21 +5,10 @@ import { Routes, Route } from "react-router-dom";
 import ReportDetails from "../../components/reports/ReportDetails.tsx";
 import { FileText, LayoutList } from "lucide-react";
 import ErrorWindow from "../../components/common/ErrorWindow.tsx";
-import { useAuth } from "../../hooks/useAuth.tsx";
+import { Role } from "../../enums/UserRoleEnum.tsx";
+import ProtectedRoute from "../../components/authorization/ProtectedRoute.tsx";
 
 function ReportsPage() {
-  // --- USER INFO ---
-  const { user } = useAuth();
-
-  if (!user)
-    return (
-      <ErrorWindow
-        text="Access Denied"
-        statusCode={401}
-        onClose={function () {}}
-      />
-    );
-
   return (
     // Reports page
     <div className="reportsPage">
@@ -29,7 +18,7 @@ function ReportsPage() {
         <Route
           path="/"
           element={
-            <>
+            <ProtectedRoute allowedRoles={[Role.USER, Role.ADMIN]}>
               {/* Page header */}
               <div className="reportsPage__header">
                 <BackButton />
@@ -41,14 +30,14 @@ function ReportsPage() {
               </div>
               {/* List component */}
               <ReportList />
-            </>
+            </ProtectedRoute>
           }
         />
         {/* Report details */}
         <Route
           path="/:reportId"
           element={
-            <>
+            <ProtectedRoute allowedRoles={[Role.USER, Role.ADMIN]}>
               {/* Page header */}
               <div className="reportsPage__header">
                 <BackButton />
@@ -60,7 +49,7 @@ function ReportsPage() {
               </div>
               {/* Details component */}
               <ReportDetails />
-            </>
+            </ProtectedRoute>
           }
         />
         {/* NOT FOUND PAGE */}

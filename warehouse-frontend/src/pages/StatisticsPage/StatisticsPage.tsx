@@ -7,21 +7,8 @@ import { Routes, Route } from "react-router-dom";
 import { Role } from "../../enums/UserRoleEnum.tsx";
 import { ChartColumnDecreasing, LayoutList } from "lucide-react";
 import ErrorWindow from "../../components/common/ErrorWindow.tsx";
-import { useAuth } from "../../hooks/useAuth.tsx";
 
 function StatisticsPage() {
-  // --- USER INFO ---
-  const { user } = useAuth();
-
-  if (!user)
-    return (
-      <ErrorWindow
-        text="Access Denied"
-        statusCode={401}
-        onClose={function () {}}
-      />
-    );
-
   return (
     // Statistics page
     <div className="statisticsPage">
@@ -31,7 +18,7 @@ function StatisticsPage() {
         <Route
           path="/"
           element={
-            <>
+            <ProtectedRoute allowedRoles={[Role.ADMIN]}>
               <div className="statisticsPage__header">
                 <BackButton />
                 {/* Title */}
@@ -40,17 +27,15 @@ function StatisticsPage() {
                   Statistics
                 </h2>
               </div>
-              <ProtectedRoute allowedRoles={[Role.ADMIN]}>
-                <StatisticsList />
-              </ProtectedRoute>
-            </>
+              <StatisticsList />
+            </ProtectedRoute>
           }
         />
         {/* Statistics details */}
         <Route
           path="/:statId"
           element={
-            <>
+            <ProtectedRoute allowedRoles={[Role.ADMIN]}>
               <div className="statisticsPage__header">
                 <BackButton />
                 {/* Title */}
@@ -59,10 +44,8 @@ function StatisticsPage() {
                   Statistics chart
                 </h2>
               </div>
-              <ProtectedRoute allowedRoles={[Role.ADMIN]}>
-                <StatisticsDetails />
-              </ProtectedRoute>
-            </>
+              <StatisticsDetails />
+            </ProtectedRoute>
           }
         />
         {/* NOT FOUND PAGE */}

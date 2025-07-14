@@ -9,21 +9,8 @@ import { ClipboardList, LayoutList, Pencil, SquarePlus } from "lucide-react";
 import ErrorWindow from "../../components/common/ErrorWindow.tsx";
 import ProtectedRoute from "../../components/authorization/ProtectedRoute.tsx";
 import { Role } from "../../enums/UserRoleEnum.tsx";
-import { useAuth } from "../../hooks/useAuth.tsx";
 
 function WarehousePage() {
-  // --- USER INFO ---
-  const { user } = useAuth();
-
-  if (!user)
-    return (
-      <ErrorWindow
-        text="Access Denied"
-        statusCode={401}
-        onClose={function () {}}
-      />
-    );
-
   return (
     // Warehouse page
     <div className="warehousesPage">
@@ -33,7 +20,7 @@ function WarehousePage() {
         <Route
           path="/"
           element={
-            <>
+            <ProtectedRoute allowedRoles={[Role.USER, Role.ADMIN]}>
               {/* Page header */}
               <div className="warehousesPage__listHeader">
                 <BackButton />
@@ -45,14 +32,14 @@ function WarehousePage() {
               </div>
               {/* List component */}
               <WarehouseList />
-            </>
+            </ProtectedRoute>
           }
         />
         {/* Warehouse details */}
         <Route
           path="/:warehouseId"
           element={
-            <>
+            <ProtectedRoute allowedRoles={[Role.USER, Role.ADMIN]}>
               {/* Page header */}
               <div className="warehousesPage__detailsHeader">
                 <BackButton />
@@ -64,9 +51,10 @@ function WarehousePage() {
               </div>
               {/* Details component */}
               <WarehouseDetails />
-            </>
+            </ProtectedRoute>
           }
         />
+
         {/* Warehouse create form */}
         <Route
           path="/add"
