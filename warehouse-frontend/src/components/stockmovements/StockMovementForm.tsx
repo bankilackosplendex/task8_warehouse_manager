@@ -30,6 +30,7 @@ import { Product } from "../../types/ProductType.tsx";
 import { Company } from "../../types/CompanyType.tsx";
 import ErrorWindow from "../common/ErrorWindow.tsx";
 import { WarehouseProduct } from "../../types/WarehouseProductType.tsx";
+import { MovementType } from "../../enums/MovementTypeEnum.tsx";
 
 function StockMovementsForm({ type }: { type: FormType }) {
   // --- MOVEMENT ID URL PARAMETER ---
@@ -97,8 +98,10 @@ function StockMovementsForm({ type }: { type: FormType }) {
           warehouseId: stockMovement.warehouseId,
           productId: stockMovement.productId,
         };
-        console.log(warehouseProduct);
-        await addProductToWarehouse(warehouseProduct);
+
+        if (stockMovement.movementType === MovementType.IMPORT) {
+          await addProductToWarehouse(warehouseProduct);
+        }
       } else if (type == FormType.MODIFY && stockMovementId) {
         const cleanedStockMovement = { ...stockMovement };
         delete cleanedStockMovement.id;

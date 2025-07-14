@@ -6,10 +6,10 @@ export const useLogout = () => {
   const navigate = useNavigate();
 
   const logout = () => {
+    navigate("/");
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
     setUser(null);
-    navigate("/");
   };
 
   return logout;
