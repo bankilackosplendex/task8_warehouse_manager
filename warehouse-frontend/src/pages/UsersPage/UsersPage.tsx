@@ -12,7 +12,14 @@ function UsersPage() {
   // --- USER INFO ---
   const { user } = useAuth();
 
-  if (!user) return <ErrorWindow text="Access Denied" statusCode={401} />;
+  if (!user)
+    return (
+      <ErrorWindow
+        text="Access Denied"
+        statusCode={401}
+        onClose={function () {}}
+      />
+    );
 
   return (
     // Users page
@@ -40,7 +47,13 @@ function UsersPage() {
         {/* NOT FOUND PAGE */}
         <Route
           path="/*"
-          element={<ErrorWindow text={"404 Not found"} statusCode={404} />}
+          element={
+            <ErrorWindow
+              text={"404 Not found"}
+              statusCode={404}
+              onClose={function () {}}
+            />
+          }
         />
       </Routes>
     </div>
