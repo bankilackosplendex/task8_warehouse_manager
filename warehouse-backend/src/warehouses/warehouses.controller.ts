@@ -19,8 +19,17 @@ export class WarehousesController {
   // --- CREATE A NEW WAREHOUSE ---
   @Roles(Role.ADMIN) // -> only with ADMIN role
   @Post()
-  create(@Body() createCoffeeDto: Prisma.WarehouseCreateInput) {
-    return this.warehousesService.create(createCoffeeDto);
+  create(@Body() createWarehouseDto: Prisma.WarehouseCreateInput) {
+    return this.warehousesService.create(createWarehouseDto);
+  }
+
+  // --- ADD A NEW PRODUCT TO THE WAREHOUSE ---
+  @Roles(Role.ADMIN) // -> only with ADMIN role
+  @Post('/addProduct')
+  addProduct(
+    @Body() createWarehouseProductDto: Prisma.WarehouseProductUncheckedCreateInput,
+  ) {
+    return this.warehousesService.addProduct(createWarehouseProductDto);
   }
 
   // --- GET ALL WAREHOUSES ---
@@ -40,9 +49,9 @@ export class WarehousesController {
   @Patch(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() updateCoffeeDto: Prisma.WarehouseUpdateInput,
+    @Body() updateWarehouseDto: Prisma.WarehouseUpdateInput,
   ) {
-    return this.warehousesService.update(+id, updateCoffeeDto);
+    return this.warehousesService.update(+id, updateWarehouseDto);
   }
 
   // --- DELETE ONE SPECIFIC WAREHOUSE BY ID ---
@@ -56,5 +65,10 @@ export class WarehousesController {
   @Get(':id/products')
   getProductsByWarehouse(@Param('id', ParseIntPipe) id: number) {
     return this.warehousesService.getWarehouseProducts(id);
+  }
+
+  @Get(':id/wp')
+  getAllWarehouseProducts() {
+    return this.warehousesService.getAllWarehouseProducts();
   }
 }

@@ -13,6 +13,13 @@ export class WarehousesService {
     });
   }
 
+  // --- ADD A NEW PRODUCT TO THE WAREHOUSE ---
+  addProduct(createWarehouseProductDto: Prisma.WarehouseProductUncheckedCreateInput) {
+    return this.prisma.warehouseProduct.create({
+      data: createWarehouseProductDto,
+    });
+  }
+
   // --- GET ALL WAREHOUSES ---
   findAll() {
     return this.prisma.warehouse.findMany();
@@ -59,5 +66,9 @@ export class WarehousesService {
         product: true,
       },
     });
+  }
+
+  async getAllWarehouseProducts() {
+    return this.prisma.warehouseProduct.findMany();
   }
 }
