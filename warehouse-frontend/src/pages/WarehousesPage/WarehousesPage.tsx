@@ -93,7 +93,7 @@ function WarehousePage() {
             </ProtectedRoute>
           }
         />
-        {/* NOT FOUND PAGE */}
+        {/* Not found page */}
         <Route
           path="/*"
           element={

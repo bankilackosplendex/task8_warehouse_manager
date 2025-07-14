@@ -16,6 +16,7 @@ import ErrorWindow from "./components/common/ErrorWindow.tsx";
 function App() {
   return (
     <div>
+      {/* --- NAVIGATION BAR --- */}
       <Navbar />
       <Routes>
         {/* --- HOME PAGE --- */}
@@ -38,7 +39,7 @@ function App() {
         <Route path="/registration" element={<RegisterPage />} />
         {/* --- USERS PAGE --- */}
         <Route path="/users" element={<UsersPage />} />
-        {/* NOT FOUND PAGE */}
+        {/* --- NOT FOUND PAGE --- */}
         <Route
           path="/*"
           element={
