@@ -14,10 +14,61 @@ export class WarehousesService {
   }
 
   // --- ADD A NEW PRODUCT TO THE WAREHOUSE ---
-  addProduct(createWarehouseProductDto: Prisma.WarehouseProductUncheckedCreateInput) {
+  addProduct(
+    createWarehouseProductDto: Prisma.WarehouseProductUncheckedCreateInput,
+  ) {
     return this.prisma.warehouseProduct.create({
       data: createWarehouseProductDto,
     });
+  }
+
+  async addOrUpdateProduct(input: Prisma.WarehouseProductUncheckedCreateInput) {
+    const { warehouseId, productId, quantity } = input;
+
+    const existing = await this.prisma.warehouseProduct.findUnique({
+      where: {
+        warehouseId_productId: {
+          warehouseId,
+          productId,
+        },
+      },
+    });
+
+    if (existing) {
+      const newQuantity = existing.quantity + quantity;
+
+      if (newQuantity < 0) {
+        throw new Error(
+          `Can't export more than the available quantity the warehouse`,
+        );
+      }
+
+      return this.prisma.warehouseProduct.update({
+        where: {
+          warehouseId_productId: {
+            warehouseId,
+            productId,
+          },
+        },
+        data: {
+          quantity: {
+            increment: quantity,
+          },
+        },
+      });
+    } else {
+      if (quantity < 0) {
+        throw new Error(`Negative quantity`);
+      }
+
+      return this.prisma.warehouseProduct.create({
+        data: {
+          warehouseId,
+          productId,
+          quantity,
+        },
+      });
+    }
   }
 
   // --- GET ALL WAREHOUSES ---

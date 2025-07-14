@@ -29,7 +29,7 @@ export class WarehousesController {
   addProduct(
     @Body() createWarehouseProductDto: Prisma.WarehouseProductUncheckedCreateInput,
   ) {
-    return this.warehousesService.addProduct(createWarehouseProductDto);
+    return this.warehousesService.addOrUpdateProduct(createWarehouseProductDto);
   }
 
   // --- GET ALL WAREHOUSES ---

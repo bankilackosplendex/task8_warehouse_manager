@@ -99,6 +99,10 @@ function StockMovementsForm({ type }: { type: FormType }) {
         console.log(stockMovement);
         await createStockMovement(stockMovement);
 
+        if (stockMovement.movementType === MovementType.EXPORT) {
+          stockMovement.quantity *= -1;
+        }
+
         const warehouseProduct: WarehouseProduct = {
           quantity: stockMovement.quantity,
           createdAt: stockMovement.createdAt,
@@ -106,9 +110,7 @@ function StockMovementsForm({ type }: { type: FormType }) {
           productId: stockMovement.productId,
         };
 
-        if (stockMovement.movementType === MovementType.IMPORT) {
-          await addProductToWarehouse(warehouseProduct);
-        }
+        await addProductToWarehouse(warehouseProduct);
       } else if (type == FormType.MODIFY && stockMovementId) {
         const cleanedStockMovement = { ...stockMovement };
         delete cleanedStockMovement.id;
